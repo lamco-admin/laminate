@@ -25,7 +25,7 @@ fn csv_row_all_strings_extract_typed() {
     assert_eq!(name, "Alice");
     assert_eq!(age, 30);
     assert!((salary - 75000.50).abs() < 0.01);
-    assert_eq!(active, true);
+    assert!(active);
 }
 
 #[test]

@@ -31,7 +31,7 @@ fn iter26_whitespace_padded_float() {
 fn iter26_whitespace_padded_bool() {
     let json = serde_json::json!({"val": "  true  "});
     let flex = FlexValue::new(json);
-    assert_eq!(flex.extract::<bool>("val").unwrap(), true);
+    assert!(flex.extract::<bool>("val").unwrap());
 }
 
 #[test]

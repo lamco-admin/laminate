@@ -12,7 +12,7 @@ fn csv_hint_enables_coercion() {
     assert_eq!(port, 8080);
 
     let debug: bool = val.extract("debug").unwrap();
-    assert_eq!(debug, true);
+    assert!(debug);
 }
 
 #[test]

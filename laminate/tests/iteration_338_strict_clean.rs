@@ -28,7 +28,7 @@ fn shape_strict_clean_data() {
     let record = result.unwrap();
     assert_eq!(record.name, "Alice");
     assert_eq!(record.age, 30);
-    assert_eq!(record.active, true);
+    assert!(record.active);
 }
 
 #[test]

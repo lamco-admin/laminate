@@ -28,7 +28,7 @@ fn api_response_shape_absorbing_preserves_overflow() {
 
     assert_eq!(result.value.id, 42);
     assert_eq!(result.value.name, "Alice");
-    assert_eq!(result.value.verified, true);
+    assert!(result.value.verified);
     // Note: shape_absorbing always returns empty overflow (by design, iter 218 confirmed)
     // because the derive macro doesn't feed leftover keys into the residual
     println!("residual: {:?}", result.residual);
@@ -44,7 +44,7 @@ fn api_response_with_coercion_needed() {
     });
 
     let result = ApiUser::shape_absorbing(&api_response).unwrap();
-    assert_eq!(result.value.verified, true);
+    assert!(result.value.verified);
     // "yes" → true coercion should produce a diagnostic
     println!("diagnostics: {:?}", result.diagnostics);
 }

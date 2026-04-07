@@ -85,7 +85,7 @@ fn all_attributes_clean_data() {
     assert_eq!(result.id, 1);
     assert_eq!(result.name, "Alice");
     assert!((result.score - 95.5).abs() < 0.01);
-    assert_eq!(result.active, true);
+    assert!(result.active);
     // parse_json_string should parse the stringified JSON
     assert!(
         result.metadata.is_object() || result.metadata.is_string(),

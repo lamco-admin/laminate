@@ -35,7 +35,7 @@ fn shape_lenient_produces_laminate_result() {
 
     assert_eq!(result.value.name, "test");
     assert_eq!(result.value.port, 8080);
-    assert_eq!(result.value.debug, true);
+    assert!(result.value.debug);
     // Lenient residual is ()
     assert_eq!(result.residual, ());
     // Diagnostics should show coercions

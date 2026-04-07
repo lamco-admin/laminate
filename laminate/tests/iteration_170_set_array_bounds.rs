@@ -67,5 +67,5 @@ fn set_nested_array_in_object() {
     val.set("a.b[2].c", json!(true)).unwrap();
 
     let result: bool = val.extract("a.b[2].c").unwrap();
-    assert_eq!(result, true);
+    assert!(result);
 }

@@ -35,7 +35,7 @@ fn coerced_values_survive_roundtrip() {
     println!("Original: {:?}, diags: {:?}", original, diags);
 
     assert_eq!(original.age, 30);
-    assert_eq!(original.active, true);
+    assert!(original.active);
 
     // Round-trip: serialize and re-deserialize
     let serialized = original.to_value();

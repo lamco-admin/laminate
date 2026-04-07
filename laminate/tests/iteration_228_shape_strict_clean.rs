@@ -24,7 +24,7 @@ fn shape_strict_all_valid() {
     let val = result.expect("shape_strict should succeed with exact types");
     assert_eq!(val.host, "localhost");
     assert_eq!(val.port, 8080);
-    assert_eq!(val.debug, true);
+    assert!(val.debug);
 }
 
 #[test]

@@ -123,5 +123,5 @@ fn dynamic_mode_config_pattern() {
     let debug: bool = data.extract("debug").unwrap();
 
     assert_eq!(port, 8080);
-    assert_eq!(debug, true);
+    assert!(debug);
 }
