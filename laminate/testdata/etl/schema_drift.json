@@ -1,0 +1,10 @@
+[
+  {"version": "v1", "user_id": 1001, "name": "Alice", "email": "alice@test.com"},
+  {"version": "v1", "user_id": 1002, "name": "Bob", "email": "bob@test.com"},
+  {"version": "v2", "user_id": 1003, "name": "Charlie", "email": "charlie@test.com", "phone": "+1-555-0103"},
+  {"version": "v2", "user_id": 1004, "name": "Diana", "email": "diana@test.com", "phone": "+1-555-0104"},
+  {"version": "v3", "user_id": 1005, "name": "Eve", "email": "eve@test.com", "phone": "+1-555-0105", "role": "admin", "mfa_enabled": true},
+  {"version": "v3", "user_id": 1006, "name": "Frank", "email": "frank@test.com", "phone": null, "role": "user", "mfa_enabled": false},
+  {"version": "v3", "user_id": "1007", "name": "Grace", "email": "grace@test.com", "phone": "+1-555-0107", "role": "admin", "mfa_enabled": "true"},
+  {"version": "v1", "user_id": 1008, "name": "Hank", "email": "hank@test.com"}
+]

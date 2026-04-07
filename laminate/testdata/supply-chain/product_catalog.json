@@ -1,0 +1,10 @@
+[
+  {"sku": "WDG-001", "name": "Widget A", "price": "$12.99", "qty": "1x100-count", "weight": "0.5 kg", "origin": "US", "active": "Y"},
+  {"sku": "WDG-002", "name": "Widget B", "price": "€24,50", "qty": "250 each", "weight": "1.2kg", "origin": "DE", "active": "Yes"},
+  {"sku": "GDG-001", "name": "Gadget C", "price": "7.99 USD", "qty": "50", "weight": "100g", "origin": "CN", "active": true},
+  {"sku": "GDG-002", "name": "Gadget D", "price": 99.00, "qty": 12, "weight": 2.0, "origin": "JP", "active": 1},
+  {"sku": "DHK-001", "name": "Doohickey E", "price": "£3.49", "qty": "1000 units", "weight": "50 grams", "origin": "GB", "active": "TRUE"},
+  {"sku": "THG-001", "name": "Thingamajig F", "price": null, "qty": "N/A", "weight": "", "origin": null, "active": "N"},
+  {"sku": "BLT-001", "name": "Bolt M6x20", "price": "0.12", "qty": "5x1000-count", "weight": "3.2 g", "origin": "TW", "active": "y", "hazmat": false},
+  {"sku": "NUT-001", "name": "Nut M6", "price": "0.08", "qty": "10000", "weight": "2.1 g", "origin": "TW", "active": "y", "hazmat": false, "thread_pitch": "1.0mm"}
+]

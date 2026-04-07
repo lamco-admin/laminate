@@ -1,0 +1,4 @@
+[workspace]
+members = ["laminate", "laminate-derive", "laminate-sql", "laminate-cli"]
+exclude = ["laminate/fuzz"]
+resolver = "2"

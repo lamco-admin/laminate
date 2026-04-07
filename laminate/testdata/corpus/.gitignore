@@ -1,0 +1,2 @@
+# Volume datasets are too large for git (regeneratable via gen_volume_data.py)
+**/volume_*.json

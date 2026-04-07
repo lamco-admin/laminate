@@ -1,0 +1,31 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": "8443",
+    "workers": "4",
+    "debug": "false",
+    "tls": "true",
+    "max_connections": "1000",
+    "timeout_ms": "30000"
+  },
+  "database": {
+    "url": "postgresql://user:pass@localhost:5432/mydb",
+    "pool_size": "10",
+    "max_idle": "5",
+    "connect_timeout_secs": "5"
+  },
+  "logging": {
+    "level": "info",
+    "json_output": "true",
+    "max_file_size_mb": "100"
+  },
+  "feature_flags": {
+    "new_dashboard": "true",
+    "beta_api": "false",
+    "max_upload_mb": "50"
+  },
+  "unknown_future_section": {
+    "foo": "bar",
+    "version": 2
+  }
+}

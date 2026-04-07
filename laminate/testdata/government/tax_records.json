@@ -1,0 +1,7 @@
+[
+  {"tin": "123-45-6789", "tax_year": 2025, "filing_status": "married_joint", "gross_income": "125000.00", "taxable_income": "98750.00", "tax_owed": "15420.00", "payments": "14000.00", "refund_or_due": "1420.00", "state": "IL", "filed_date": "2026-02-15"},
+  {"tin": "987-65-4321", "tax_year": "2025", "filing_status": "single", "gross_income": 85000, "taxable_income": 72500, "tax_owed": 11250, "payments": 12000, "refund_or_due": -750, "state": "CA", "filed_date": "2026-03-01"},
+  {"tin": "456-78-9012", "tax_year": 2025, "filing_status": "head_of_household", "gross_income": "210,000.00", "taxable_income": "185,000.00", "tax_owed": "38,750.00", "payments": "40,000.00", "refund_or_due": "-1,250.00", "state": "NY", "filed_date": "03/15/2026"},
+  {"tin": "111-22-3333", "tax_year": 2025, "filing_status": "married_joint", "gross_income": null, "taxable_income": null, "tax_owed": null, "payments": "0", "refund_or_due": "0", "state": "TX", "filed_date": null, "extension_filed": true},
+  {"tin": "222-33-4444", "tax_year": 2025, "filing_status": "single", "gross_income": "52000", "taxable_income": "39500", "tax_owed": "4552", "payments": "5200", "refund_or_due": "-648", "state": "FL", "filed_date": "2026-01-28", "amended": false, "prior_year_agi": "48000"}
+]

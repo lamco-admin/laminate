@@ -1,0 +1,282 @@
+[
+  {
+    "gender": "male",
+    "name": {
+      "title": "Mr",
+      "first": "Wyatt",
+      "last": "Carpenter"
+    },
+    "location": {
+      "street": {
+        "number": 1755,
+        "name": "Thornridge Cir"
+      },
+      "city": "Warrnambool",
+      "state": "Tasmania",
+      "country": "Australia",
+      "postcode": 7190,
+      "coordinates": {
+        "latitude": "27.3731",
+        "longitude": "-134.8907"
+      },
+      "timezone": {
+        "offset": "+8:00",
+        "description": "Beijing, Perth, Singapore, Hong Kong"
+      }
+    },
+    "email": "wyatt.carpenter@example.com",
+    "login": {
+      "uuid": "f1d2dfae-3e82-4234-8c17-4e7e822c2097",
+      "username": "bigladybug367",
+      "password": "sheena",
+      "salt": "m6FkjppG",
+      "md5": "c62967e1ef42c58fa7dae64a17de5942",
+      "sha1": "de20fa32ea0206ade396c091f9e7e33a8b4a0ab5",
+      "sha256": "d128ab5c1ad568ef74d3f86363ca6b05a1ea0f879bf0d7c6399055c557ba986a"
+    },
+    "dob": {
+      "date": "1995-02-07T15:12:01.341Z",
+      "age": 31
+    },
+    "registered": {
+      "date": "2011-01-27T06:34:55.491Z",
+      "age": 15
+    },
+    "phone": "05-1171-0546",
+    "cell": "0487-330-766",
+    "id": {
+      "name": "TFN",
+      "value": "389680557"
+    },
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/men/88.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/men/88.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/88.jpg"
+    },
+    "nat": "AU"
+  },
+  {
+    "gender": "male",
+    "name": {
+      "title": "Mr",
+      "first": "Don",
+      "last": "Olson"
+    },
+    "location": {
+      "street": {
+        "number": 7981,
+        "name": "Fairview Road"
+      },
+      "city": "Carlisle",
+      "state": "Grampian",
+      "country": "United Kingdom",
+      "postcode": "VO5 8EX",
+      "coordinates": {
+        "latitude": "18.6140",
+        "longitude": "137.1074"
+      },
+      "timezone": {
+        "offset": "-12:00",
+        "description": "Eniwetok, Kwajalein"
+      }
+    },
+    "email": "don.olson@example.com",
+    "login": {
+      "uuid": "b651baa5-eead-4188-bb47-3a0c23682da1",
+      "username": "ticklishpeacock178",
+      "password": "9999999",
+      "salt": "i1MeAYzu",
+      "md5": "7cea7257e0b2759cf9fa56d3dea1334b",
+      "sha1": "1c8755a7730a24dc4e0621adb6f6eef13339e49e",
+      "sha256": "d4b7422eeac19cc079abe71d7d3e03b8a1ec296eee4aa30231d96a2c0edf43e6"
+    },
+    "dob": {
+      "date": "1959-08-28T15:30:48.226Z",
+      "age": 66
+    },
+    "registered": {
+      "date": "2010-06-16T13:57:12.386Z",
+      "age": 15
+    },
+    "phone": "015395 09773",
+    "cell": "07708 016989",
+    "id": {
+      "name": "NINO",
+      "value": "WM 37 75 73 H"
+    },
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/men/9.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/men/9.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/9.jpg"
+    },
+    "nat": "GB"
+  },
+  {
+    "gender": "male",
+    "name": {
+      "title": "Mr",
+      "first": "Jack",
+      "last": "Hale"
+    },
+    "location": {
+      "street": {
+        "number": 8584,
+        "name": "Rolling Green Rd"
+      },
+      "city": "Bundaberg",
+      "state": "Western Australia",
+      "country": "Australia",
+      "postcode": 7931,
+      "coordinates": {
+        "latitude": "-13.6291",
+        "longitude": "112.8717"
+      },
+      "timezone": {
+        "offset": "+9:30",
+        "description": "Adelaide, Darwin"
+      }
+    },
+    "email": "jack.hale@example.com",
+    "login": {
+      "uuid": "650dc146-1741-480a-a8bb-c283fcb4cd69",
+      "username": "yellowtiger440",
+      "password": "older",
+      "salt": "MDiiDC3v",
+      "md5": "b0aba72a3d1720f11609cdcd09a0740a",
+      "sha1": "908be4d0afdd714b69d2890ae6021918be459942",
+      "sha256": "47fe0d9aa9ad61736a37fd8a9aced1d091d9f51d0c7ad7b392389a005db57eaa"
+    },
+    "dob": {
+      "date": "1946-01-30T22:52:03.102Z",
+      "age": 80
+    },
+    "registered": {
+      "date": "2019-02-24T14:40:32.907Z",
+      "age": 7
+    },
+    "phone": "09-2200-5357",
+    "cell": "0473-824-704",
+    "id": {
+      "name": "TFN",
+      "value": "075507869"
+    },
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/men/6.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/men/6.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/6.jpg"
+    },
+    "nat": "AU"
+  },
+  {
+    "gender": "male",
+    "name": {
+      "title": "Mr",
+      "first": "Arron",
+      "last": "Austin"
+    },
+    "location": {
+      "street": {
+        "number": 9912,
+        "name": "Daisy Dr"
+      },
+      "city": "Nampa",
+      "state": "Maryland",
+      "country": "United States",
+      "postcode": 66204,
+      "coordinates": {
+        "latitude": "55.7521",
+        "longitude": "-11.5616"
+      },
+      "timezone": {
+        "offset": "+7:00",
+        "description": "Bangkok, Hanoi, Jakarta"
+      }
+    },
+    "email": "arron.austin@example.com",
+    "login": {
+      "uuid": "c3323859-189a-4216-a410-99a8f25d0fbb",
+      "username": "silvercat610",
+      "password": "lucille",
+      "salt": "QN6iaPcr",
+      "md5": "e0774e4c70d28ca80cc6c680d4ec1fb4",
+      "sha1": "2c41edf3bef791bf5fb53f5f8b7854ab535a62a2",
+      "sha256": "daf6aa2d21e755d77fdbd9aaf277e23d83128cd28d13bf76fe33fab538c98bd7"
+    },
+    "dob": {
+      "date": "1944-12-28T16:44:09.713Z",
+      "age": 81
+    },
+    "registered": {
+      "date": "2007-09-19T06:16:51.761Z",
+      "age": 18
+    },
+    "phone": "(873) 535-4266",
+    "cell": "(418) 335-6604",
+    "id": {
+      "name": "SSN",
+      "value": "059-12-3405"
+    },
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/men/78.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/men/78.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/78.jpg"
+    },
+    "nat": "US"
+  },
+  {
+    "gender": "female",
+    "name": {
+      "title": "Miss",
+      "first": "Victoria",
+      "last": "Warren"
+    },
+    "location": {
+      "street": {
+        "number": 4491,
+        "name": "North Street"
+      },
+      "city": "Sunderland",
+      "state": "Lincolnshire",
+      "country": "United Kingdom",
+      "postcode": "T4B 8NG",
+      "coordinates": {
+        "latitude": "-22.4807",
+        "longitude": "-4.6448"
+      },
+      "timezone": {
+        "offset": "+4:00",
+        "description": "Abu Dhabi, Muscat, Baku, Tbilisi"
+      }
+    },
+    "email": "victoria.warren@example.com",
+    "login": {
+      "uuid": "86a50af9-7073-4724-b6ed-3a6b79957f4d",
+      "username": "yellowbutterfly439",
+      "password": "redhot",
+      "salt": "2IL3vH7W",
+      "md5": "149c7eab31482ac57d9d175a758b7b43",
+      "sha1": "6d1b9e5b8e035652eaedffd692cdef9947d002a4",
+      "sha256": "70eac6badec199e99fdcb7973c5552cb8c81067785889b0d3413b0fd3c3b97d2"
+    },
+    "dob": {
+      "date": "1973-09-19T21:51:09.861Z",
+      "age": 52
+    },
+    "registered": {
+      "date": "2014-12-02T14:58:02.638Z",
+      "age": 11
+    },
+    "phone": "015396 77723",
+    "cell": "07137 302807",
+    "id": {
+      "name": "NINO",
+      "value": "MX 18 38 96 E"
+    },
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/women/16.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/women/16.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/16.jpg"
+    },
+    "nat": "GB"
+  }
+]

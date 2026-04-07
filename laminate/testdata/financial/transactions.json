@@ -1,0 +1,8 @@
+[
+  {"txn_id": "TXN-001", "amount": "1250.00", "currency": "USD", "type": "credit", "timestamp": "2026-03-31T10:15:00Z", "account": "ACCT-1001", "status": "settled", "fee": "12.50", "net": "1237.50", "reference": "INV-2026-0042"},
+  {"txn_id": "TXN-002", "amount": "-500.00", "currency": "USD", "type": "debit", "timestamp": "2026-03-31T10:20:00Z", "account": "ACCT-1001", "status": "settled", "fee": "0.00", "net": "-500.00", "reference": null},
+  {"txn_id": "TXN-003", "amount": "€2.450,75", "currency": "EUR", "type": "credit", "timestamp": "2026-03-31T11:00:00Z", "account": "ACCT-2001", "status": "pending", "fee": "24,51", "net": "2.426,24", "reference": "PO-DE-8891"},
+  {"txn_id": "TXN-004", "amount": 99999, "currency": "JPY", "type": "credit", "timestamp": 1711900800, "account": "ACCT-3001", "status": "settled", "fee": 0, "net": 99999, "reference": "JP-TXN-441"},
+  {"txn_id": "TXN-005", "amount": "10000", "currency": "USD", "type": "credit", "timestamp": "2026-03-31T14:00:00Z", "account": "ACCT-1001", "status": "flagged", "fee": "100.00", "net": "9900.00", "reference": "WIRE-EXT-99", "flag_reason": "amount_threshold", "review_required": true},
+  {"txn_id": "TXN-006", "amount": "0.00000001", "currency": "BTC", "type": "credit", "timestamp": "2026-03-31T14:30:00Z", "account": "ACCT-CRYPTO-01", "status": "confirmed", "fee": "0.00000000", "net": "0.00000001", "confirmations": 6, "block_height": 890123}
+]

@@ -1,0 +1,141 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated": 1775007029000,
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
+    "title": "USGS All Earthquakes, Past Hour",
+    "status": 200,
+    "api": "2.3.0",
+    "count": 11
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.69,
+        "place": "19 km NW of Parkfield, CA",
+        "time": 1775006658650,
+        "updated": 1775006757595,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75336682",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc75336682.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 44,
+        "net": "nc",
+        "code": "75336682",
+        "ids": ",nc75336682,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 20,
+        "dmin": 0.0386,
+        "rms": 0.07,
+        "gap": 80,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.7 - 19 km NW of Parkfield, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.581497192383,
+          36.0223350524902,
+          3.60999989509583
+        ]
+      },
+      "id": "nc75336682"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.99,
+        "place": "16 km W of Searles Valley, CA",
+        "time": 1775006585710,
+        "updated": 1775006786971,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci41429800",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci41429800.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ci",
+        "code": "41429800",
+        "ids": ",ci41429800,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 14,
+        "dmin": 0.05523,
+        "rms": 0.09,
+        "gap": 231,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 16 km W of Searles Valley, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.575666666667,
+          35.7633333333333,
+          8.27
+        ]
+      },
+      "id": "ci41429800"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.12,
+        "place": "19 km SSE of P\u0101hala, Hawaii",
+        "time": 1775006576300,
+        "updated": 1775006910050,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv74928507",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv74928507.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 69,
+        "net": "hv",
+        "code": "74928507",
+        "ids": ",hv74928507,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 26,
+        "dmin": 0.1294,
+        "rms": 0.209999993,
+        "gap": 212,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 19 km SSE of P\u0101hala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.383834838867,
+          19.0486660003662,
+          31.6000003814697
+        ]
+      },
+      "id": "hv74928507"
+    }
+  ],
+  "bbox": [
+    -158.21,
+    19.048666000366,
+    3.6099998950958,
+    139.9992,
+    64.787,
+    107.4
+  ]
+}

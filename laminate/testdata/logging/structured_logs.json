@@ -1,0 +1,8 @@
+[
+  {"timestamp": "2026-03-31T15:30:00.001Z", "level": "INFO", "logger": "web.server", "message": "Server started on port 8080", "port": 8080, "pid": 12345},
+  {"timestamp": "2026-03-31T15:30:01.234Z", "level": "DEBUG", "logger": "web.router", "message": "Route registered: GET /api/users", "method": "GET", "path": "/api/users"},
+  {"timestamp": "2026-03-31T15:30:05.567Z", "level": "INFO", "logger": "web.request", "message": "Request completed", "method": "GET", "path": "/api/users", "status": 200, "duration_ms": "12.5", "bytes": "4096", "ip": "192.168.1.100"},
+  {"timestamp": "2026-03-31T15:30:06.789Z", "level": "WARN", "logger": "web.request", "message": "Slow request", "method": "POST", "path": "/api/search", "status": "200", "duration_ms": 2500, "query": "complex query here"},
+  {"timestamp": "2026-03-31T15:30:10.000Z", "level": "ERROR", "logger": "db.pool", "message": "Connection pool exhausted", "pool_size": 10, "active": "10", "waiting": "5", "error": "TimeoutError: could not acquire connection within 5s", "stack_trace": "at Pool.acquire(pool.rs:42)\nat Handler.handle(handler.rs:15)"},
+  {"timestamp": "2026-03-31T15:30:10.001Z", "level": "ERROR", "logger": "web.request", "message": "Request failed", "method": "GET", "path": "/api/reports", "status": 503, "error": "Service Unavailable", "request_id": "req-abc-123", "user_id": null}
+]

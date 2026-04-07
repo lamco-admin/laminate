@@ -1,0 +1,1258 @@
+{
+  "_meta": {
+    "name": "Coercion Gauntlet",
+    "description": "Exhaustive test of every coercion path in the engine",
+    "version": "1.0.0",
+    "cases": 220,
+    "categories": [
+      "string_to_integer",
+      "string_to_float",
+      "string_to_bool",
+      "int_to_float",
+      "float_to_int",
+      "bool_to_int",
+      "bool_to_float",
+      "bool_to_string",
+      "int_to_bool",
+      "null_to_default",
+      "null_sentinels",
+      "locale_numbers",
+      "hex_octal_binary",
+      "stringified_json",
+      "array_unwrap",
+      "object_to_string",
+      "f32_overflow",
+      "integer_overflow",
+      "precision_loss",
+      "negative_coercions"
+    ]
+  },
+  "cases": [
+    {
+      "id": "s2i_001",
+      "category": "string_to_integer",
+      "input": "42",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 42
+    },
+    {
+      "id": "s2i_002",
+      "category": "string_to_integer",
+      "input": "0",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 0
+    },
+    {
+      "id": "s2i_003",
+      "category": "string_to_integer",
+      "input": "-1",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": -1
+    },
+    {
+      "id": "s2i_004",
+      "category": "string_to_integer",
+      "input": "9223372036854775807",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 9223372036854775807
+    },
+    {
+      "id": "s2i_005",
+      "category": "string_to_integer",
+      "input": "-9223372036854775808",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": -9223372036854775808
+    },
+    {
+      "id": "s2i_006",
+      "category": "string_to_integer",
+      "input": "  42  ",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 42,
+      "note": "whitespace trimmed"
+    },
+    {
+      "id": "s2i_007",
+      "category": "string_to_integer",
+      "input": "+42",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 42,
+      "note": "leading plus"
+    },
+    {
+      "id": "s2i_008",
+      "category": "string_to_integer",
+      "input": "42",
+      "target": "i32",
+      "min_level": "StringCoercion",
+      "expected": 42
+    },
+    {
+      "id": "s2i_009",
+      "category": "string_to_integer",
+      "input": "42",
+      "target": "i16",
+      "min_level": "StringCoercion",
+      "expected": 42
+    },
+    {
+      "id": "s2i_010",
+      "category": "string_to_integer",
+      "input": "42",
+      "target": "i8",
+      "min_level": "StringCoercion",
+      "expected": 42
+    },
+    {
+      "id": "s2i_011",
+      "category": "string_to_integer",
+      "input": "42",
+      "target": "u64",
+      "min_level": "StringCoercion",
+      "expected": 42
+    },
+    {
+      "id": "s2i_012",
+      "category": "string_to_integer",
+      "input": "42",
+      "target": "u32",
+      "min_level": "StringCoercion",
+      "expected": 42
+    },
+    {
+      "id": "s2i_013",
+      "category": "string_to_integer",
+      "input": "42",
+      "target": "u16",
+      "min_level": "StringCoercion",
+      "expected": 42
+    },
+    {
+      "id": "s2i_014",
+      "category": "string_to_integer",
+      "input": "42",
+      "target": "u8",
+      "min_level": "StringCoercion",
+      "expected": 42
+    },
+    {
+      "id": "s2i_015",
+      "category": "string_to_integer",
+      "input": "hello",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected_error": true,
+      "note": "non-numeric string"
+    },
+    {
+      "id": "s2i_016",
+      "category": "string_to_integer",
+      "input": "3.14",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected_error": true,
+      "note": "float string to int"
+    },
+    {
+      "id": "s2i_017",
+      "category": "string_to_integer",
+      "input": "42.0",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected_error": true,
+      "note": "float-looking string to int"
+    },
+    {
+      "id": "s2f_001",
+      "category": "string_to_float",
+      "input": "3.14",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected": 3.14
+    },
+    {
+      "id": "s2f_002",
+      "category": "string_to_float",
+      "input": "0.0",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected": 0.0
+    },
+    {
+      "id": "s2f_003",
+      "category": "string_to_float",
+      "input": "-273.15",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected": -273.15
+    },
+    {
+      "id": "s2f_004",
+      "category": "string_to_float",
+      "input": "1e10",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected": 10000000000.0
+    },
+    {
+      "id": "s2f_005",
+      "category": "string_to_float",
+      "input": "1.23e-4",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected": 0.000123
+    },
+    {
+      "id": "s2f_006",
+      "category": "string_to_float",
+      "input": "  3.14  ",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected": 3.14
+    },
+    {
+      "id": "s2f_007",
+      "category": "string_to_float",
+      "input": ".5",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected": 0.5
+    },
+    {
+      "id": "s2f_008",
+      "category": "string_to_float",
+      "input": "42",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected": 42.0
+    },
+    {
+      "id": "s2f_009",
+      "category": "string_to_float",
+      "input": "3.14",
+      "target": "f32",
+      "min_level": "StringCoercion",
+      "expected_approx": 3.14
+    },
+    {
+      "id": "s2f_010",
+      "category": "string_to_float",
+      "input": "NaN",
+      "target": "f64",
+      "min_level": "BestEffort",
+      "expected": null,
+      "note": "NaN becomes null sentinel"
+    },
+    {
+      "id": "s2f_011",
+      "category": "string_to_float",
+      "input": "Infinity",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "s2f_012",
+      "category": "string_to_float",
+      "input": "-Infinity",
+      "target": "f64",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "s2b_001",
+      "category": "string_to_bool",
+      "input": "true",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": true
+    },
+    {
+      "id": "s2b_002",
+      "category": "string_to_bool",
+      "input": "false",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": false
+    },
+    {
+      "id": "s2b_003",
+      "category": "string_to_bool",
+      "input": "True",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": true
+    },
+    {
+      "id": "s2b_004",
+      "category": "string_to_bool",
+      "input": "FALSE",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": false
+    },
+    {
+      "id": "s2b_005",
+      "category": "string_to_bool",
+      "input": "yes",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": true
+    },
+    {
+      "id": "s2b_006",
+      "category": "string_to_bool",
+      "input": "no",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": false
+    },
+    {
+      "id": "s2b_007",
+      "category": "string_to_bool",
+      "input": "YES",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": true
+    },
+    {
+      "id": "s2b_008",
+      "category": "string_to_bool",
+      "input": "NO",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": false
+    },
+    {
+      "id": "s2b_009",
+      "category": "string_to_bool",
+      "input": "1",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": true
+    },
+    {
+      "id": "s2b_010",
+      "category": "string_to_bool",
+      "input": "0",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": false
+    },
+    {
+      "id": "s2b_011",
+      "category": "string_to_bool",
+      "input": "on",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": true
+    },
+    {
+      "id": "s2b_012",
+      "category": "string_to_bool",
+      "input": "off",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": false
+    },
+    {
+      "id": "s2b_013",
+      "category": "string_to_bool",
+      "input": "y",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": true
+    },
+    {
+      "id": "s2b_014",
+      "category": "string_to_bool",
+      "input": "n",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected": false
+    },
+    {
+      "id": "s2b_015",
+      "category": "string_to_bool",
+      "input": "maybe",
+      "target": "bool",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "i2f_001",
+      "category": "int_to_float",
+      "input_value": 42,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected": 42.0
+    },
+    {
+      "id": "i2f_002",
+      "category": "int_to_float",
+      "input_value": 0,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected": 0.0
+    },
+    {
+      "id": "i2f_003",
+      "category": "int_to_float",
+      "input_value": -1,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected": -1.0
+    },
+    {
+      "id": "i2f_004",
+      "category": "int_to_float",
+      "input_value": 9007199254740992,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected": 9007199254740992.0,
+      "note": "2^53 — exact limit"
+    },
+    {
+      "id": "i2f_005",
+      "category": "int_to_float",
+      "input_value": 9007199254740993,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected_warning": true,
+      "note": "2^53+1 — precision loss"
+    },
+    {
+      "id": "i2f_006",
+      "category": "int_to_float",
+      "input_value": 42,
+      "target": "f64",
+      "min_level": "Exact",
+      "expected_error": true,
+      "note": "Exact rejects int→float"
+    },
+    {
+      "id": "f2i_001",
+      "category": "float_to_int",
+      "input_value": 3.0,
+      "target": "i64",
+      "min_level": "SafeWidening",
+      "expected": 3
+    },
+    {
+      "id": "f2i_002",
+      "category": "float_to_int",
+      "input_value": 3.5,
+      "target": "i64",
+      "min_level": "SafeWidening",
+      "expected_error": true,
+      "note": "fractional part"
+    },
+    {
+      "id": "f2i_003",
+      "category": "float_to_int",
+      "input_value": 0.0,
+      "target": "i64",
+      "min_level": "SafeWidening",
+      "expected": 0
+    },
+    {
+      "id": "f2i_004",
+      "category": "float_to_int",
+      "input_value": -1.0,
+      "target": "i64",
+      "min_level": "SafeWidening",
+      "expected": -1
+    },
+    {
+      "id": "f2i_005",
+      "category": "float_to_int",
+      "input_value": 1e+18,
+      "target": "i64",
+      "min_level": "SafeWidening",
+      "expected": 1000000000000000000
+    },
+    {
+      "id": "b2i_001",
+      "category": "bool_to_int",
+      "input_value": true,
+      "target": "i64",
+      "min_level": "SafeWidening",
+      "expected": 1
+    },
+    {
+      "id": "b2i_002",
+      "category": "bool_to_int",
+      "input_value": false,
+      "target": "i64",
+      "min_level": "SafeWidening",
+      "expected": 0
+    },
+    {
+      "id": "b2i_003",
+      "category": "bool_to_int",
+      "input_value": true,
+      "target": "u8",
+      "min_level": "SafeWidening",
+      "expected": 1
+    },
+    {
+      "id": "b2i_004",
+      "category": "bool_to_int",
+      "input_value": true,
+      "target": "i32",
+      "min_level": "SafeWidening",
+      "expected": 1
+    },
+    {
+      "id": "b2f_001",
+      "category": "bool_to_float",
+      "input_value": true,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected": 1.0
+    },
+    {
+      "id": "b2f_002",
+      "category": "bool_to_float",
+      "input_value": false,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected": 0.0
+    },
+    {
+      "id": "b2s_001",
+      "category": "bool_to_string",
+      "input_value": true,
+      "target": "String",
+      "min_level": "StringCoercion",
+      "expected": "true"
+    },
+    {
+      "id": "b2s_002",
+      "category": "bool_to_string",
+      "input_value": false,
+      "target": "String",
+      "min_level": "StringCoercion",
+      "expected": "false"
+    },
+    {
+      "id": "i2b_001",
+      "category": "int_to_bool",
+      "input_value": 1,
+      "target": "bool",
+      "min_level": "SafeWidening",
+      "expected": true
+    },
+    {
+      "id": "i2b_002",
+      "category": "int_to_bool",
+      "input_value": 0,
+      "target": "bool",
+      "min_level": "SafeWidening",
+      "expected": false
+    },
+    {
+      "id": "i2b_003",
+      "category": "int_to_bool",
+      "input_value": 42,
+      "target": "bool",
+      "min_level": "SafeWidening",
+      "expected_error": true,
+      "note": "only 0/1 allowed"
+    },
+    {
+      "id": "i2b_004",
+      "category": "int_to_bool",
+      "input_value": -1,
+      "target": "bool",
+      "min_level": "SafeWidening",
+      "expected_error": true
+    },
+    {
+      "id": "n2d_001",
+      "category": "null_to_default",
+      "input_value": null,
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "n2d_002",
+      "category": "null_to_default",
+      "input_value": null,
+      "target": "f64",
+      "min_level": "BestEffort",
+      "expected": 0.0
+    },
+    {
+      "id": "n2d_003",
+      "category": "null_to_default",
+      "input_value": null,
+      "target": "bool",
+      "min_level": "BestEffort",
+      "expected": false
+    },
+    {
+      "id": "n2d_004",
+      "category": "null_to_default",
+      "input_value": null,
+      "target": "String",
+      "min_level": "BestEffort",
+      "expected": ""
+    },
+    {
+      "id": "n2d_005",
+      "category": "null_to_default",
+      "input_value": null,
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected_error": true,
+      "note": "null→default requires BestEffort"
+    },
+    {
+      "id": "n2d_006",
+      "category": "null_to_default",
+      "input_value": null,
+      "target": "u8",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "n2d_007",
+      "category": "null_to_default",
+      "input_value": null,
+      "target": "i32",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "n2d_008",
+      "category": "null_to_default",
+      "input_value": null,
+      "target": "f32",
+      "min_level": "BestEffort",
+      "expected": 0.0
+    },
+    {
+      "id": "ns_001",
+      "category": "null_sentinels",
+      "input": "null",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0,
+      "note": "sentinel → null → default"
+    },
+    {
+      "id": "ns_002",
+      "category": "null_sentinels",
+      "input": "NULL",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_003",
+      "category": "null_sentinels",
+      "input": "None",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_004",
+      "category": "null_sentinels",
+      "input": "none",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_005",
+      "category": "null_sentinels",
+      "input": "N/A",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_006",
+      "category": "null_sentinels",
+      "input": "n/a",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_007",
+      "category": "null_sentinels",
+      "input": "NA",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_008",
+      "category": "null_sentinels",
+      "input": "na",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_009",
+      "category": "null_sentinels",
+      "input": "-",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_010",
+      "category": "null_sentinels",
+      "input": "undefined",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_011",
+      "category": "null_sentinels",
+      "input": "unknown",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "ns_012",
+      "category": "null_sentinels",
+      "input": "",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected_error": true,
+      "note": "empty string is NOT a null sentinel for coercion"
+    },
+    {
+      "id": "ns_013",
+      "category": "null_sentinels",
+      "input": "nil",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 0
+    },
+    {
+      "id": "lc_001",
+      "category": "locale_numbers",
+      "input": "1,234",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 1234,
+      "note": "US thousands"
+    },
+    {
+      "id": "lc_002",
+      "category": "locale_numbers",
+      "input": "1,234,567",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 1234567
+    },
+    {
+      "id": "lc_003",
+      "category": "locale_numbers",
+      "input": "1,234.56",
+      "target": "f64",
+      "min_level": "BestEffort",
+      "expected": 1234.56
+    },
+    {
+      "id": "lc_004",
+      "category": "locale_numbers",
+      "input": "1.234,56",
+      "target": "f64",
+      "min_level": "BestEffort",
+      "expected": 1234.56,
+      "note": "European"
+    },
+    {
+      "id": "lc_005",
+      "category": "locale_numbers",
+      "input": "1.234.567",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 1234567,
+      "note": "European thousands only"
+    },
+    {
+      "id": "lc_006",
+      "category": "locale_numbers",
+      "input": "1'234.56",
+      "target": "f64",
+      "min_level": "BestEffort",
+      "expected": 1234.56,
+      "note": "Swiss apostrophe"
+    },
+    {
+      "id": "lc_007",
+      "category": "locale_numbers",
+      "input": "1'234'567",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 1234567
+    },
+    {
+      "id": "lc_008",
+      "category": "locale_numbers",
+      "input": "1 234 567",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 1234567,
+      "note": "French/SI space"
+    },
+    {
+      "id": "lc_009",
+      "category": "locale_numbers",
+      "input": "1 234,56",
+      "target": "f64",
+      "min_level": "BestEffort",
+      "expected": 1234.56,
+      "note": "French space+comma"
+    },
+    {
+      "id": "lc_010",
+      "category": "locale_numbers",
+      "input": "12,34",
+      "target": "f64",
+      "min_level": "BestEffort",
+      "expected_error": true,
+      "note": "ambiguous — not valid US grouping"
+    },
+    {
+      "id": "hx_001",
+      "category": "hex_octal_binary",
+      "input": "0xFF",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 255
+    },
+    {
+      "id": "hx_002",
+      "category": "hex_octal_binary",
+      "input": "0x1A",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 26
+    },
+    {
+      "id": "hx_003",
+      "category": "hex_octal_binary",
+      "input": "0o77",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 63
+    },
+    {
+      "id": "hx_004",
+      "category": "hex_octal_binary",
+      "input": "0b1010",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 10
+    },
+    {
+      "id": "hx_005",
+      "category": "hex_octal_binary",
+      "input": "0x0",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 0
+    },
+    {
+      "id": "hx_006",
+      "category": "hex_octal_binary",
+      "input": "0xFF",
+      "target": "u8",
+      "min_level": "StringCoercion",
+      "expected": 255
+    },
+    {
+      "id": "hx_007",
+      "category": "hex_octal_binary",
+      "input": "0x100",
+      "target": "u8",
+      "min_level": "StringCoercion",
+      "expected_error": true,
+      "note": "256 overflows u8"
+    },
+    {
+      "id": "hx_008",
+      "category": "hex_octal_binary",
+      "input": "0xDEAD",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected": 57005
+    },
+    {
+      "id": "sj_001",
+      "category": "stringified_json",
+      "input": "{\"a\":1}",
+      "target": "Value",
+      "min_level": "BestEffort",
+      "note": "parsed as JSON object"
+    },
+    {
+      "id": "sj_002",
+      "category": "stringified_json",
+      "input": "[1,2,3]",
+      "target": "Value",
+      "min_level": "BestEffort",
+      "note": "parsed as JSON array"
+    },
+    {
+      "id": "sj_003",
+      "category": "stringified_json",
+      "input": "not json",
+      "target": "Value",
+      "min_level": "BestEffort",
+      "note": "falls through to string"
+    },
+    {
+      "id": "sj_004",
+      "category": "stringified_json",
+      "input": " {\"a\":1} ",
+      "target": "Value",
+      "min_level": "BestEffort",
+      "note": "whitespace-padded JSON"
+    },
+    {
+      "id": "au_001",
+      "category": "array_unwrap",
+      "input_value": [
+        42
+      ],
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected": 42,
+      "note": "single-element array unwrap"
+    },
+    {
+      "id": "au_002",
+      "category": "array_unwrap",
+      "input_value": [
+        "hello"
+      ],
+      "target": "String",
+      "min_level": "BestEffort",
+      "expected": "[\"hello\"]",
+      "note": "BestEffort Any→String serializes array to JSON string (not scalar unwrap)"
+    },
+    {
+      "id": "au_003",
+      "category": "array_unwrap",
+      "input_value": [
+        true
+      ],
+      "target": "bool",
+      "min_level": "BestEffort",
+      "expected": true
+    },
+    {
+      "id": "au_004",
+      "category": "array_unwrap",
+      "input_value": [
+        1,
+        2
+      ],
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected_error": true,
+      "note": "multi-element not unwrapped"
+    },
+    {
+      "id": "o2s_001",
+      "category": "object_to_string",
+      "input_value": {
+        "a": 1
+      },
+      "target": "String",
+      "min_level": "BestEffort",
+      "note": "serialized to JSON string"
+    },
+    {
+      "id": "o2s_002",
+      "category": "object_to_string",
+      "input_value": [
+        1,
+        2,
+        3
+      ],
+      "target": "String",
+      "min_level": "BestEffort",
+      "note": "array serialized to JSON string"
+    },
+    {
+      "id": "fo_001",
+      "category": "f32_overflow",
+      "input_value": 1e+308,
+      "target": "f32",
+      "min_level": "SafeWidening",
+      "expected_error": true,
+      "note": "overflows f32 → infinity"
+    },
+    {
+      "id": "fo_002",
+      "category": "f32_overflow",
+      "input_value": -1e+39,
+      "target": "f32",
+      "min_level": "SafeWidening",
+      "expected_error": true
+    },
+    {
+      "id": "fo_003",
+      "category": "f32_overflow",
+      "input_value": 1e-300,
+      "target": "f32",
+      "min_level": "SafeWidening",
+      "expected_error": true,
+      "note": "underflows f32 → 0"
+    },
+    {
+      "id": "fo_004",
+      "category": "f32_overflow",
+      "input": "1e308",
+      "target": "f32",
+      "min_level": "StringCoercion",
+      "expected_error": true,
+      "note": "string path overflow"
+    },
+    {
+      "id": "fo_005",
+      "category": "f32_overflow",
+      "input": "-1e39",
+      "target": "f32",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "fo_006",
+      "category": "f32_overflow",
+      "input": "1e-300",
+      "target": "f32",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "fo_007",
+      "category": "f32_overflow",
+      "input_value": 12.99,
+      "target": "f32",
+      "min_level": "SafeWidening",
+      "expected_approx": 12.99,
+      "note": "normal f32 OK"
+    },
+    {
+      "id": "io_001",
+      "category": "integer_overflow",
+      "input": "256",
+      "target": "u8",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "io_002",
+      "category": "integer_overflow",
+      "input": "-1",
+      "target": "u8",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "io_003",
+      "category": "integer_overflow",
+      "input": "128",
+      "target": "i8",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "io_004",
+      "category": "integer_overflow",
+      "input": "-129",
+      "target": "i8",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "io_005",
+      "category": "integer_overflow",
+      "input": "65536",
+      "target": "u16",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "io_006",
+      "category": "integer_overflow",
+      "input": "32768",
+      "target": "i16",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "io_007",
+      "category": "integer_overflow",
+      "input": "4294967296",
+      "target": "u32",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "io_008",
+      "category": "integer_overflow",
+      "input": "2147483648",
+      "target": "i32",
+      "min_level": "StringCoercion",
+      "expected_error": true
+    },
+    {
+      "id": "io_009",
+      "category": "integer_overflow",
+      "input_value": 256,
+      "target": "u8",
+      "min_level": "SafeWidening",
+      "expected_error": true,
+      "note": "number value overflow"
+    },
+    {
+      "id": "io_010",
+      "category": "integer_overflow",
+      "input_value": -1,
+      "target": "u32",
+      "min_level": "SafeWidening",
+      "expected_error": true
+    },
+    {
+      "id": "io_011",
+      "category": "integer_overflow",
+      "input": "255",
+      "target": "u8",
+      "min_level": "StringCoercion",
+      "expected": 255,
+      "note": "boundary OK"
+    },
+    {
+      "id": "io_012",
+      "category": "integer_overflow",
+      "input": "127",
+      "target": "i8",
+      "min_level": "StringCoercion",
+      "expected": 127,
+      "note": "boundary OK"
+    },
+    {
+      "id": "io_013",
+      "category": "integer_overflow",
+      "input": "-128",
+      "target": "i8",
+      "min_level": "StringCoercion",
+      "expected": -128,
+      "note": "boundary OK"
+    },
+    {
+      "id": "pl_001",
+      "category": "precision_loss",
+      "input_value": 9007199254740993,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected_warning": true,
+      "note": "2^53+1 loses precision"
+    },
+    {
+      "id": "pl_002",
+      "category": "precision_loss",
+      "input_value": 9007199254740992,
+      "target": "f64",
+      "min_level": "SafeWidening",
+      "expected": 9007199254740992.0,
+      "note": "2^53 exact"
+    },
+    {
+      "id": "nc_001",
+      "category": "negative_coercions",
+      "input": "42",
+      "target": "i64",
+      "min_level": "Exact",
+      "expected_error": true,
+      "note": "Exact rejects string→int"
+    },
+    {
+      "id": "nc_002",
+      "category": "negative_coercions",
+      "input": "true",
+      "target": "bool",
+      "min_level": "Exact",
+      "expected_error": true,
+      "note": "Exact rejects string→bool"
+    },
+    {
+      "id": "nc_003",
+      "category": "negative_coercions",
+      "input": "3.14",
+      "target": "f64",
+      "min_level": "Exact",
+      "expected_error": true,
+      "note": "Exact rejects string→float"
+    },
+    {
+      "id": "nc_004",
+      "category": "negative_coercions",
+      "input_value": 42,
+      "target": "f64",
+      "min_level": "Exact",
+      "expected_error": true,
+      "note": "Exact rejects int→float"
+    },
+    {
+      "id": "nc_005",
+      "category": "negative_coercions",
+      "input_value": null,
+      "target": "i64",
+      "min_level": "Exact",
+      "expected_error": true,
+      "note": "Exact rejects null→default"
+    },
+    {
+      "id": "nc_006",
+      "category": "negative_coercions",
+      "input_value": null,
+      "target": "i64",
+      "min_level": "SafeWidening",
+      "expected_error": true,
+      "note": "SafeWidening rejects null→default"
+    },
+    {
+      "id": "nc_007",
+      "category": "negative_coercions",
+      "input": "1,234",
+      "target": "i64",
+      "min_level": "StringCoercion",
+      "expected_error": true,
+      "note": "locale needs BestEffort"
+    },
+    {
+      "id": "nc_008",
+      "category": "negative_coercions",
+      "input": "hello",
+      "target": "i64",
+      "min_level": "BestEffort",
+      "expected_error": true,
+      "note": "truly non-coercible"
+    }
+  ]
+}

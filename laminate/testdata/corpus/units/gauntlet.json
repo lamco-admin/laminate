@@ -1,0 +1,684 @@
+{
+  "_meta": {
+    "name": "Units & Measurements Gauntlet",
+    "description": "Comprehensive test of unit parsing, conversion, pack notation, SI prefixes",
+    "version": "1.0.0",
+    "cases": 120
+  },
+  "cases": [
+    {
+      "id": "wt_001",
+      "input": "5.2 kg",
+      "expected_amount": 5.2,
+      "expected_unit": "kg",
+      "category": "Weight"
+    },
+    {
+      "id": "wt_002",
+      "input": "120 lbs",
+      "expected_amount": 120.0,
+      "expected_unit": "lb",
+      "category": "Weight",
+      "note": " [canonical SI output]"
+    },
+    {
+      "id": "wt_003",
+      "input": "16 oz",
+      "expected_amount": 16.0,
+      "expected_unit": "oz",
+      "category": "Weight"
+    },
+    {
+      "id": "wt_004",
+      "input": "1.5 tons",
+      "expected_amount": 1.5,
+      "expected_unit": "tons",
+      "category": "Weight"
+    },
+    {
+      "id": "wt_005",
+      "input": "500 g",
+      "expected_amount": 500.0,
+      "expected_unit": "g",
+      "category": "Weight"
+    },
+    {
+      "id": "wt_006",
+      "input": "250 mg",
+      "expected_amount": 250.0,
+      "expected_unit": "mg",
+      "category": "Weight"
+    },
+    {
+      "id": "wt_007",
+      "input": "0 kg",
+      "expected_amount": 0.0,
+      "expected_unit": "kg",
+      "category": "Weight"
+    },
+    {
+      "id": "wt_008",
+      "input": "2.2046 lb",
+      "expected_amount": 2.2046,
+      "expected_unit": "lb",
+      "category": "Weight"
+    },
+    {
+      "id": "wt_009",
+      "input": "1 stone",
+      "expected_amount": 1.0,
+      "expected_unit": "stone",
+      "category": "Weight"
+    },
+    {
+      "id": "wt_010",
+      "input": "0.5kg",
+      "expected_amount": 0.5,
+      "expected_unit": "kg",
+      "category": "Weight",
+      "note": "no space"
+    },
+    {
+      "id": "ln_001",
+      "input": "100 km",
+      "expected_amount": 100.0,
+      "expected_unit": "km",
+      "category": "Length"
+    },
+    {
+      "id": "ln_002",
+      "input": "5.5 mi",
+      "expected_amount": 5.5,
+      "expected_unit": "mi",
+      "category": "Length"
+    },
+    {
+      "id": "ln_003",
+      "input": "6 ft",
+      "expected_amount": 6.0,
+      "expected_unit": "ft",
+      "category": "Length"
+    },
+    {
+      "id": "ln_004",
+      "input": "12 in",
+      "expected_amount": 12.0,
+      "expected_unit": "in",
+      "category": "Length"
+    },
+    {
+      "id": "ln_005",
+      "input": "100 m",
+      "expected_amount": 100.0,
+      "expected_unit": "m",
+      "category": "Length"
+    },
+    {
+      "id": "ln_006",
+      "input": "50 cm",
+      "expected_amount": 50.0,
+      "expected_unit": "cm",
+      "category": "Length"
+    },
+    {
+      "id": "ln_007",
+      "input": "10 mm",
+      "expected_amount": 10.0,
+      "expected_unit": "mm",
+      "category": "Length"
+    },
+    {
+      "id": "ln_008",
+      "input": "1 yd",
+      "expected_amount": 1.0,
+      "expected_unit": "yd",
+      "category": "Length"
+    },
+    {
+      "id": "ln_009",
+      "input": "1 nm",
+      "expected_amount": 1.0,
+      "expected_unit": "nmi",
+      "category": "Length",
+      "note": "nautical mile [canonical SI output]"
+    },
+    {
+      "id": "ln_010",
+      "input": "100m",
+      "expected_amount": 100.0,
+      "expected_unit": "m",
+      "category": "Length",
+      "note": "no space"
+    },
+    {
+      "id": "tmp_001",
+      "input": "98.6°F",
+      "expected_amount": 98.6,
+      "expected_unit": "°F",
+      "category": "Temperature"
+    },
+    {
+      "id": "tmp_002",
+      "input": "37°C",
+      "expected_amount": 37.0,
+      "expected_unit": "°C",
+      "category": "Temperature"
+    },
+    {
+      "id": "tmp_003",
+      "input": "273.15 K",
+      "expected_amount": 273.15,
+      "expected_unit": "K",
+      "category": "Temperature"
+    },
+    {
+      "id": "tmp_004",
+      "input": "0°C",
+      "expected_amount": 0.0,
+      "expected_unit": "°C",
+      "category": "Temperature"
+    },
+    {
+      "id": "tmp_005",
+      "input": "-40°F",
+      "expected_amount": -40.0,
+      "expected_unit": "°F",
+      "category": "Temperature"
+    },
+    {
+      "id": "tmp_006",
+      "input": "100 °C",
+      "expected_amount": 100.0,
+      "expected_unit": "°C",
+      "category": "Temperature"
+    },
+    {
+      "id": "tmp_007",
+      "input": "212°F",
+      "expected_amount": 212.0,
+      "expected_unit": "°F",
+      "category": "Temperature"
+    },
+    {
+      "id": "tmp_008",
+      "input": "0 K",
+      "expected_amount": 0.0,
+      "expected_unit": "K",
+      "category": "Temperature",
+      "note": "absolute zero"
+    },
+    {
+      "id": "vol_001",
+      "input": "3.7 L",
+      "expected_amount": 3.7,
+      "expected_unit": "L",
+      "category": "Volume"
+    },
+    {
+      "id": "vol_002",
+      "input": "1 gal",
+      "expected_amount": 1.0,
+      "expected_unit": "gal",
+      "category": "Volume"
+    },
+    {
+      "id": "vol_003",
+      "input": "500 mL",
+      "expected_amount": 500.0,
+      "expected_unit": "mL",
+      "category": "Volume"
+    },
+    {
+      "id": "vol_004",
+      "input": "1 qt",
+      "expected_amount": 1.0,
+      "expected_unit": "qt",
+      "category": "Volume"
+    },
+    {
+      "id": "vol_005",
+      "input": "1 pt",
+      "expected_amount": 1.0,
+      "expected_unit": "pt",
+      "category": "Volume"
+    },
+    {
+      "id": "vol_006",
+      "input": "8 fl oz",
+      "expected_amount": 8.0,
+      "expected_unit": "fl oz",
+      "category": "Volume"
+    },
+    {
+      "id": "vol_007",
+      "input": "1 cup",
+      "expected_amount": 1.0,
+      "expected_unit": "cup",
+      "category": "Volume"
+    },
+    {
+      "id": "si_001",
+      "input": "100 kHz",
+      "expected_amount": 100.0,
+      "expected_unit": "kHz",
+      "category": "Frequency",
+      "note": "SI prefix kilo"
+    },
+    {
+      "id": "si_002",
+      "input": "2.4 GHz",
+      "expected_amount": 2.4,
+      "expected_unit": "GHz",
+      "category": "Frequency",
+      "note": "SI prefix giga"
+    },
+    {
+      "id": "si_003",
+      "input": "50 MHz",
+      "expected_amount": 50.0,
+      "expected_unit": "MHz",
+      "category": "Frequency",
+      "note": "SI prefix mega"
+    },
+    {
+      "id": "si_004",
+      "input": "10 THz",
+      "expected_amount": 10.0,
+      "expected_unit": "THz",
+      "category": "Frequency",
+      "note": "SI prefix tera"
+    },
+    {
+      "id": "dat_001",
+      "input": "500 MB",
+      "expected_amount": 500.0,
+      "expected_unit": "MB",
+      "category": "Data"
+    },
+    {
+      "id": "dat_002",
+      "input": "10 TB",
+      "expected_amount": 10.0,
+      "expected_unit": "TB",
+      "category": "Data"
+    },
+    {
+      "id": "dat_003",
+      "input": "1 GB",
+      "expected_amount": 1.0,
+      "expected_unit": "GB",
+      "category": "Data"
+    },
+    {
+      "id": "dat_004",
+      "input": "256 KB",
+      "expected_amount": 256.0,
+      "expected_unit": "KB",
+      "category": "Data"
+    },
+    {
+      "id": "dat_005",
+      "input": "100 bytes",
+      "expected_amount": 100.0,
+      "expected_unit": "bytes",
+      "category": "Data"
+    },
+    {
+      "id": "prs_001",
+      "input": "1013.25 hPa",
+      "expected_amount": 1013.25,
+      "expected_unit": "hPa",
+      "category": "Pressure"
+    },
+    {
+      "id": "prs_002",
+      "input": "120 mmHg",
+      "expected_amount": 120.0,
+      "expected_unit": "mmHg",
+      "category": "Pressure"
+    },
+    {
+      "id": "prs_003",
+      "input": "14.7 psi",
+      "expected_amount": 14.7,
+      "expected_unit": "psi",
+      "category": "Pressure"
+    },
+    {
+      "id": "prs_004",
+      "input": "1 atm",
+      "expected_amount": 1.0,
+      "expected_unit": "atm",
+      "category": "Pressure"
+    },
+    {
+      "id": "prs_005",
+      "input": "101325 Pa",
+      "expected_amount": 101325.0,
+      "expected_unit": "Pa",
+      "category": "Pressure"
+    },
+    {
+      "id": "spd_001",
+      "input": "60 mph",
+      "expected_amount": 60.0,
+      "expected_unit": "mph",
+      "category": "Speed"
+    },
+    {
+      "id": "spd_002",
+      "input": "100 km/h",
+      "expected_amount": 100.0,
+      "expected_unit": "km/h",
+      "category": "Speed"
+    },
+    {
+      "id": "spd_003",
+      "input": "343 m/s",
+      "expected_amount": 343.0,
+      "expected_unit": "m/s",
+      "category": "Speed"
+    },
+    {
+      "id": "spd_004",
+      "input": "10 knots",
+      "expected_amount": 10.0,
+      "expected_unit": "knots",
+      "category": "Speed"
+    },
+    {
+      "id": "nrg_001",
+      "input": "100 kWh",
+      "expected_amount": 100.0,
+      "expected_unit": "kWh",
+      "category": "Energy"
+    },
+    {
+      "id": "nrg_002",
+      "input": "4184 J",
+      "expected_amount": 4184.0,
+      "expected_unit": "J",
+      "category": "Energy"
+    },
+    {
+      "id": "nrg_003",
+      "input": "1 kcal",
+      "expected_amount": 1.0,
+      "expected_unit": "kcal",
+      "category": "Energy"
+    },
+    {
+      "id": "nrg_004",
+      "input": "3412 BTU",
+      "expected_amount": 3412.0,
+      "expected_unit": "BTU",
+      "category": "Energy"
+    },
+    {
+      "id": "tm_001",
+      "input": "3600 s",
+      "expected_amount": 3600.0,
+      "expected_unit": "s",
+      "category": "Time"
+    },
+    {
+      "id": "tm_002",
+      "input": "60 min",
+      "expected_amount": 60.0,
+      "expected_unit": "min",
+      "category": "Time"
+    },
+    {
+      "id": "tm_003",
+      "input": "24 hr",
+      "expected_amount": 24.0,
+      "expected_unit": "h",
+      "category": "Time",
+      "note": " [canonical SI output]"
+    },
+    {
+      "id": "tm_004",
+      "input": "1 ms",
+      "expected_amount": 1.0,
+      "expected_unit": "ms",
+      "category": "Time"
+    },
+    {
+      "id": "unece_001",
+      "input": "100 KGM",
+      "expected_amount": 100.0,
+      "expected_unit": "kg",
+      "category": "Weight",
+      "note": "UNECE code [canonical SI output]"
+    },
+    {
+      "id": "unece_002",
+      "input": "50 MTR",
+      "expected_amount": 50.0,
+      "expected_unit": "m",
+      "category": "Length",
+      "note": "UNECE code [canonical SI output]"
+    },
+    {
+      "id": "unece_003",
+      "input": "10 LTR",
+      "expected_amount": 10.0,
+      "expected_unit": "L",
+      "category": "Volume",
+      "note": "UNECE code [canonical SI output]"
+    },
+    {
+      "id": "unece_004",
+      "input": "1 TNE",
+      "expected_amount": 1.0,
+      "expected_unit": "kg",
+      "category": "Weight",
+      "note": "UNECE metric tonne [canonical SI output]"
+    },
+    {
+      "id": "unece_005",
+      "input": "100 CMT",
+      "expected_amount": 100.0,
+      "expected_unit": "cm",
+      "category": "Length",
+      "note": "UNECE centimetre [canonical SI output]"
+    },
+    {
+      "id": "pack_001",
+      "input": "1x100-count",
+      "expected_units": 100,
+      "category": "PackSize",
+      "note": "pack notation"
+    },
+    {
+      "id": "pack_002",
+      "input": "6x12-count",
+      "expected_units": 72,
+      "category": "PackSize"
+    },
+    {
+      "id": "pack_003",
+      "input": "2x500ml",
+      "expected_units": 1000.0,
+      "category": "PackSize"
+    },
+    {
+      "id": "pack_004",
+      "input": "24x330ml",
+      "expected_units": 7920.0,
+      "category": "PackSize"
+    },
+    {
+      "id": "pack_005",
+      "input": "1x1-count",
+      "expected_units": 1,
+      "category": "PackSize"
+    },
+    {
+      "id": "qw_001",
+      "input": "G.W. 15.5kg",
+      "expected_amount": 15.5,
+      "category": "QualifiedWeight",
+      "qualifier": "gross"
+    },
+    {
+      "id": "qw_002",
+      "input": "N.W. 10.0kg",
+      "expected_amount": 10.0,
+      "category": "QualifiedWeight",
+      "qualifier": "net"
+    },
+    {
+      "id": "qw_003",
+      "input": "Gross Weight 100 lbs",
+      "expected_amount": 100.0,
+      "category": "QualifiedWeight",
+      "qualifier": "gross"
+    },
+    {
+      "id": "qw_004",
+      "input": "Net Wt 50 lbs",
+      "expected_amount": 50.0,
+      "category": "QualifiedWeight",
+      "qualifier": "net"
+    },
+    {
+      "id": "qw_005",
+      "input": "Tare 5.5kg",
+      "expected_amount": 5.5,
+      "category": "QualifiedWeight",
+      "qualifier": "tare"
+    },
+    {
+      "id": "conv_001",
+      "from": "kg",
+      "to": "lbs",
+      "amount": 1.0,
+      "expected": 2.20462,
+      "note": "kg → lbs"
+    },
+    {
+      "id": "conv_002",
+      "from": "mi",
+      "to": "km",
+      "amount": 1.0,
+      "expected": 1.60934,
+      "note": "mi → km"
+    },
+    {
+      "id": "conv_003",
+      "from": "°C",
+      "to": "°F",
+      "amount": 0.0,
+      "expected": 32.0,
+      "note": "freezing point"
+    },
+    {
+      "id": "conv_004",
+      "from": "°C",
+      "to": "°F",
+      "amount": 100.0,
+      "expected": 212.0,
+      "note": "boiling point"
+    },
+    {
+      "id": "conv_005",
+      "from": "°F",
+      "to": "°C",
+      "amount": 98.6,
+      "expected": 37.0,
+      "note": "body temp"
+    },
+    {
+      "id": "conv_006",
+      "from": "L",
+      "to": "gal",
+      "amount": 1.0,
+      "expected": 0.264172,
+      "note": "L → gal"
+    },
+    {
+      "id": "conv_007",
+      "from": "in",
+      "to": "cm",
+      "amount": 1.0,
+      "expected": 2.54,
+      "note": "in → cm"
+    },
+    {
+      "id": "conv_008",
+      "from": "ft",
+      "to": "m",
+      "amount": 1.0,
+      "expected": 0.3048,
+      "note": "ft → m"
+    },
+    {
+      "id": "conv_009",
+      "from": "oz",
+      "to": "g",
+      "amount": 1.0,
+      "expected": 28.3495,
+      "note": "oz → g"
+    },
+    {
+      "id": "conv_010",
+      "from": "kg",
+      "to": "lbs",
+      "amount": 0.0,
+      "expected": 0.0,
+      "note": "zero value"
+    },
+    {
+      "id": "edge_001",
+      "input": "0 kg",
+      "expected_amount": 0.0,
+      "expected_unit": "kg",
+      "note": "zero"
+    },
+    {
+      "id": "edge_002",
+      "input": "-5 °C",
+      "expected_amount": -5.0,
+      "expected_unit": "°C",
+      "note": "negative"
+    },
+    {
+      "id": "edge_003",
+      "input": "1e6 kg",
+      "expected_amount": 1000000.0,
+      "expected_unit": "kg",
+      "note": "scientific notation"
+    },
+    {
+      "id": "edge_004",
+      "input": "just text",
+      "expected_amount": null,
+      "note": "not a unit value"
+    },
+    {
+      "id": "edge_005",
+      "input": "",
+      "expected_amount": null,
+      "note": "empty string"
+    },
+    {
+      "id": "edge_006",
+      "input": "kg",
+      "expected_amount": null,
+      "note": "unit without amount"
+    },
+    {
+      "id": "edge_007",
+      "input": "42",
+      "expected_amount": null,
+      "note": "number without unit"
+    },
+    {
+      "id": "edge_008",
+      "input": "5.2 kg extra text",
+      "expected_amount": null,
+      "note": "trailing garbage"
+    }
+  ]
+}

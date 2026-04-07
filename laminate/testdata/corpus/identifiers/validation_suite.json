@@ -1,0 +1,2072 @@
+{
+  "_meta": {
+    "description": "Comprehensive identifier validation test suite for laminate identifiers pack",
+    "version": "1.0.0",
+    "created": "2026-04-06",
+    "coverage": [
+      "IBAN",
+      "credit_card",
+      "ISBN",
+      "SSN",
+      "EIN",
+      "NPI",
+      "NHS",
+      "EU_VAT",
+      "UUID",
+      "email",
+      "phone"
+    ],
+    "total_cases": 256,
+    "valid_ratio": "50%"
+  },
+  "cases": [
+    {
+      "id": "iban-001",
+      "input": "GB29NWBK60161331926819",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK IBAN"
+    },
+    {
+      "id": "iban-002",
+      "input": "GB82WEST12345698765432",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK IBAN (Westminster)"
+    },
+    {
+      "id": "iban-003",
+      "input": "DE89370400440532013000",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "DE",
+      "note": "Valid German IBAN"
+    },
+    {
+      "id": "iban-004",
+      "input": "DE75512108001245126199",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "DE",
+      "note": "Valid German IBAN (alternate)"
+    },
+    {
+      "id": "iban-005",
+      "input": "FR7630006000011234567890189",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "FR",
+      "note": "Valid French IBAN"
+    },
+    {
+      "id": "iban-006",
+      "input": "ES9121000418450200051332",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "ES",
+      "note": "Valid Spanish IBAN"
+    },
+    {
+      "id": "iban-007",
+      "input": "IT60X0542811101000000123456",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "IT",
+      "note": "Valid Italian IBAN"
+    },
+    {
+      "id": "iban-008",
+      "input": "NL91ABNA0417164300",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "NL",
+      "note": "Valid Dutch IBAN"
+    },
+    {
+      "id": "iban-009",
+      "input": "CH9300762011623852957",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "CH",
+      "note": "Valid Swiss IBAN"
+    },
+    {
+      "id": "iban-010",
+      "input": "AT611904300234573201",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "AT",
+      "note": "Valid Austrian IBAN"
+    },
+    {
+      "id": "iban-011",
+      "input": "BE68539007547034",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "BE",
+      "note": "Valid Belgian IBAN"
+    },
+    {
+      "id": "iban-012",
+      "input": "SE4550000000058398257466",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "SE",
+      "note": "Valid Swedish IBAN"
+    },
+    {
+      "id": "iban-013",
+      "input": "NO9386011117947",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "NO",
+      "note": "Valid Norwegian IBAN"
+    },
+    {
+      "id": "iban-014",
+      "input": "DK5000400440116243",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "DK",
+      "note": "Valid Danish IBAN"
+    },
+    {
+      "id": "iban-015",
+      "input": "PL61109010140000071219812874",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "PL",
+      "note": "Valid Polish IBAN"
+    },
+    {
+      "id": "iban-016",
+      "input": "GB29NWBK60161331926818",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UK IBAN - wrong check digits (last digit changed)"
+    },
+    {
+      "id": "iban-017",
+      "input": "DE00370400440532013000",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid German IBAN - wrong check digits (00)"
+    },
+    {
+      "id": "iban-018",
+      "input": "GB29NWBK6016133192681",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UK IBAN - wrong length (one digit short)"
+    },
+    {
+      "id": "iban-019",
+      "input": "XX29NWBK60161331926819",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid IBAN - non-existent country code XX"
+    },
+    {
+      "id": "iban-020",
+      "input": "CZ6508000000192000145399",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "CZ",
+      "note": "Valid Czech IBAN"
+    },
+    {
+      "id": "iban-021",
+      "input": "PT50000201231234567890154",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "PT",
+      "note": "Valid Portuguese IBAN"
+    },
+    {
+      "id": "cc-001",
+      "input": "4111111111111111",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "visa",
+      "note": "Valid Visa test number"
+    },
+    {
+      "id": "cc-002",
+      "input": "4012888888881881",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "visa",
+      "note": "Valid Visa test number (alternate)"
+    },
+    {
+      "id": "cc-003",
+      "input": "4222222222222",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "visa",
+      "note": "Valid Visa 13-digit"
+    },
+    {
+      "id": "cc-004",
+      "input": "5500000000000004",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "mastercard",
+      "note": "Valid Mastercard test number"
+    },
+    {
+      "id": "cc-005",
+      "input": "5105105105105100",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "mastercard",
+      "note": "Valid Mastercard test number (alternate)"
+    },
+    {
+      "id": "cc-006",
+      "input": "2221000000000009",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "mastercard",
+      "note": "Valid Mastercard 2-series range"
+    },
+    {
+      "id": "cc-007",
+      "input": "340000000000009",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "amex",
+      "note": "Valid Amex test number (34-prefix)"
+    },
+    {
+      "id": "cc-008",
+      "input": "378282246310005",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "amex",
+      "note": "Valid Amex test number (37-prefix)"
+    },
+    {
+      "id": "cc-009",
+      "input": "6011111111111117",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "discover",
+      "note": "Valid Discover test number"
+    },
+    {
+      "id": "cc-010",
+      "input": "6011000990139424",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "discover",
+      "note": "Valid Discover test number (alternate)"
+    },
+    {
+      "id": "cc-011",
+      "input": "3530111333300000",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "jcb",
+      "note": "Valid JCB test number"
+    },
+    {
+      "id": "cc-012",
+      "input": "3566002020360505",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "jcb",
+      "note": "Valid JCB test number (alternate)"
+    },
+    {
+      "id": "cc-013",
+      "input": "30569309025904",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "Diners Club",
+      "note": "Valid Diners Club test number"
+    },
+    {
+      "id": "cc-014",
+      "input": "4111-1111-1111-1111",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "visa",
+      "note": "Valid Visa with dashes"
+    },
+    {
+      "id": "cc-015",
+      "input": "5500 0000 0000 0004",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "mastercard",
+      "note": "Valid Mastercard with spaces"
+    },
+    {
+      "id": "cc-016",
+      "input": "4111111111111112",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Visa - fails Luhn (last digit wrong)"
+    },
+    {
+      "id": "cc-017",
+      "input": "5500000000000005",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Mastercard - fails Luhn"
+    },
+    {
+      "id": "cc-018",
+      "input": "0000000000000000",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid - all zeros, no valid issuer prefix"
+    },
+    {
+      "id": "cc-019",
+      "input": "1234567890123456",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid - sequential digits, fails Luhn, no valid prefix"
+    },
+    {
+      "id": "cc-020",
+      "input": "378282246310006",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Amex - fails Luhn (last digit changed)"
+    },
+    {
+      "id": "isbn-001",
+      "input": "978-0-306-40615-7",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 with dashes"
+    },
+    {
+      "id": "isbn-002",
+      "input": "9780306406157",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 plain"
+    },
+    {
+      "id": "isbn-003",
+      "input": "978-3-16-148410-0",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 (German publisher)"
+    },
+    {
+      "id": "isbn-004",
+      "input": "978-1-4028-9462-6",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 (US publisher)"
+    },
+    {
+      "id": "isbn-005",
+      "input": "979-10-90636-07-1",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 with 979 prefix"
+    },
+    {
+      "id": "isbn-006",
+      "input": "0-306-40615-2",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-10",
+      "note": "Valid ISBN-10 with dashes"
+    },
+    {
+      "id": "isbn-007",
+      "input": "0306406152",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-10",
+      "note": "Valid ISBN-10 plain"
+    },
+    {
+      "id": "isbn-008",
+      "input": "0-8044-2957-X",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-10",
+      "note": "Valid ISBN-10 with X check digit"
+    },
+    {
+      "id": "isbn-009",
+      "input": "080442957X",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-10",
+      "note": "Valid ISBN-10 with X check digit, plain format"
+    },
+    {
+      "id": "isbn-010",
+      "input": "978-0-13-468599-1",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 (The C Programming Language)"
+    },
+    {
+      "id": "isbn-011",
+      "input": "978-0-306-40615-8",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-13 - wrong check digit (8 instead of 7)"
+    },
+    {
+      "id": "isbn-012",
+      "input": "978-0-306-40615",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-13 - too short (12 digits)"
+    },
+    {
+      "id": "isbn-013",
+      "input": "0-306-40615-3",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-10 - wrong check digit (3 instead of 2)"
+    },
+    {
+      "id": "isbn-014",
+      "input": "9780306406158",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-13 plain - wrong check digit"
+    },
+    {
+      "id": "isbn-015",
+      "input": "0-8044-2957-5",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-10 - should have X check digit, not 5"
+    },
+    {
+      "id": "ssn-001",
+      "input": "123-45-6789",
+      "type": "SSN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid SSN format"
+    },
+    {
+      "id": "ssn-002",
+      "input": "001-01-0001",
+      "type": "SSN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid SSN - minimum non-zero values"
+    },
+    {
+      "id": "ssn-003",
+      "input": "899-99-9999",
+      "type": "SSN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid SSN - area just below 900"
+    },
+    {
+      "id": "ssn-004",
+      "input": "219-09-9999",
+      "type": "SSN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid SSN - normal area number"
+    },
+    {
+      "id": "ssn-005",
+      "input": "078-05-1120",
+      "type": "SSN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid SSN format - historically the Woolworth SSN (now invalid in practice but structurally valid)"
+    },
+    {
+      "id": "ssn-006",
+      "input": "000-45-6789",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - area number 000"
+    },
+    {
+      "id": "ssn-007",
+      "input": "666-45-6789",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - area number 666"
+    },
+    {
+      "id": "ssn-008",
+      "input": "900-45-6789",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - area number 900+ (ITIN range)"
+    },
+    {
+      "id": "ssn-009",
+      "input": "123-00-6789",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - group number 00"
+    },
+    {
+      "id": "ssn-010",
+      "input": "123-45-0000",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - serial number 0000"
+    },
+    {
+      "id": "ein-001",
+      "input": "12-3456789",
+      "type": "EIN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid EIN format"
+    },
+    {
+      "id": "ein-002",
+      "input": "10-1234567",
+      "type": "EIN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid EIN - prefix 10 (IRS campus)"
+    },
+    {
+      "id": "ein-003",
+      "input": "20-1234567",
+      "type": "EIN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid EIN - prefix 20"
+    },
+    {
+      "id": "ein-004",
+      "input": "27-1234567",
+      "type": "EIN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid EIN - prefix 27"
+    },
+    {
+      "id": "ein-005",
+      "input": "00-1234567",
+      "type": "EIN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid EIN - prefix 00 not assigned"
+    },
+    {
+      "id": "ein-006",
+      "input": "12-0000000",
+      "type": "EIN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid EIN - all zeros in serial"
+    },
+    {
+      "id": "ein-007",
+      "input": "123456789",
+      "type": "EIN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid EIN - missing dash"
+    },
+    {
+      "id": "ein-008",
+      "input": "12-345678",
+      "type": "EIN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid EIN - too short (8 digits)"
+    },
+    {
+      "id": "npi-001",
+      "input": "1234567893",
+      "type": "NPI",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NPI - passes Luhn with 80840 prefix"
+    },
+    {
+      "id": "npi-002",
+      "input": "1245319599",
+      "type": "NPI",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NPI"
+    },
+    {
+      "id": "npi-003",
+      "input": "1003000126",
+      "type": "NPI",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NPI"
+    },
+    {
+      "id": "npi-004",
+      "input": "1679576722",
+      "type": "NPI",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NPI"
+    },
+    {
+      "id": "npi-005",
+      "input": "1234567890",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - fails Luhn check"
+    },
+    {
+      "id": "npi-006",
+      "input": "1234567891",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - fails Luhn check"
+    },
+    {
+      "id": "npi-007",
+      "input": "123456789",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - only 9 digits"
+    },
+    {
+      "id": "npi-008",
+      "input": "12345678901",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - 11 digits, too long"
+    },
+    {
+      "id": "nhs-001",
+      "input": "4505577104",
+      "type": "NHS",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NHS number - passes mod-11"
+    },
+    {
+      "id": "nhs-002",
+      "input": "9434765919",
+      "type": "NHS",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NHS number"
+    },
+    {
+      "id": "nhs-003",
+      "input": "4148973513",
+      "type": "NHS",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NHS — MOD-11 check digit is 9, actual digit is 3"
+    },
+    {
+      "id": "nhs-004",
+      "input": "6328797966",
+      "type": "NHS",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NHS number"
+    },
+    {
+      "id": "nhs-005",
+      "input": "4505577105",
+      "type": "NHS",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NHS - wrong check digit"
+    },
+    {
+      "id": "nhs-006",
+      "input": "0000000000",
+      "type": "NHS",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NHS - all zeros"
+    },
+    {
+      "id": "nhs-007",
+      "input": "450557710",
+      "type": "NHS",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NHS - only 9 digits"
+    },
+    {
+      "id": "nhs-008",
+      "input": "45055771044",
+      "type": "NHS",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NHS - 11 digits, too long"
+    },
+    {
+      "id": "vat-001",
+      "input": "DE123456789",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "DE",
+      "note": "Valid German VAT - 9 digits"
+    },
+    {
+      "id": "vat-002",
+      "input": "FR12345678901",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "FR",
+      "note": "Valid French VAT - 2 chars + 9 digits"
+    },
+    {
+      "id": "vat-003",
+      "input": "FRXX999999999",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "FR",
+      "note": "Valid French VAT with letter prefix"
+    },
+    {
+      "id": "vat-004",
+      "input": "GB123456789",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK VAT - 9 digits"
+    },
+    {
+      "id": "vat-005",
+      "input": "GB123456789012",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK VAT - 12 digits (branch traders)"
+    },
+    {
+      "id": "vat-006",
+      "input": "GBGD001",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK VAT - government departments"
+    },
+    {
+      "id": "vat-007",
+      "input": "IT12345678901",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "IT",
+      "note": "Valid Italian VAT - 11 digits"
+    },
+    {
+      "id": "vat-008",
+      "input": "ESX1234567A",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "ES",
+      "note": "Valid Spanish VAT - letter + 7 digits + letter"
+    },
+    {
+      "id": "vat-009",
+      "input": "NL123456789B01",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "NL",
+      "note": "Valid Dutch VAT - 9 digits + B + 2 digits"
+    },
+    {
+      "id": "vat-010",
+      "input": "ATU12345678",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "AT",
+      "note": "Valid Austrian VAT - U + 8 digits"
+    },
+    {
+      "id": "vat-011",
+      "input": "BE0123456789",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "BE",
+      "note": "Valid Belgian VAT - 10 digits (starts with 0)"
+    },
+    {
+      "id": "vat-012",
+      "input": "SE123456789012",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "SE",
+      "note": "Valid Swedish VAT - 12 digits"
+    },
+    {
+      "id": "vat-013",
+      "input": "PL1234567890",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "PL",
+      "note": "Valid Polish VAT - 10 digits"
+    },
+    {
+      "id": "vat-014",
+      "input": "DE12345678",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid German VAT - only 8 digits (needs 9)"
+    },
+    {
+      "id": "vat-015",
+      "input": "XX123456789",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid VAT - non-existent country code"
+    },
+    {
+      "id": "uuid-001",
+      "input": "550e8400-e29b-41d4-a716-446655440000",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "v4",
+      "note": "Valid UUID v4"
+    },
+    {
+      "id": "uuid-002",
+      "input": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "v1",
+      "note": "Valid UUID v1"
+    },
+    {
+      "id": "uuid-003",
+      "input": "00000000-0000-0000-0000-000000000000",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "nil",
+      "note": "Nil UUID (all zeros)"
+    },
+    {
+      "id": "uuid-004",
+      "input": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "max",
+      "note": "Max UUID (all f's)"
+    },
+    {
+      "id": "uuid-005",
+      "input": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "v4",
+      "note": "Valid UUID v4 (alternate)"
+    },
+    {
+      "id": "uuid-006",
+      "input": "A987FBC9-4BED-3078-CF07-9141BA07C9F3",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "v3",
+      "note": "Valid UUID v3 (uppercase)"
+    },
+    {
+      "id": "uuid-007",
+      "input": "550e8400-e29b-41d4-a716-44665544000",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - last segment too short"
+    },
+    {
+      "id": "uuid-008",
+      "input": "550e8400-e29b-41d4-a716",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - missing last segment"
+    },
+    {
+      "id": "uuid-009",
+      "input": "550e8400-e29b-41d4-a716-44665544000g",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - contains non-hex character 'g'"
+    },
+    {
+      "id": "uuid-010",
+      "input": "550e8400e29b41d4a716446655440000",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - missing dashes (not standard format)"
+    },
+    {
+      "id": "email-001",
+      "input": "user@example.com",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid standard email"
+    },
+    {
+      "id": "email-002",
+      "input": "firstname.lastname@example.com",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with dot in local part"
+    },
+    {
+      "id": "email-003",
+      "input": "user+tag@example.com",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with plus alias"
+    },
+    {
+      "id": "email-004",
+      "input": "user@sub.domain.example.com",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with subdomain"
+    },
+    {
+      "id": "email-005",
+      "input": "user@example.co.uk",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with ccTLD"
+    },
+    {
+      "id": "email-006",
+      "input": "user123@example.com",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with numbers in local part"
+    },
+    {
+      "id": "email-007",
+      "input": "user-name@example.com",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with hyphen in local part"
+    },
+    {
+      "id": "email-008",
+      "input": "user_name@example.com",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with underscore in local part"
+    },
+    {
+      "id": "email-009",
+      "input": "plainaddress",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - no @ sign"
+    },
+    {
+      "id": "email-010",
+      "input": "@example.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - no local part"
+    },
+    {
+      "id": "email-011",
+      "input": "user@",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - no domain"
+    },
+    {
+      "id": "email-012",
+      "input": "user@.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - domain starts with dot"
+    },
+    {
+      "id": "email-013",
+      "input": "user @example.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - space in local part"
+    },
+    {
+      "id": "email-014",
+      "input": "user@exam ple.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - space in domain"
+    },
+    {
+      "id": "email-015",
+      "input": "user@example",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - no TLD"
+    },
+    {
+      "id": "phone-001",
+      "input": "+14155552671",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "US",
+      "note": "Valid US E.164 phone number"
+    },
+    {
+      "id": "phone-002",
+      "input": "+12025551234",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "US",
+      "note": "Valid US E.164 (Washington DC area code)"
+    },
+    {
+      "id": "phone-003",
+      "input": "+442071234567",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK E.164 (London)"
+    },
+    {
+      "id": "phone-004",
+      "input": "+447911123456",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK mobile E.164"
+    },
+    {
+      "id": "phone-005",
+      "input": "+33123456789",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "FR",
+      "note": "Valid French E.164"
+    },
+    {
+      "id": "phone-006",
+      "input": "+4930123456",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "DE",
+      "note": "Valid German E.164 (Berlin)"
+    },
+    {
+      "id": "phone-007",
+      "input": "+81312345678",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "JP",
+      "note": "Valid Japanese E.164 (Tokyo)"
+    },
+    {
+      "id": "phone-008",
+      "input": "+61234567890",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "AU",
+      "note": "Valid Australian E.164"
+    },
+    {
+      "id": "phone-009",
+      "input": "(415) 555-2671",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "US",
+      "note": "Valid US format with parentheses"
+    },
+    {
+      "id": "phone-010",
+      "input": "+44 20 7123 4567",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK with spaces"
+    },
+    {
+      "id": "phone-011",
+      "input": "+1",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - country code only, too short"
+    },
+    {
+      "id": "phone-012",
+      "input": "+123456789012345678",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - too long (18 digits, max is 15)"
+    },
+    {
+      "id": "phone-013",
+      "input": "12345",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - too short, no country code"
+    },
+    {
+      "id": "phone-014",
+      "input": "+0012345678",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - country code starts with 0"
+    },
+    {
+      "id": "phone-015",
+      "input": "+abcdefghij",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - letters instead of digits"
+    },
+    {
+      "id": "phone-016",
+      "input": "+5511987654321",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "BR",
+      "note": "Valid Brazilian mobile E.164"
+    },
+    {
+      "id": "iban-022",
+      "input": "GB 29 NWBK 6016 1331 9268 19",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK IBAN with spaces (common display format)"
+    },
+    {
+      "id": "iban-023",
+      "input": "gb29nwbk60161331926819",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "GB",
+      "note": "Valid UK IBAN in lowercase"
+    },
+    {
+      "id": "iban-024",
+      "input": "FR7630006000011234567890180",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid French IBAN - wrong check (last digit changed)"
+    },
+    {
+      "id": "cc-021",
+      "input": "3782 822463 10005",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "amex",
+      "note": "Valid Amex with spaces in Amex grouping (4-6-5)"
+    },
+    {
+      "id": "isbn-016",
+      "input": "978 0 306 40615 7",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 with spaces instead of dashes"
+    },
+    {
+      "id": "ssn-011",
+      "input": "999-99-9999",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - area 999 (900+ range)"
+    },
+    {
+      "id": "ein-009",
+      "input": "45-6789012",
+      "type": "EIN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid EIN - prefix 45"
+    },
+    {
+      "id": "npi-009",
+      "input": "1992345678",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - fails Luhn with 80840 prefix"
+    },
+    {
+      "id": "nhs-009",
+      "input": "1234567890",
+      "type": "NHS",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NHS - check digit remainder equals 10 (not assignable)"
+    },
+    {
+      "id": "vat-016",
+      "input": "ATU1234567",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Austrian VAT - only 7 digits after U (needs 8)"
+    },
+    {
+      "id": "vat-017",
+      "input": "NL123456789A01",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Dutch VAT - must have B not A before last 2 digits"
+    },
+    {
+      "id": "uuid-011",
+      "input": "550E8400-E29B-41D4-A716-446655440000",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "v4",
+      "note": "Valid UUID v4 in uppercase"
+    },
+    {
+      "id": "email-016",
+      "input": "a@b.cd",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email - minimal (1 char local, 1 char domain, 2 char TLD)"
+    },
+    {
+      "id": "phone-017",
+      "input": "+91 98765 43210",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "IN",
+      "note": "Valid Indian mobile with spaces"
+    },
+    {
+      "id": "ssn-012",
+      "input": "987-65-4321",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - area 987 (900+ range)"
+    },
+    {
+      "id": "iban-025",
+      "input": "LU280019400644750000",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "LU",
+      "note": "Valid Luxembourg IBAN"
+    },
+    {
+      "id": "iban-026",
+      "input": "IE29AIBK93115212345678",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "IE",
+      "note": "Valid Irish IBAN"
+    },
+    {
+      "id": "iban-027",
+      "input": "FI2112345600000785",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "FI",
+      "note": "Valid Finnish IBAN"
+    },
+    {
+      "id": "cc-022",
+      "input": "6011-0009-9013-9424",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "discover",
+      "note": "Valid Discover with dashes"
+    },
+    {
+      "id": "cc-023",
+      "input": "3530 1113 3330 0000",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "jcb",
+      "note": "Valid JCB with spaces"
+    },
+    {
+      "id": "cc-024",
+      "input": "36110361103612",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid — passes Luhn (sum=40)"
+    },
+    {
+      "id": "isbn-017",
+      "input": "978-0-596-52068-7",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 (Learning Python)"
+    },
+    {
+      "id": "isbn-018",
+      "input": "0-596-52068-9",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-10",
+      "note": "Valid ISBN-10 (Learning Python)"
+    },
+    {
+      "id": "ssn-013",
+      "input": "123456789",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - missing dashes"
+    },
+    {
+      "id": "ein-010",
+      "input": "95-1234567",
+      "type": "EIN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid EIN - prefix 95"
+    },
+    {
+      "id": "npi-010",
+      "input": "0123456789",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - does not start with 1 or 2"
+    },
+    {
+      "id": "nhs-010",
+      "input": "9876543210",
+      "type": "NHS",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NHS — MOD-11 check=0, last digit=0"
+    },
+    {
+      "id": "vat-018",
+      "input": "CZ12345678",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "CZ",
+      "note": "Valid Czech VAT - 8 digits"
+    },
+    {
+      "id": "vat-019",
+      "input": "CZ1234567890",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "CZ",
+      "note": "Valid Czech VAT - 10 digits (individuals)"
+    },
+    {
+      "id": "vat-020",
+      "input": "DK12345678",
+      "type": "EU_VAT",
+      "expected_valid": true,
+      "expected_detail": "DK",
+      "note": "Valid Danish VAT - 8 digits"
+    },
+    {
+      "id": "uuid-012",
+      "input": "6ba7b811-9dad-21d1-80b4-00c04fd430c8",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "v2",
+      "note": "Valid UUID v2"
+    },
+    {
+      "id": "uuid-013",
+      "input": "6ba7b812-9dad-51d1-80b4-00c04fd430c8",
+      "type": "UUID",
+      "expected_valid": true,
+      "expected_detail": "v5",
+      "note": "Valid UUID v5"
+    },
+    {
+      "id": "email-017",
+      "input": "very.common@example.org",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with dots"
+    },
+    {
+      "id": "email-018",
+      "input": "disposable.style.email.with+symbol@example.com",
+      "type": "email",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid email with long local and plus alias"
+    },
+    {
+      "id": "email-019",
+      "input": "user..name@example.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - consecutive dots in local part"
+    },
+    {
+      "id": "email-020",
+      "input": ".user@example.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - leading dot in local part"
+    },
+    {
+      "id": "phone-018",
+      "input": "+861012345678",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "CN",
+      "note": "Valid Chinese landline E.164 (Beijing)"
+    },
+    {
+      "id": "phone-019",
+      "input": "+8613912345678",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "CN",
+      "note": "Valid Chinese mobile E.164"
+    },
+    {
+      "id": "phone-020",
+      "input": "+7 495 123 4567",
+      "type": "phone",
+      "expected_valid": true,
+      "expected_detail": "RU",
+      "note": "Valid Russian phone with spaces (Moscow)"
+    },
+    {
+      "id": "iban-028",
+      "input": "GR1601101250000000012300695",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "GR",
+      "note": "Valid Greek IBAN"
+    },
+    {
+      "id": "iban-029",
+      "input": "HU42117730161111101800000000",
+      "type": "IBAN",
+      "expected_valid": true,
+      "expected_detail": "HU",
+      "note": "Valid Hungarian IBAN"
+    },
+    {
+      "id": "iban-030",
+      "input": "12345678901234",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid IBAN - no country code prefix"
+    },
+    {
+      "id": "cc-025",
+      "input": "6759649826438453",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "maestro",
+      "note": "Valid Maestro (6759 prefix)"
+    },
+    {
+      "id": "cc-026",
+      "input": "4917300800000000",
+      "type": "credit_card",
+      "expected_valid": true,
+      "expected_detail": "visa",
+      "note": "Valid Visa Electron"
+    },
+    {
+      "id": "isbn-019",
+      "input": "978-0-06-112008-4",
+      "type": "ISBN",
+      "expected_valid": true,
+      "expected_detail": "ISBN-13",
+      "note": "Valid ISBN-13 (To Kill a Mockingbird)"
+    },
+    {
+      "id": "isbn-020",
+      "input": "978-0-00-000000-1",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-13 - wrong check digit for all-zero body"
+    },
+    {
+      "id": "ssn-014",
+      "input": "665-45-6789",
+      "type": "SSN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid SSN - area 665 (just below forbidden 666)"
+    },
+    {
+      "id": "ssn-015",
+      "input": "667-45-6789",
+      "type": "SSN",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid SSN - area 667 (just above forbidden 666)"
+    },
+    {
+      "id": "iban-031",
+      "input": "DE89370400440532013001",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid German IBAN - last digit changed breaks mod-97"
+    },
+    {
+      "id": "iban-032",
+      "input": "NL91ABNA041716430",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Dutch IBAN - too short"
+    },
+    {
+      "id": "iban-033",
+      "input": "ES91210004184502000513321",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Spanish IBAN - too long (extra digit)"
+    },
+    {
+      "id": "iban-034",
+      "input": "CH93007620116238529571",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Swiss IBAN - extra digit"
+    },
+    {
+      "id": "iban-035",
+      "input": "AT61190430023457320X",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Austrian IBAN - contains letter X in account"
+    },
+    {
+      "id": "iban-036",
+      "input": "BE00539007547034",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Belgian IBAN - check digits 00"
+    },
+    {
+      "id": "iban-037",
+      "input": "SE45500000000583982574660",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Swedish IBAN - too long"
+    },
+    {
+      "id": "iban-038",
+      "input": "PL01109010140000071219812874",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Polish IBAN - wrong check digits"
+    },
+    {
+      "id": "iban-039",
+      "input": "DK0000400440116243",
+      "type": "IBAN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Danish IBAN - check digits 00"
+    },
+    {
+      "id": "cc-027",
+      "input": "4111111111111110",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Visa - last digit 0 fails Luhn"
+    },
+    {
+      "id": "cc-028",
+      "input": "5500000000000003",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Mastercard - fails Luhn"
+    },
+    {
+      "id": "cc-029",
+      "input": "340000000000001",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Amex - fails Luhn"
+    },
+    {
+      "id": "cc-030",
+      "input": "6011111111111110",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Discover - fails Luhn"
+    },
+    {
+      "id": "cc-031",
+      "input": "3530111333300001",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid JCB - fails Luhn"
+    },
+    {
+      "id": "cc-032",
+      "input": "4111-1111-1111-1110",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Visa with dashes - fails Luhn"
+    },
+    {
+      "id": "cc-033",
+      "input": "411111111111111",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Visa - 15 digits (too short for Visa 16)"
+    },
+    {
+      "id": "cc-034",
+      "input": "41111111111111111",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Visa - 17 digits (too long)"
+    },
+    {
+      "id": "cc-035",
+      "input": "9999999999999999",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid card - 9-prefix not a recognized issuer"
+    },
+    {
+      "id": "cc-036",
+      "input": "305693090259040",
+      "type": "credit_card",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Diners Club - extra digit, fails Luhn"
+    },
+    {
+      "id": "isbn-021",
+      "input": "978-0-596-52068-0",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-13 - wrong check digit (0 instead of 7)"
+    },
+    {
+      "id": "isbn-022",
+      "input": "9780596520680",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-13 plain - wrong check digit"
+    },
+    {
+      "id": "isbn-023",
+      "input": "0-596-52068-0",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-10 - wrong check digit (0 instead of 9)"
+    },
+    {
+      "id": "isbn-024",
+      "input": "978-0-596-5206",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN-13 - too short (only 11 digits)"
+    },
+    {
+      "id": "isbn-025",
+      "input": "978-0-596-52068-77",
+      "type": "ISBN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid ISBN - too long (14 digits)"
+    },
+    {
+      "id": "ssn-016",
+      "input": "000-00-0000",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - all zeros"
+    },
+    {
+      "id": "ssn-017",
+      "input": "666-12-3456",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - area 666 with valid group and serial"
+    },
+    {
+      "id": "ssn-018",
+      "input": "912-34-5678",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - area 912 in ITIN range"
+    },
+    {
+      "id": "ssn-019",
+      "input": "1234-56-789",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - wrong dash placement"
+    },
+    {
+      "id": "ssn-020",
+      "input": "123-45-678",
+      "type": "SSN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid SSN - serial only 3 digits"
+    },
+    {
+      "id": "ein-011",
+      "input": "12-34567890",
+      "type": "EIN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid EIN - 10 digits after dash (too long)"
+    },
+    {
+      "id": "ein-012",
+      "input": "1-23456789",
+      "type": "EIN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid EIN - only 1 digit prefix"
+    },
+    {
+      "id": "ein-013",
+      "input": "AB-CDEFGHI",
+      "type": "EIN",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid EIN - letters instead of digits"
+    },
+    {
+      "id": "npi-011",
+      "input": "2345678901",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - fails Luhn with 80840 prefix"
+    },
+    {
+      "id": "npi-012",
+      "input": "12345678",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - only 8 digits"
+    },
+    {
+      "id": "npi-013",
+      "input": "1111111111",
+      "type": "NPI",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NPI - all ones, fails Luhn with 80840 prefix"
+    },
+    {
+      "id": "nhs-011",
+      "input": "1111111111",
+      "type": "NHS",
+      "expected_valid": true,
+      "expected_detail": null,
+      "note": "Valid NHS — MOD-11 check=1, last digit=1"
+    },
+    {
+      "id": "nhs-012",
+      "input": "999999999",
+      "type": "NHS",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NHS - 9 digits too short"
+    },
+    {
+      "id": "nhs-013",
+      "input": "12345678901",
+      "type": "NHS",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid NHS - 11 digits too long"
+    },
+    {
+      "id": "vat-021",
+      "input": "DE1234567890",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid German VAT - 10 digits (needs exactly 9)"
+    },
+    {
+      "id": "vat-022",
+      "input": "FR1234567890",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid French VAT - only 10 digits after FR (needs 11)"
+    },
+    {
+      "id": "vat-023",
+      "input": "IT1234567890",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Italian VAT - only 10 digits (needs 11)"
+    },
+    {
+      "id": "vat-024",
+      "input": "BE123456789",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Belgian VAT - only 9 digits (needs 10)"
+    },
+    {
+      "id": "vat-025",
+      "input": "SE12345678901",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Swedish VAT - only 11 digits (needs 12)"
+    },
+    {
+      "id": "vat-026",
+      "input": "PL123456789",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Polish VAT - only 9 digits (needs 10)"
+    },
+    {
+      "id": "vat-027",
+      "input": "AT12345678",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid Austrian VAT - missing U prefix"
+    },
+    {
+      "id": "vat-028",
+      "input": "GB12345678",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UK VAT - only 8 digits (needs 9)"
+    },
+    {
+      "id": "vat-029",
+      "input": "123456789",
+      "type": "EU_VAT",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid VAT - no country prefix"
+    },
+    {
+      "id": "uuid-014",
+      "input": "550e8400-e29b-41d4a716-446655440000",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - missing dash between 3rd and 4th segment"
+    },
+    {
+      "id": "uuid-015",
+      "input": "",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - empty string"
+    },
+    {
+      "id": "uuid-016",
+      "input": "not-a-uuid-at-all-really",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - arbitrary text with dashes"
+    },
+    {
+      "id": "uuid-017",
+      "input": "550e8400-e29b-41d4-a716-4466554400000",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - last segment 13 chars (too long)"
+    },
+    {
+      "id": "uuid-018",
+      "input": "550e8400-e29b-41d4-a716-44665544000",
+      "type": "UUID",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid UUID - last segment 11 chars (too short)"
+    },
+    {
+      "id": "email-021",
+      "input": "user@-example.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - domain starts with hyphen"
+    },
+    {
+      "id": "email-022",
+      "input": "user@example-.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - domain label ends with hyphen"
+    },
+    {
+      "id": "email-023",
+      "input": "@",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - just @ sign"
+    },
+    {
+      "id": "email-024",
+      "input": "",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - empty string"
+    },
+    {
+      "id": "email-025",
+      "input": "user@exam_ple.com",
+      "type": "email",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid email - underscore in domain"
+    },
+    {
+      "id": "phone-021",
+      "input": "+",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - plus sign only"
+    },
+    {
+      "id": "phone-022",
+      "input": "++14155552671",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - double plus sign"
+    },
+    {
+      "id": "phone-023",
+      "input": "+1415555267100000",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - 16 digits (exceeds E.164 max of 15)"
+    },
+    {
+      "id": "phone-024",
+      "input": "",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - empty string"
+    },
+    {
+      "id": "phone-025",
+      "input": "555-1234",
+      "type": "phone",
+      "expected_valid": false,
+      "expected_detail": null,
+      "note": "Invalid phone - local number without country code"
+    }
+  ]
+}

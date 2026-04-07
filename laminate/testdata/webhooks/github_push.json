@@ -1,0 +1,52 @@
+{
+  "ref": "refs/heads/main",
+  "before": "abc123def456abc123def456abc123def456abc123",
+  "after": "def456abc123def456abc123def456abc123def456",
+  "repository": {
+    "id": 123456789,
+    "name": "laminate",
+    "full_name": "lamco-admin/laminate",
+    "private": true,
+    "owner": {
+      "login": "lamco-admin",
+      "id": 987654,
+      "type": "Organization"
+    },
+    "html_url": "https://github.com/lamco-admin/laminate",
+    "default_branch": "main",
+    "created_at": "2026-03-31T10:00:00Z",
+    "updated_at": "2026-03-31T15:30:00Z",
+    "pushed_at": "2026-03-31T15:30:00Z",
+    "size": 1024,
+    "stargazers_count": 0,
+    "language": "Rust",
+    "topics": ["serde", "json", "data-shaping"]
+  },
+  "pusher": {
+    "name": "glamberson",
+    "email": "greg@lamco.io"
+  },
+  "commits": [
+    {
+      "id": "def456abc123def456abc123def456abc123def456",
+      "message": "Phase 1: FlexValue core",
+      "timestamp": "2026-03-31T15:30:00Z",
+      "author": {
+        "name": "Greg Lamberson",
+        "email": "greg@lamco.io",
+        "username": "glamberson"
+      },
+      "added": ["laminate/src/value.rs"],
+      "removed": [],
+      "modified": ["Cargo.toml"]
+    }
+  ],
+  "head_commit": {
+    "id": "def456abc123def456abc123def456abc123def456",
+    "message": "Phase 1: FlexValue core",
+    "timestamp": "2026-03-31T15:30:00Z"
+  },
+  "forced": false,
+  "created": false,
+  "deleted": false
+}

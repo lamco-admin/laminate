@@ -1,0 +1,16 @@
+{
+  "model": "llama3.2:latest",
+  "created_at": "2026-03-31T15:00:00.123456Z",
+  "message": {
+    "role": "assistant",
+    "content": "Here's a simple hello world in Rust:\n\n```rust\nfn main() {\n    println!(\"Hello, world!\");\n}\n```"
+  },
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 1234567890,
+  "load_duration": 123456789,
+  "prompt_eval_count": 26,
+  "prompt_eval_duration": 234567890,
+  "eval_count": 42,
+  "eval_duration": 876543210
+}

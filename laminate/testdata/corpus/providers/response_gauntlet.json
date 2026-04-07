@@ -1,0 +1,191 @@
+{
+  "_meta": {
+    "name": "Provider Response Parsing Gauntlet",
+    "description": "Tests for Anthropic, OpenAI, and Ollama response parsing and round-trip normalization",
+    "version": "1.0.0"
+  },
+  "cases": [
+    {
+      "id": "anthropic_text_001",
+      "provider": "anthropic",
+      "input": {
+        "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
+        "type": "message",
+        "model": "claude-sonnet-4-20250514",
+        "content": [{"type": "text", "text": "Hello, how can I help you today?"}],
+        "stop_reason": "end_turn",
+        "usage": {"input_tokens": 25, "output_tokens": 12}
+      },
+      "expected_text": "Hello, how can I help you today?",
+      "expected_stop": "end_turn",
+      "expected_tool_count": 0
+    },
+    {
+      "id": "anthropic_tool_001",
+      "provider": "anthropic",
+      "input": {
+        "id": "msg_tool_01",
+        "type": "message",
+        "model": "claude-sonnet-4-20250514",
+        "content": [
+          {"type": "text", "text": "I'll search for that."},
+          {"type": "tool_use", "id": "toolu_01", "name": "search", "input": {"query": "laminate rust"}}
+        ],
+        "stop_reason": "tool_use",
+        "usage": {"input_tokens": 100, "output_tokens": 50}
+      },
+      "expected_text": "I'll search for that.",
+      "expected_stop": "tool_use",
+      "expected_tool_count": 1
+    },
+    {
+      "id": "anthropic_cache_001",
+      "provider": "anthropic",
+      "input": {
+        "id": "msg_cache_01",
+        "type": "message",
+        "model": "claude-sonnet-4-20250514",
+        "content": [{"type": "text", "text": "Cached response."}],
+        "stop_reason": "end_turn",
+        "usage": {"input_tokens": 10, "output_tokens": 5, "cache_read_input_tokens": 100, "cache_creation_input_tokens": 50}
+      },
+      "expected_text": "Cached response.",
+      "expected_cache_read": 100,
+      "expected_cache_create": 50
+    },
+    {
+      "id": "anthropic_multi_text_001",
+      "provider": "anthropic",
+      "input": {
+        "id": "msg_multi_01",
+        "type": "message",
+        "model": "claude-sonnet-4-20250514",
+        "content": [
+          {"type": "text", "text": "First block. "},
+          {"type": "text", "text": "Second block."}
+        ],
+        "stop_reason": "end_turn",
+        "usage": {"input_tokens": 10, "output_tokens": 8}
+      },
+      "expected_text": "First block. Second block.",
+      "expected_tool_count": 0
+    },
+
+    {
+      "id": "openai_text_001",
+      "provider": "openai",
+      "input": {
+        "id": "chatcmpl-abc123",
+        "object": "chat.completion",
+        "model": "gpt-4o-2024-08-06",
+        "choices": [{
+          "index": 0,
+          "message": {"role": "assistant", "content": "Hello! How can I assist you?"},
+          "finish_reason": "stop"
+        }],
+        "usage": {"prompt_tokens": 20, "completion_tokens": 10, "total_tokens": 30}
+      },
+      "expected_text": "Hello! How can I assist you?",
+      "expected_stop": "end_turn",
+      "expected_tool_count": 0
+    },
+    {
+      "id": "openai_tool_001",
+      "provider": "openai",
+      "input": {
+        "id": "chatcmpl-tool123",
+        "object": "chat.completion",
+        "model": "gpt-4o-2024-08-06",
+        "choices": [{
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "tool_calls": [{
+              "id": "call_abc123",
+              "type": "function",
+              "function": {"name": "get_weather", "arguments": "{\"location\":\"London\"}"}
+            }]
+          },
+          "finish_reason": "tool_calls"
+        }],
+        "usage": {"prompt_tokens": 50, "completion_tokens": 25, "total_tokens": 75}
+      },
+      "expected_text": "",
+      "expected_stop": "tool_use",
+      "expected_tool_count": 1
+    },
+    {
+      "id": "openai_multi_tool_001",
+      "provider": "openai",
+      "input": {
+        "id": "chatcmpl-multi",
+        "object": "chat.completion",
+        "model": "gpt-4o",
+        "choices": [{
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Let me check both.",
+            "tool_calls": [
+              {"id": "call_1", "type": "function", "function": {"name": "search", "arguments": "{\"q\":\"a\"}"}},
+              {"id": "call_2", "type": "function", "function": {"name": "search", "arguments": "{\"q\":\"b\"}"}}
+            ]
+          },
+          "finish_reason": "tool_calls"
+        }],
+        "usage": {"prompt_tokens": 100, "completion_tokens": 50, "total_tokens": 150}
+      },
+      "expected_text": "Let me check both.",
+      "expected_stop": "tool_use",
+      "expected_tool_count": 2
+    },
+    {
+      "id": "openai_max_tokens_001",
+      "provider": "openai",
+      "input": {
+        "id": "chatcmpl-max",
+        "object": "chat.completion",
+        "model": "gpt-4o",
+        "choices": [{
+          "index": 0,
+          "message": {"role": "assistant", "content": "Truncated resp"},
+          "finish_reason": "length"
+        }],
+        "usage": {"prompt_tokens": 10, "completion_tokens": 4096, "total_tokens": 4106}
+      },
+      "expected_text": "Truncated resp",
+      "expected_stop": "max_tokens"
+    },
+
+    {
+      "id": "roundtrip_anthropic_001",
+      "provider": "anthropic",
+      "test_type": "roundtrip",
+      "input": {
+        "id": "msg_rt_01",
+        "type": "message",
+        "model": "claude-sonnet-4-20250514",
+        "content": [{"type": "text", "text": "Round trip test."}],
+        "stop_reason": "end_turn",
+        "usage": {"input_tokens": 5, "output_tokens": 3}
+      }
+    },
+    {
+      "id": "roundtrip_openai_001",
+      "provider": "openai",
+      "test_type": "roundtrip",
+      "input": {
+        "id": "chatcmpl-rt01",
+        "object": "chat.completion",
+        "model": "gpt-4o",
+        "choices": [{
+          "index": 0,
+          "message": {"role": "assistant", "content": "Round trip."},
+          "finish_reason": "stop"
+        }],
+        "usage": {"prompt_tokens": 5, "completion_tokens": 3, "total_tokens": 8}
+      }
+    }
+  ]
+}

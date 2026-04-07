@@ -1,0 +1,498 @@
+{
+  "_meta": {
+    "name": "Medical Lab Value Conversion Suite",
+    "description": "US conventional ↔ SI unit conversions for 18 supported analytes",
+    "version": "1.0.0",
+    "cases": 80
+  },
+  "cases": [
+    {
+      "id": "glu_001",
+      "analyte": "glucose",
+      "value": 126.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 6.993,
+      "note": "diabetic threshold"
+    },
+    {
+      "id": "glu_002",
+      "analyte": "glucose",
+      "value": 7.0,
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "expected": 126.126,
+      "note": "reverse"
+    },
+    {
+      "id": "glu_003",
+      "analyte": "glucose",
+      "value": 100.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 5.55,
+      "note": "pre-diabetic"
+    },
+    {
+      "id": "glu_004",
+      "analyte": "glucose",
+      "value": 0.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 0.0,
+      "note": "zero"
+    },
+    {
+      "id": "glu_005",
+      "analyte": "glucose",
+      "value": 70.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 3.885,
+      "note": "hypoglycemia threshold"
+    },
+    {
+      "id": "chol_001",
+      "analyte": "cholesterol",
+      "value": 200.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 5.172,
+      "note": "borderline high"
+    },
+    {
+      "id": "chol_002",
+      "analyte": "cholesterol",
+      "value": 5.2,
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "expected": 201.08,
+      "note": "reverse"
+    },
+    {
+      "id": "chol_003",
+      "analyte": "cholesterol",
+      "value": 240.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 6.206
+    },
+    {
+      "id": "hdl_001",
+      "analyte": "hdl",
+      "value": 60.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 1.5516
+    },
+    {
+      "id": "hdl_002",
+      "analyte": "hdl",
+      "value": 1.0,
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "expected": 38.67
+    },
+    {
+      "id": "ldl_001",
+      "analyte": "ldl",
+      "value": 130.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 3.362
+    },
+    {
+      "id": "ldl_002",
+      "analyte": "ldl",
+      "value": 3.4,
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "expected": 131.48
+    },
+    {
+      "id": "trig_001",
+      "analyte": "triglycerides",
+      "value": 150.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 1.6935
+    },
+    {
+      "id": "trig_002",
+      "analyte": "triglycerides",
+      "value": 1.7,
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "expected": 150.58
+    },
+    {
+      "id": "cre_001",
+      "analyte": "creatinine",
+      "value": 1.0,
+      "from": "mg/dL",
+      "to": "µmol/L",
+      "expected": 88.4
+    },
+    {
+      "id": "cre_002",
+      "analyte": "creatinine",
+      "value": 88.4,
+      "from": "µmol/L",
+      "to": "mg/dL",
+      "expected": 1.0
+    },
+    {
+      "id": "cre_003",
+      "analyte": "creatinine",
+      "value": 1.5,
+      "from": "mg/dL",
+      "to": "µmol/L",
+      "expected": 132.6
+    },
+    {
+      "id": "bun_001",
+      "analyte": "bun",
+      "value": 15.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 5.355
+    },
+    {
+      "id": "bun_002",
+      "analyte": "bun",
+      "value": 5.0,
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "expected": 14.006
+    },
+    {
+      "id": "hgb_001",
+      "analyte": "hemoglobin",
+      "value": 14.0,
+      "from": "g/dL",
+      "to": "g/L",
+      "expected": 140.0
+    },
+    {
+      "id": "hgb_002",
+      "analyte": "hemoglobin",
+      "value": 140.0,
+      "from": "g/L",
+      "to": "g/dL",
+      "expected": 14.0
+    },
+    {
+      "id": "hgb_003",
+      "analyte": "hemoglobin",
+      "value": 12.0,
+      "from": "g/dL",
+      "to": "g/L",
+      "expected": 120.0,
+      "note": "anemia threshold"
+    },
+    {
+      "id": "hct_001",
+      "analyte": "hematocrit",
+      "value": 42.0,
+      "from": "%",
+      "to": "L/L",
+      "expected": 0.42
+    },
+    {
+      "id": "hct_002",
+      "analyte": "hematocrit",
+      "value": 0.42,
+      "from": "L/L",
+      "to": "%",
+      "expected": 42.0
+    },
+    {
+      "id": "na_001",
+      "analyte": "sodium",
+      "value": 140.0,
+      "from": "mEq/L",
+      "to": "mmol/L",
+      "expected": 140.0,
+      "note": "1:1 ratio"
+    },
+    {
+      "id": "na_002",
+      "analyte": "sodium",
+      "value": 135.0,
+      "from": "mEq/L",
+      "to": "mmol/L",
+      "expected": 135.0,
+      "note": "low normal"
+    },
+    {
+      "id": "na_003",
+      "analyte": "sodium",
+      "value": 145.0,
+      "from": "mEq/L",
+      "to": "mmol/L",
+      "expected": 145.0,
+      "note": "high normal"
+    },
+    {
+      "id": "k_001",
+      "analyte": "potassium",
+      "value": 4.0,
+      "from": "mEq/L",
+      "to": "mmol/L",
+      "expected": 4.0,
+      "note": "1:1 ratio"
+    },
+    {
+      "id": "k_002",
+      "analyte": "potassium",
+      "value": 3.5,
+      "from": "mEq/L",
+      "to": "mmol/L",
+      "expected": 3.5
+    },
+    {
+      "id": "k_003",
+      "analyte": "potassium",
+      "value": 5.0,
+      "from": "mEq/L",
+      "to": "mmol/L",
+      "expected": 5.0
+    },
+    {
+      "id": "cl_001",
+      "analyte": "chloride",
+      "value": 100.0,
+      "from": "mEq/L",
+      "to": "mmol/L",
+      "expected": 100.0
+    },
+    {
+      "id": "ca_001",
+      "analyte": "calcium",
+      "value": 9.5,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": 2.373
+    },
+    {
+      "id": "ca_002",
+      "analyte": "calcium",
+      "value": 2.4,
+      "from": "mmol/L",
+      "to": "mg/dL",
+      "expected": 9.608
+    },
+    {
+      "id": "alb_001",
+      "analyte": "albumin",
+      "value": 4.0,
+      "from": "g/dL",
+      "to": "g/L",
+      "expected": 40.0
+    },
+    {
+      "id": "alb_002",
+      "analyte": "albumin",
+      "value": 40.0,
+      "from": "g/L",
+      "to": "g/dL",
+      "expected": 4.0
+    },
+    {
+      "id": "bil_001",
+      "analyte": "bilirubin",
+      "value": 1.0,
+      "from": "mg/dL",
+      "to": "µmol/L",
+      "expected": 17.1
+    },
+    {
+      "id": "bil_002",
+      "analyte": "bilirubin",
+      "value": 17.1,
+      "from": "µmol/L",
+      "to": "mg/dL",
+      "expected": 1.0
+    },
+    {
+      "id": "alt_001",
+      "analyte": "alt",
+      "value": 40.0,
+      "from": "U/L",
+      "to": "µkat/L",
+      "expected": 0.668
+    },
+    {
+      "id": "alt_002",
+      "analyte": "alt",
+      "value": 0.67,
+      "from": "µkat/L",
+      "to": "U/L",
+      "expected": 40.12
+    },
+    {
+      "id": "ast_001",
+      "analyte": "ast",
+      "value": 35.0,
+      "from": "U/L",
+      "to": "µkat/L",
+      "expected": 0.5845
+    },
+    {
+      "id": "ast_002",
+      "analyte": "ast",
+      "value": 0.58,
+      "from": "µkat/L",
+      "to": "U/L",
+      "expected": 34.8
+    },
+    {
+      "id": "tsh_001",
+      "analyte": "tsh",
+      "value": 2.5,
+      "from": "µIU/mL",
+      "to": "mIU/L",
+      "expected": 2.5,
+      "note": "1:1 ratio"
+    },
+    {
+      "id": "tsh_002",
+      "analyte": "tsh",
+      "value": 0.4,
+      "from": "µIU/mL",
+      "to": "mIU/L",
+      "expected": 0.4,
+      "note": "low normal"
+    },
+    {
+      "id": "tsh_003",
+      "analyte": "tsh",
+      "value": 4.0,
+      "from": "µIU/mL",
+      "to": "mIU/L",
+      "expected": 4.0,
+      "note": "high normal"
+    },
+    {
+      "id": "same_001",
+      "analyte": "glucose",
+      "value": 100.0,
+      "from": "mg/dL",
+      "to": "mg/dL",
+      "expected": 100.0,
+      "note": "same unit identity"
+    },
+    {
+      "id": "same_002",
+      "analyte": "creatinine",
+      "value": 1.0,
+      "from": "mg/dL",
+      "to": "mg/dL",
+      "expected": 1.0
+    },
+    {
+      "id": "unk_001",
+      "analyte": "nonexistent_analyte",
+      "value": 1.0,
+      "from": "mg/dL",
+      "to": "mmol/L",
+      "expected": null,
+      "note": "unknown analyte"
+    },
+    {
+      "id": "unk_002",
+      "analyte": "glucose",
+      "value": 100.0,
+      "from": "mg/dL",
+      "to": "parsecs",
+      "expected": null,
+      "note": "invalid target unit"
+    },
+    {
+      "id": "hl7_001",
+      "input": "20260406143022",
+      "expected_iso": "2026-04-06T14:30:22",
+      "note": "HL7 basic datetime"
+    },
+    {
+      "id": "hl7_002",
+      "input": "20260406143022.1234",
+      "expected_iso": "2026-04-06T14:30:22.1234",
+      "note": "HL7 fractional seconds"
+    },
+    {
+      "id": "hl7_003",
+      "input": "20260406143022.1234-0500",
+      "expected_iso": "2026-04-06T14:30:22.1234-05:00",
+      "note": "HL7 with timezone"
+    },
+    {
+      "id": "hl7_004",
+      "input": "20260406",
+      "expected_iso": "2026-04-06",
+      "note": "HL7 date only"
+    },
+    {
+      "id": "hl7_005",
+      "input": "202604",
+      "expected_iso": "2026-04",
+      "note": "HL7 year-month"
+    },
+    {
+      "id": "hl7_006",
+      "input": "2026",
+      "expected_iso": "2026",
+      "note": "HL7 year only"
+    },
+    {
+      "id": "hl7_007",
+      "input": "99991231",
+      "expected_iso": "9999-12-31",
+      "note": "HL7 far future"
+    },
+    {
+      "id": "pharma_001",
+      "input": "µg",
+      "expected_normalized": "µg",
+      "note": "Unicode micro sign U+00B5"
+    },
+    {
+      "id": "pharma_002",
+      "input": "μg",
+      "expected_normalized": "µg",
+      "note": "Greek mu U+03BC"
+    },
+    {
+      "id": "pharma_003",
+      "input": "mcg",
+      "expected_normalized": "µg",
+      "note": "already normalized"
+    },
+    {
+      "id": "pharma_004",
+      "input": "mg",
+      "expected_normalized": "mg"
+    },
+    {
+      "id": "pharma_005",
+      "input": "IU",
+      "expected_normalized": "IU"
+    },
+    {
+      "id": "pharma_006",
+      "input": "mL",
+      "expected_normalized": "mL"
+    },
+    {
+      "id": "pharma_007",
+      "input": "units",
+      "expected_normalized": "units"
+    },
+    {
+      "id": "pharma_008",
+      "input": "ug",
+      "expected_normalized": "µg",
+      "note": "common abbreviation"
+    }
+  ]
+}

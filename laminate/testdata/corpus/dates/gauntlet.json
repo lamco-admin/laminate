@@ -1,0 +1,1405 @@
+{
+  "_meta": {
+    "name": "Date/Time Format Detection Gauntlet",
+    "description": "Exhaustive test of every date/time format recognized by the time pack",
+    "version": "1.0.0",
+    "cases": 193,
+    "categories": [
+      "iso8601",
+      "iso_date",
+      "iso_week_date",
+      "us_date",
+      "eu_date",
+      "ambiguous",
+      "abbrev_date",
+      "long_date",
+      "two_digit_year",
+      "unix_seconds",
+      "unix_millis",
+      "time_12",
+      "time_24",
+      "gedcom_approx",
+      "gedcom_range",
+      "gedcom_period",
+      "gedcom_before_after",
+      "gedcom_interpreted",
+      "hl7_date",
+      "leap_year",
+      "boundary",
+      "invalid",
+      "timezone"
+    ]
+  },
+  "cases": [
+    {
+      "id": "iso_001",
+      "input": "2026-04-06T14:30:00Z",
+      "expected_iso": "2026-04-06T14:30:00Z",
+      "format": "Iso8601",
+      "note": "canonical ISO 8601 with Zulu"
+    },
+    {
+      "id": "iso_002",
+      "input": "2026-04-06T14:30:00+05:00",
+      "expected_iso": "2026-04-06T14:30:00+05:00",
+      "format": "Iso8601",
+      "note": "ISO 8601 with positive UTC offset [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_003",
+      "input": "2026-04-06T14:30:00-04:00",
+      "expected_iso": "2026-04-06T14:30:00-04:00",
+      "format": "Iso8601",
+      "note": "ISO 8601 with negative UTC offset [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_004",
+      "input": "2026-04-06T14:30:00.123Z",
+      "expected_iso": "2026-04-06T14:30:00.123Z",
+      "format": "Iso8601",
+      "note": "fractional seconds milliseconds"
+    },
+    {
+      "id": "iso_005",
+      "input": "2026-04-06T14:30:00.123456Z",
+      "expected_iso": "2026-04-06T14:30:00.123456Z",
+      "format": "Iso8601",
+      "note": "fractional seconds microseconds"
+    },
+    {
+      "id": "iso_006",
+      "input": "2026-04-06T00:00:00Z",
+      "expected_iso": "2026-04-06T00:00:00Z",
+      "format": "Iso8601",
+      "note": "midnight UTC"
+    },
+    {
+      "id": "iso_007",
+      "input": "2026-04-06T23:59:59Z",
+      "expected_iso": "2026-04-06T23:59:59Z",
+      "format": "Iso8601",
+      "note": "last second of day"
+    },
+    {
+      "id": "iso_008",
+      "input": "2026-04-06T14:30:00+00:00",
+      "expected_iso": "2026-04-06T14:30:00+00:00",
+      "format": "Iso8601",
+      "note": "+00:00 equivalent to Z [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_009",
+      "input": "2026-04-06T14:30:00-00:00",
+      "expected_iso": "2026-04-06T14:30:00-00:00",
+      "format": "Iso8601",
+      "note": "-00:00 equivalent to Z [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_010",
+      "input": "2026-04-06T14:30:00+05:30",
+      "expected_iso": "2026-04-06T14:30:00+05:30",
+      "format": "Iso8601",
+      "note": "India Standard Time half-hour offset [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_011",
+      "input": "2026-04-06T14:30:00+05:45",
+      "expected_iso": "2026-04-06T14:30:00+05:45",
+      "format": "Iso8601",
+      "note": "Nepal Time 45-minute offset [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_012",
+      "input": "2026-04-06 14:30:00",
+      "expected_iso": "2026-04-06T14:30:00",
+      "format": "Iso8601",
+      "note": "space-separated datetime (database style)"
+    },
+    {
+      "id": "iso_013",
+      "input": "2026-04-06 14:30:00.000",
+      "expected_iso": "2026-04-06T14:30:00.000",
+      "format": "Iso8601",
+      "note": "space-separated with millis"
+    },
+    {
+      "id": "iso_014",
+      "input": "2026-12-31T23:59:59.999Z",
+      "expected_iso": "2026-12-31T23:59:59.999Z",
+      "format": "Iso8601",
+      "note": "end of year"
+    },
+    {
+      "id": "iso_015",
+      "input": "2026-01-01T00:00:00Z",
+      "expected_iso": "2026-01-01T00:00:00Z",
+      "format": "Iso8601",
+      "note": "start of year"
+    },
+    {
+      "id": "iso_016",
+      "input": "2026-04-06T14:30:00+12:00",
+      "expected_iso": "2026-04-06T14:30:00+12:00",
+      "format": "Iso8601",
+      "note": "maximum positive offset (New Zealand) [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_017",
+      "input": "2026-04-06T14:30:00-12:00",
+      "expected_iso": "2026-04-06T14:30:00-12:00",
+      "format": "Iso8601",
+      "note": "maximum negative offset (Baker Island) [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_018",
+      "input": "2026-04-06T14:30:00+14:00",
+      "expected_iso": "2026-04-06T14:30:00+14:00",
+      "format": "Iso8601",
+      "note": "Line Islands +14 [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "iso_019",
+      "input": "2000-01-01T00:00:00Z",
+      "expected_iso": "2000-01-01T00:00:00Z",
+      "format": "Iso8601",
+      "note": "Y2K midnight"
+    },
+    {
+      "id": "iso_020",
+      "input": "1970-01-01T00:00:00Z",
+      "expected_iso": "1970-01-01T00:00:00Z",
+      "format": "Iso8601",
+      "note": "Unix epoch as ISO 8601"
+    },
+    {
+      "id": "isodate_001",
+      "input": "2026-04-06",
+      "expected_iso": "2026-04-06",
+      "format": "IsoDate",
+      "note": "simple ISO date"
+    },
+    {
+      "id": "isodate_002",
+      "input": "2026-01-01",
+      "expected_iso": "2026-01-01",
+      "format": "IsoDate",
+      "note": "first day of year"
+    },
+    {
+      "id": "isodate_003",
+      "input": "2026-12-31",
+      "expected_iso": "2026-12-31",
+      "format": "IsoDate",
+      "note": "last day of year"
+    },
+    {
+      "id": "isodate_004",
+      "input": "2000-02-29",
+      "expected_iso": "2000-02-29",
+      "format": "IsoDate",
+      "note": "leap day 2000"
+    },
+    {
+      "id": "isodate_005",
+      "input": "1999-12-31",
+      "expected_iso": "1999-12-31",
+      "format": "IsoDate",
+      "note": "Y2K eve"
+    },
+    {
+      "id": "isoweek_001",
+      "input": "2026-W14",
+      "expected_iso": "2026-03-30",
+      "format": "IsoWeekDate",
+      "note": "ISO week date with dash"
+    },
+    {
+      "id": "isoweek_002",
+      "input": "2026W14",
+      "expected_iso": "2026-03-30",
+      "format": "IsoWeekDate",
+      "note": "ISO week date compact"
+    },
+    {
+      "id": "isoweek_003",
+      "input": "2026-W14-1",
+      "expected_iso": "2026-03-30",
+      "format": "IsoWeekDate",
+      "note": "ISO week date Monday"
+    },
+    {
+      "id": "isoweek_004",
+      "input": "2026W141",
+      "expected_iso": "2026-03-30",
+      "format": "IsoWeekDate",
+      "note": "ISO week date compact with day"
+    },
+    {
+      "id": "isoweek_005",
+      "input": "2026-W01",
+      "expected_iso": "2025-12-29",
+      "format": "IsoWeekDate",
+      "note": "week 1 may start in previous year"
+    },
+    {
+      "id": "isoweek_006",
+      "input": "2026-W53",
+      "expected_iso": "2026-12-28",
+      "format": "IsoWeekDate",
+      "note": "week 53 — 2026 has 53 weeks (Jan 1 is Thursday); correctly maps to Dec 28"
+    },
+    {
+      "id": "us_001",
+      "input": "04/06/2026",
+      "expected_iso": "2026-04-06",
+      "format": "Ambiguous",
+      "note": "MM/DD/YYYY both parts <= 12, ambiguous — defaults to US (MM/DD)"
+    },
+    {
+      "id": "us_002",
+      "input": "12/31/2025",
+      "expected_iso": "2025-12-31",
+      "format": "UsDate",
+      "note": "unambiguous — day=31 > 12"
+    },
+    {
+      "id": "us_003",
+      "input": "01/15/2026",
+      "expected_iso": "2026-01-15",
+      "format": "UsDate",
+      "note": "unambiguous — day=15 > 12"
+    },
+    {
+      "id": "us_004",
+      "input": "07/20/1969",
+      "expected_iso": "1969-07-20",
+      "format": "UsDate",
+      "note": "Moon landing"
+    },
+    {
+      "id": "us_005",
+      "input": "09/11/2001",
+      "expected_iso": "2001-09-11",
+      "format": "Ambiguous",
+      "note": "both parts <= 12 [ambiguous: defaults to US]"
+    },
+    {
+      "id": "us_006",
+      "input": "02/28/2026",
+      "expected_iso": "2026-02-28",
+      "format": "UsDate",
+      "note": "unambiguous — day=28 > 12"
+    },
+    {
+      "id": "us_007",
+      "input": "11/22/1963",
+      "expected_iso": "1963-11-22",
+      "format": "UsDate",
+      "note": "JFK assassination, day=22 > 12"
+    },
+    {
+      "id": "us_008",
+      "input": "12/25/2025",
+      "expected_iso": "2025-12-25",
+      "format": "UsDate",
+      "note": "Christmas, day=25 > 12"
+    },
+    {
+      "id": "us_009",
+      "input": "06/15/2026",
+      "expected_iso": "2026-06-15",
+      "format": "UsDate",
+      "note": "unambiguous — day=15 > 12"
+    },
+    {
+      "id": "us_010",
+      "input": "01/31/2026",
+      "expected_iso": "2026-01-31",
+      "format": "UsDate",
+      "note": "unambiguous — day=31 > 12"
+    },
+    {
+      "id": "us_011",
+      "input": "10/20/2026",
+      "expected_iso": "2026-10-20",
+      "format": "UsDate",
+      "note": "unambiguous — day=20 > 12"
+    },
+    {
+      "id": "us_012",
+      "input": "03/14/2026",
+      "expected_iso": "2026-03-14",
+      "format": "UsDate",
+      "note": "Pi Day, day=14 > 12"
+    },
+    {
+      "id": "us_013",
+      "input": "02/14/2026",
+      "expected_iso": "2026-02-14",
+      "format": "UsDate",
+      "note": "Valentine's Day, day=14 > 12"
+    },
+    {
+      "id": "us_014",
+      "input": "07/04/2026",
+      "expected_iso": "2026-07-04",
+      "format": "Ambiguous",
+      "note": "US Independence Day but both parts <= 12 [ambiguous: defaults to US]"
+    },
+    {
+      "id": "us_015",
+      "input": "11/30/2026",
+      "expected_iso": "2026-11-30",
+      "format": "UsDate",
+      "note": "unambiguous — day=30 > 12"
+    },
+    {
+      "id": "eu_001",
+      "input": "06/04/2026",
+      "expected_iso": "2026-06-04",
+      "format": "Ambiguous",
+      "note": "DD/MM/YYYY both parts <= 12 [ambiguous: defaults to US interpretation 06/04]"
+    },
+    {
+      "id": "eu_002",
+      "input": "31/12/2025",
+      "expected_iso": "2025-12-31",
+      "format": "EuDate",
+      "note": "unambiguous — first=31 > 12"
+    },
+    {
+      "id": "eu_003",
+      "input": "13/01/2026",
+      "expected_iso": "2026-01-13",
+      "format": "EuDate",
+      "note": "unambiguous — first=13 > 12"
+    },
+    {
+      "id": "eu_004",
+      "input": "25/12/2025",
+      "expected_iso": "2025-12-25",
+      "format": "EuDate",
+      "note": "Christmas European style"
+    },
+    {
+      "id": "eu_005",
+      "input": "14/02/2026",
+      "expected_iso": "2026-02-14",
+      "format": "EuDate",
+      "note": "Valentine's Day European"
+    },
+    {
+      "id": "eu_006",
+      "input": "20/07/1969",
+      "expected_iso": "1969-07-20",
+      "format": "EuDate",
+      "note": "Moon landing European"
+    },
+    {
+      "id": "eu_007",
+      "input": "15/06/2026",
+      "expected_iso": "2026-06-15",
+      "format": "EuDate",
+      "note": "unambiguous — first=15 > 12"
+    },
+    {
+      "id": "eu_008",
+      "input": "28/02/2026",
+      "expected_iso": "2026-02-28",
+      "format": "EuDate",
+      "note": "end of Feb European"
+    },
+    {
+      "id": "eu_009",
+      "input": "30/11/2026",
+      "expected_iso": "2026-11-30",
+      "format": "EuDate",
+      "note": "unambiguous — first=30 > 12"
+    },
+    {
+      "id": "eu_010",
+      "input": "22/11/1963",
+      "expected_iso": "1963-11-22",
+      "format": "EuDate",
+      "note": "JFK European style"
+    },
+    {
+      "id": "eu_011",
+      "input": "29/02/2024",
+      "expected_iso": "2024-02-29",
+      "format": "EuDate",
+      "note": "leap day European"
+    },
+    {
+      "id": "eu_012",
+      "input": "31/01/2026",
+      "expected_iso": "2026-01-31",
+      "format": "EuDate",
+      "note": "last day of Jan European"
+    },
+    {
+      "id": "eu_013",
+      "input": "16/03/2026",
+      "expected_iso": "2026-03-16",
+      "format": "EuDate",
+      "note": "unambiguous — first=16 > 12"
+    },
+    {
+      "id": "eu_014",
+      "input": "21/06/2026",
+      "expected_iso": "2026-06-21",
+      "format": "EuDate",
+      "note": "summer solstice European"
+    },
+    {
+      "id": "eu_015",
+      "input": "14/07/2026",
+      "expected_iso": "2026-07-14",
+      "format": "EuDate",
+      "note": "Bastille Day, first=14 > 12"
+    },
+    {
+      "id": "amb_001",
+      "input": "01/02/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Jan 2 or Feb 1"
+    },
+    {
+      "id": "amb_002",
+      "input": "03/04/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Mar 4 or Apr 3"
+    },
+    {
+      "id": "amb_003",
+      "input": "05/06/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "May 6 or Jun 5"
+    },
+    {
+      "id": "amb_004",
+      "input": "07/08/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Jul 8 or Aug 7"
+    },
+    {
+      "id": "amb_005",
+      "input": "09/10/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Sep 10 or Oct 9"
+    },
+    {
+      "id": "amb_006",
+      "input": "11/12/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Nov 12 or Dec 11"
+    },
+    {
+      "id": "amb_007",
+      "input": "02/03/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Feb 3 or Mar 2"
+    },
+    {
+      "id": "amb_008",
+      "input": "04/05/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Apr 5 or May 4"
+    },
+    {
+      "id": "amb_009",
+      "input": "06/07/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Jun 7 or Jul 6"
+    },
+    {
+      "id": "amb_010",
+      "input": "08/09/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Aug 9 or Sep 8"
+    },
+    {
+      "id": "amb_011",
+      "input": "10/11/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Oct 11 or Nov 10"
+    },
+    {
+      "id": "amb_012",
+      "input": "12/01/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Dec 1 or Jan 12"
+    },
+    {
+      "id": "amb_013",
+      "input": "01/01/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Jan 1 both ways but still ambiguous by rule"
+    },
+    {
+      "id": "amb_014",
+      "input": "06/06/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Jun 6 both ways, same result but still ambiguous"
+    },
+    {
+      "id": "amb_015",
+      "input": "12/12/2025",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Dec 12 both ways, same result but still ambiguous"
+    },
+    {
+      "id": "abbr_001",
+      "input": "06-Apr-2026",
+      "expected_iso": "2026-04-06",
+      "format": "AbbrevDate",
+      "note": "DD-Mon-YYYY with dashes"
+    },
+    {
+      "id": "abbr_002",
+      "input": "6 Apr 2026",
+      "expected_iso": "2026-04-06",
+      "format": "AbbrevDate",
+      "note": "D Mon YYYY with spaces"
+    },
+    {
+      "id": "abbr_003",
+      "input": "Apr 6, 2026",
+      "expected_iso": "2026-04-06",
+      "format": "AbbrevDate",
+      "note": "Mon D, YYYY US style"
+    },
+    {
+      "id": "abbr_004",
+      "input": "01-Jan-2026",
+      "expected_iso": "2026-01-01",
+      "format": "AbbrevDate",
+      "note": "new year"
+    },
+    {
+      "id": "abbr_005",
+      "input": "31-Dec-2025",
+      "expected_iso": "2025-12-31",
+      "format": "AbbrevDate",
+      "note": "new year eve"
+    },
+    {
+      "id": "abbr_006",
+      "input": "15 Mar 2026",
+      "expected_iso": "2026-03-15",
+      "format": "AbbrevDate",
+      "note": "Ides of March"
+    },
+    {
+      "id": "abbr_007",
+      "input": "Jul 4, 2026",
+      "expected_iso": "2026-07-04",
+      "format": "AbbrevDate",
+      "note": "US Independence Day"
+    },
+    {
+      "id": "abbr_008",
+      "input": "25-Dec-2025",
+      "expected_iso": "2025-12-25",
+      "format": "AbbrevDate",
+      "note": "Christmas"
+    },
+    {
+      "id": "abbr_009",
+      "input": "14 Feb 2026",
+      "expected_iso": "2026-02-14",
+      "format": "AbbrevDate",
+      "note": "Valentine's Day"
+    },
+    {
+      "id": "abbr_010",
+      "input": "01 Jan 1970",
+      "expected_iso": "1970-01-01",
+      "format": "AbbrevDate",
+      "note": "Unix epoch as abbrev"
+    },
+    {
+      "id": "abbr_011",
+      "input": "Nov 11, 2025",
+      "expected_iso": "2025-11-11",
+      "format": "AbbrevDate",
+      "note": "Veterans Day"
+    },
+    {
+      "id": "abbr_012",
+      "input": "29-Feb-2024",
+      "expected_iso": "2024-02-29",
+      "format": "AbbrevDate",
+      "note": "leap day abbreviated"
+    },
+    {
+      "id": "abbr_013",
+      "input": "Sep 1, 1939",
+      "expected_iso": "1939-09-01",
+      "format": "AbbrevDate",
+      "note": "WW2 start"
+    },
+    {
+      "id": "abbr_014",
+      "input": "Aug 6, 1945",
+      "expected_iso": "1945-08-06",
+      "format": "AbbrevDate",
+      "note": "Hiroshima"
+    },
+    {
+      "id": "abbr_015",
+      "input": "Oct 29, 1929",
+      "expected_iso": "1929-10-29",
+      "format": "AbbrevDate",
+      "note": "Black Tuesday"
+    },
+    {
+      "id": "long_001",
+      "input": "April 6, 2026",
+      "expected_iso": "2026-04-06",
+      "format": "LongDate",
+      "note": "US long format"
+    },
+    {
+      "id": "long_002",
+      "input": "6 April 2026",
+      "expected_iso": "2026-04-06",
+      "format": "LongDate",
+      "note": "European long format"
+    },
+    {
+      "id": "long_003",
+      "input": "January 1, 2026",
+      "expected_iso": "2026-01-01",
+      "format": "LongDate",
+      "note": "New Year's Day"
+    },
+    {
+      "id": "long_004",
+      "input": "December 31, 2025",
+      "expected_iso": "2025-12-31",
+      "format": "LongDate",
+      "note": "New Year's Eve"
+    },
+    {
+      "id": "long_005",
+      "input": "February 29, 2024",
+      "expected_iso": "2024-02-29",
+      "format": "LongDate",
+      "note": "leap day long format"
+    },
+    {
+      "id": "long_006",
+      "input": "March 15, 44",
+      "expected_iso": "0044-03-15",
+      "format": "LongDate",
+      "note": "Ides of March — 2-digit year as ancient date"
+    },
+    {
+      "id": "long_007",
+      "input": "July 20, 1969",
+      "expected_iso": "1969-07-20",
+      "format": "LongDate",
+      "note": "Moon landing long"
+    },
+    {
+      "id": "long_008",
+      "input": "November 22, 1963",
+      "expected_iso": "1963-11-22",
+      "format": "LongDate",
+      "note": "JFK assassination long"
+    },
+    {
+      "id": "long_009",
+      "input": "September 11, 2001",
+      "expected_iso": "2001-09-11",
+      "format": "LongDate",
+      "note": "9/11 long format"
+    },
+    {
+      "id": "long_010",
+      "input": "October 31, 2026",
+      "expected_iso": "2026-10-31",
+      "format": "LongDate",
+      "note": "Halloween"
+    },
+    {
+      "id": "y2d_001",
+      "input": "06-Apr-26",
+      "expected_iso": "2026-04-06",
+      "format": "AbbrevDate",
+      "note": "2-digit year, 26 -> 2026"
+    },
+    {
+      "id": "y2d_002",
+      "input": "01/15/26",
+      "expected_iso": "2026-01-15",
+      "format": "UsDate",
+      "note": "2-digit year US format, day > 12 disambiguates"
+    },
+    {
+      "id": "y2d_003",
+      "input": "31-Dec-99",
+      "expected_iso": "1999-12-31",
+      "format": "AbbrevDate",
+      "note": "2-digit year, 99 -> 1999"
+    },
+    {
+      "id": "y2d_004",
+      "input": "01-Jan-00",
+      "expected_iso": "2000-01-01",
+      "format": "AbbrevDate",
+      "note": "2-digit year, 00 -> 2000"
+    },
+    {
+      "id": "y2d_005",
+      "input": "15-Mar-30",
+      "expected_iso": "1930-03-15",
+      "format": "AbbrevDate",
+      "note": "2-digit year, 30 -> 1930 (pivot)"
+    },
+    {
+      "id": "y2d_006",
+      "input": "15-Mar-29",
+      "expected_iso": "2029-03-15",
+      "format": "AbbrevDate",
+      "note": "2-digit year, 29 -> 2029 (pivot)"
+    },
+    {
+      "id": "y2d_007",
+      "input": "25/12/99",
+      "expected_iso": "1999-12-25",
+      "format": "EuDate",
+      "note": "2-digit year EU, day > 12 disambiguates"
+    },
+    {
+      "id": "y2d_008",
+      "input": "15/06/26",
+      "expected_iso": "2026-06-15",
+      "format": "EuDate",
+      "note": "2-digit year EU, day > 12 disambiguates"
+    },
+    {
+      "id": "y2d_009",
+      "input": "Jun 15, 26",
+      "expected_iso": "2026-06-15",
+      "format": "AbbrevDate",
+      "note": "2-digit year abbreviated month"
+    },
+    {
+      "id": "y2d_010",
+      "input": "01/02/26",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "2-digit year, ambiguous US vs EU"
+    },
+    {
+      "id": "unix_001",
+      "input": "1711900800",
+      "expected_iso": "2024-03-31T16:00:00Z",
+      "format": "UnixSeconds",
+      "note": "1711900800 = 2024-03-31T16:00:00 UTC (corpus had wrong date)"
+    },
+    {
+      "id": "unix_002",
+      "input": "1735689600",
+      "expected_iso": "2025-01-01T00:00:00Z",
+      "format": "UnixSeconds",
+      "note": "Jan 1, 2025 00:00:00 UTC"
+    },
+    {
+      "id": "unix_003",
+      "input": "946684801",
+      "expected_iso": "2000-01-01T00:00:01Z",
+      "format": "UnixSeconds",
+      "note": "just above threshold (> 946684800)"
+    },
+    {
+      "id": "unix_004",
+      "input": "1000000000",
+      "expected_iso": "2001-09-09T01:46:40Z",
+      "format": "UnixSeconds",
+      "note": "Unix billennium"
+    },
+    {
+      "id": "unix_005",
+      "input": "1711900800000",
+      "expected_iso": "2024-03-31T16:00:00Z",
+      "format": "UnixMillis",
+      "note": "millisecond timestamp > 1 trillion (corpus had wrong date)"
+    },
+    {
+      "id": "t12_001",
+      "input": "2:30 PM",
+      "expected_iso": null,
+      "format": "Time12",
+      "note": "simple 12-hour PM time"
+    },
+    {
+      "id": "t12_002",
+      "input": "12:00 AM",
+      "expected_iso": null,
+      "format": "Time12",
+      "note": "midnight in 12-hour"
+    },
+    {
+      "id": "t12_003",
+      "input": "12:00 PM",
+      "expected_iso": null,
+      "format": "Time12",
+      "note": "noon in 12-hour"
+    },
+    {
+      "id": "t12_004",
+      "input": "11:59 PM",
+      "expected_iso": null,
+      "format": "Time12",
+      "note": "last minute before midnight"
+    },
+    {
+      "id": "t12_005",
+      "input": "1:00 AM",
+      "expected_iso": null,
+      "format": "Time12",
+      "note": "early morning 12-hour"
+    },
+    {
+      "id": "t12_006",
+      "input": "02:30:00 AM",
+      "expected_iso": null,
+      "format": "Time12",
+      "note": "12-hour with seconds"
+    },
+    {
+      "id": "t12_007",
+      "input": "12:30:45 PM",
+      "expected_iso": null,
+      "format": "Time12",
+      "note": "noon-hour with seconds"
+    },
+    {
+      "id": "t24_001",
+      "input": "14:30",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "simple 24-hour HH:MM"
+    },
+    {
+      "id": "t24_002",
+      "input": "14:30:00",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "24-hour with seconds"
+    },
+    {
+      "id": "t24_003",
+      "input": "23:59:59",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "last second of day"
+    },
+    {
+      "id": "t24_004",
+      "input": "00:00:00",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "midnight 24-hour"
+    },
+    {
+      "id": "t24_005",
+      "input": "00:00",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "midnight short form"
+    },
+    {
+      "id": "t24_006",
+      "input": "12:00:00",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "noon 24-hour"
+    },
+    {
+      "id": "t24_007",
+      "input": "T15:30:00Z",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "T-prefixed with Zulu"
+    },
+    {
+      "id": "t24_008",
+      "input": "T15:30:00+02:00",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "T-prefixed with offset"
+    },
+    {
+      "id": "t24_009",
+      "input": "14:30:00.123",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "24-hour with fractional seconds"
+    },
+    {
+      "id": "t24_010",
+      "input": "T09:00:00-05:00",
+      "expected_iso": null,
+      "format": "Time24",
+      "note": "T-prefixed EST offset"
+    },
+    {
+      "id": "ged_001",
+      "input": "ABT 1850",
+      "expected_iso": null,
+      "format": "GedcomApprox",
+      "note": "GEDCOM approximate date"
+    },
+    {
+      "id": "ged_002",
+      "input": "BET 1840 AND 1860",
+      "expected_iso": null,
+      "format": "GedcomRange",
+      "note": "GEDCOM range"
+    },
+    {
+      "id": "ged_003",
+      "input": "AFT 1900",
+      "expected_iso": null,
+      "format": "GedcomBeforeAfter",
+      "note": "GEDCOM after date"
+    },
+    {
+      "id": "ged_004",
+      "input": "BEF 1899",
+      "expected_iso": null,
+      "format": "GedcomBeforeAfter",
+      "note": "GEDCOM before date"
+    },
+    {
+      "id": "ged_005",
+      "input": "FROM 1840 TO 1860",
+      "expected_iso": null,
+      "format": "GedcomPeriod",
+      "note": "GEDCOM period"
+    },
+    {
+      "id": "ged_006",
+      "input": "EST 1776",
+      "expected_iso": null,
+      "format": "GedcomApprox",
+      "note": "GEDCOM estimated"
+    },
+    {
+      "id": "ged_007",
+      "input": "CAL 1823",
+      "expected_iso": null,
+      "format": "GedcomApprox",
+      "note": "GEDCOM calculated"
+    },
+    {
+      "id": "ged_008",
+      "input": "INT 1756 (age 30 at death)",
+      "expected_iso": null,
+      "format": "GedcomInterpreted",
+      "note": "GEDCOM interpreted with phrase"
+    },
+    {
+      "id": "ged_009",
+      "input": "FROM 1900",
+      "expected_iso": null,
+      "format": "GedcomPeriod",
+      "note": "GEDCOM open-ended period"
+    },
+    {
+      "id": "ged_010",
+      "input": "TO 1950",
+      "expected_iso": null,
+      "format": "GedcomPeriod",
+      "note": "GEDCOM period end only"
+    },
+    {
+      "id": "hl7_001",
+      "input": "20260406143022",
+      "expected_iso": "2026-04-06T14:30:22",
+      "format": "Hl7Date",
+      "note": "HL7 v2 YYYYMMDDHHMMSS"
+    },
+    {
+      "id": "hl7_002",
+      "input": "20260406143022.1234",
+      "expected_iso": "2026-04-06T14:30:22.1234",
+      "format": "Hl7Date",
+      "note": "HL7 with fractional seconds"
+    },
+    {
+      "id": "hl7_003",
+      "input": "20260406143022.1234-0500",
+      "expected_iso": "2026-04-06T14:30:22.1234-05:00",
+      "format": "Hl7Date",
+      "note": "HL7 with timezone"
+    },
+    {
+      "id": "hl7_004",
+      "input": "99991231",
+      "expected_iso": "9999-12-31",
+      "format": "Hl7Date",
+      "note": "HL7 end-of-time sentinel"
+    },
+    {
+      "id": "hl7_005",
+      "input": "20260406",
+      "expected_iso": "2026-04-06",
+      "format": "Hl7Date",
+      "note": "HL7 date-only YYYYMMDD"
+    },
+    {
+      "id": "hl7_006",
+      "input": "20260101",
+      "expected_iso": "2026-01-01",
+      "format": "Hl7Date",
+      "note": "HL7 new year"
+    },
+    {
+      "id": "hl7_007",
+      "input": "19700101",
+      "expected_iso": "1970-01-01",
+      "format": "Hl7Date",
+      "note": "HL7 Unix epoch date"
+    },
+    {
+      "id": "hl7_008",
+      "input": "20000229",
+      "expected_iso": "2000-02-29",
+      "format": "Hl7Date",
+      "note": "HL7 leap day"
+    },
+    {
+      "id": "hl7_009",
+      "input": "20260406000000",
+      "expected_iso": "2026-04-06T00:00:00",
+      "format": "Hl7Date",
+      "note": "HL7 midnight"
+    },
+    {
+      "id": "hl7_010",
+      "input": "20261231235959",
+      "expected_iso": "2026-12-31T23:59:59",
+      "format": "Hl7Date",
+      "note": "HL7 last second of year"
+    },
+    {
+      "id": "leap_001",
+      "input": "29 Feb 2024",
+      "expected_iso": "2024-02-29",
+      "format": "AbbrevDate",
+      "note": "valid leap day 2024 (div by 4)"
+    },
+    {
+      "id": "leap_002",
+      "input": "29 Feb 2023",
+      "expected_iso": null,
+      "format": "AbbrevDate",
+      "note": "invalid — 2023 is not a leap year"
+    },
+    {
+      "id": "leap_003",
+      "input": "29/02/2000",
+      "expected_iso": "2000-02-29",
+      "format": "EuDate",
+      "note": "valid — 2000 div by 400"
+    },
+    {
+      "id": "leap_004",
+      "input": "29/02/1900",
+      "expected_iso": null,
+      "format": "EuDate",
+      "note": "invalid — 1900 div by 100 but not 400"
+    },
+    {
+      "id": "leap_005",
+      "input": "February 29, 2028",
+      "expected_iso": "2028-02-29",
+      "format": "LongDate",
+      "note": "next leap year after 2024"
+    },
+    {
+      "id": "bound_001",
+      "input": "01 Jan 0001",
+      "expected_iso": "0001-01-01",
+      "format": "AbbrevDate",
+      "note": "earliest representable date"
+    },
+    {
+      "id": "bound_002",
+      "input": "31 Dec 9999",
+      "expected_iso": "9999-12-31",
+      "format": "AbbrevDate",
+      "note": "latest representable date"
+    },
+    {
+      "id": "bound_003",
+      "input": "01/01/1970",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Unix epoch slash format — ambiguous (both <= 12)"
+    },
+    {
+      "id": "bound_004",
+      "input": "01/01/2000",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "Y2K — ambiguous (both <= 12)"
+    },
+    {
+      "id": "bound_005",
+      "input": "1970-01-01",
+      "expected_iso": "1970-01-01",
+      "format": "IsoDate",
+      "note": "Unix epoch ISO date"
+    },
+    {
+      "id": "bound_006",
+      "input": "2038-01-19",
+      "expected_iso": "2038-01-19",
+      "format": "IsoDate",
+      "note": "near Y2038 problem (32-bit Unix overflow)"
+    },
+    {
+      "id": "bound_007",
+      "input": "9999-12-31",
+      "expected_iso": "9999-12-31",
+      "format": "IsoDate",
+      "note": "max ISO date"
+    },
+    {
+      "id": "bound_008",
+      "input": "0001-01-01",
+      "expected_iso": "0001-01-01",
+      "format": "IsoDate",
+      "note": "min ISO date"
+    },
+    {
+      "id": "bound_009",
+      "input": "2026",
+      "expected_iso": "2026-01-01",
+      "format": "YearOnly",
+      "note": "year only — current year; expands to YYYY-01-01 by design"
+    },
+    {
+      "id": "bound_010",
+      "input": "1948",
+      "expected_iso": "1948-01-01",
+      "format": "YearOnly",
+      "note": "year only — mid 20th century; expands to YYYY-01-01 by design"
+    },
+    {
+      "id": "inv_001",
+      "input": "not a date",
+      "expected_iso": null,
+      "format": "Unknown",
+      "note": "plain text"
+    },
+    {
+      "id": "inv_002",
+      "input": "99/99/9999",
+      "expected_iso": null,
+      "format": "EuDate",
+      "note": "nonsensical slash-separated — first > 12 so detected as EuDate but invalid values"
+    },
+    {
+      "id": "inv_003",
+      "input": "2026-13-01",
+      "expected_iso": null,
+      "format": "IsoDate",
+      "note": "month 13 — structurally ISO but invalid"
+    },
+    {
+      "id": "inv_004",
+      "input": "2026-04-32",
+      "expected_iso": null,
+      "format": "IsoDate",
+      "note": "day 32 — structurally ISO but invalid"
+    },
+    {
+      "id": "inv_005",
+      "input": "tomorrow",
+      "expected_iso": null,
+      "format": "Unknown",
+      "note": "relative date word — not supported"
+    },
+    {
+      "id": "inv_006",
+      "input": "",
+      "expected_iso": null,
+      "format": "Unknown",
+      "note": "empty string"
+    },
+    {
+      "id": "inv_007",
+      "input": "N/A",
+      "expected_iso": null,
+      "format": "Unknown",
+      "note": "common null sentinel"
+    },
+    {
+      "id": "inv_008",
+      "input": "TBD",
+      "expected_iso": null,
+      "format": "Unknown",
+      "note": "to be determined"
+    },
+    {
+      "id": "inv_009",
+      "input": "00/00/0000",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "note": "zero date — slash format with both <= 12"
+    },
+    {
+      "id": "inv_010",
+      "input": "2026-00-00",
+      "expected_iso": null,
+      "format": "IsoDate",
+      "note": "zero month and day — structurally ISO but invalid"
+    },
+    {
+      "id": "tz_001",
+      "input": "2026-04-06T14:30:00+05:00",
+      "expected_iso": "2026-04-06T14:30:00+05:00",
+      "format": "Iso8601",
+      "note": "positive timezone offset [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "tz_002",
+      "input": "2026-04-06T14:30:00-05:00",
+      "expected_iso": "2026-04-06T14:30:00-05:00",
+      "format": "Iso8601",
+      "note": "negative timezone offset (EST) [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "tz_003",
+      "input": "2026-04-06T14:30:00+09:00",
+      "expected_iso": "2026-04-06T14:30:00+09:00",
+      "format": "Iso8601",
+      "note": "Japan Standard Time [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "tz_004",
+      "input": "2026-04-06T14:30:00+01:00",
+      "expected_iso": "2026-04-06T14:30:00+01:00",
+      "format": "Iso8601",
+      "note": "Central European Time [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "tz_005",
+      "input": "2026-04-06T14:30:00-08:00",
+      "expected_iso": "2026-04-06T14:30:00-08:00",
+      "format": "Iso8601",
+      "note": "Pacific Standard Time [preserve offset, no UTC normalization]"
+    },
+    {
+      "id": "misc_001",
+      "input": "circa 1850",
+      "expected_iso": null,
+      "format": "GedcomApprox",
+      "note": "circa lowercase variant"
+    },
+    {
+      "id": "misc_002",
+      "input": "CIRCA 1850",
+      "expected_iso": null,
+      "format": "GedcomApprox",
+      "note": "CIRCA uppercase variant"
+    },
+    {
+      "id": "misc_003",
+      "input": "c. 1850",
+      "expected_iso": null,
+      "format": "GedcomApprox",
+      "note": "c. abbreviation for circa"
+    },
+    {
+      "id": "misc_004",
+      "input": "ABOUT 1776",
+      "expected_iso": null,
+      "format": "GedcomApprox",
+      "note": "ABOUT variant"
+    },
+    {
+      "id": "misc_005",
+      "input": "BETWEEN 1840 AND 1860",
+      "expected_iso": null,
+      "format": "GedcomRange",
+      "note": "BETWEEN long form"
+    },
+    {
+      "id": "misc_006",
+      "input": "BEFORE 1899",
+      "expected_iso": null,
+      "format": "GedcomBeforeAfter",
+      "note": "BEFORE long form"
+    },
+    {
+      "id": "misc_007",
+      "input": "AFTER 1900",
+      "expected_iso": null,
+      "format": "GedcomBeforeAfter",
+      "note": "AFTER long form"
+    },
+    {
+      "id": "misc_008",
+      "input": "04-06-2026",
+      "expected_iso": "2026-04-06",
+      "format": "Ambiguous",
+      "note": "dash-separated date — now handled; ambiguous (both ≤12), defaults to US (MM/DD)"
+    },
+    {
+      "id": "misc_009",
+      "input": "06.04.2026",
+      "expected_iso": "2026-04-06",
+      "format": "EuDate",
+      "note": "dot-separated European — now handled (iteration 278 added support)"
+    },
+    {
+      "id": "misc_010",
+      "input": "4/6/2026",
+      "expected_iso": null,
+      "format": "Ambiguous",
+      "ambiguous": true,
+      "note": "single-digit month and day slash format, both <= 12"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+[package]
+name = "laminate-cli"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+authors = ["Greg Lamberson <greg@lamco.io>"]
+description = "CLI tool for laminate — data auditing, schema inference, and type detection"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/lamco-admin/laminate"
+homepage = "https://lamco.ai"
+documentation = "https://docs.rs/laminate-cli"
+keywords = ["laminate", "cli", "data", "schema", "audit"]
+categories = ["command-line-utilities", "encoding"]
+
+[badges]
+maintenance = { status = "actively-developed" }
+
+[[bin]]
+name = "laminate"
+path = "src/main.rs"
+
+[dependencies]
+laminate = { path = "../laminate", version = "0.1.0", features = ["schema"] }
+clap = { version = "4", features = ["derive"] }
+serde_json = "1"

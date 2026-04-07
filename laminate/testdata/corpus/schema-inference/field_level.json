@@ -1,0 +1,229 @@
+{
+  "_meta": {
+    "name": "Schema Inference Field-Level Tests",
+    "description": "Per-field type inference, required detection, constraints, and audit validation",
+    "version": "1.0.0"
+  },
+  "datasets": {
+    "clean_types": {
+      "rows": [
+        {
+          "id": 1,
+          "name": "Alice",
+          "score": 95.5,
+          "active": true,
+          "tags": [
+            "a"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Bob",
+          "score": 88.0,
+          "active": false,
+          "tags": [
+            "b",
+            "c"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Carol",
+          "score": 91.2,
+          "active": true,
+          "tags": [
+            "a",
+            "d"
+          ]
+        }
+      ],
+      "expected_fields": {
+        "id": {
+          "type": "Integer",
+          "required": true,
+          "nullable": false
+        },
+        "name": {
+          "type": "String",
+          "required": true,
+          "nullable": false
+        },
+        "score": {
+          "type": "Float",
+          "required": true,
+          "nullable": false
+        },
+        "active": {
+          "type": "Bool",
+          "required": true,
+          "nullable": false
+        },
+        "tags": {
+          "type": "Array",
+          "required": true,
+          "nullable": false
+        }
+      }
+    },
+    "nullable_fields": {
+      "rows": [
+        {
+          "id": 1,
+          "name": "Alice",
+          "email": "alice@test.com"
+        },
+        {
+          "id": 2,
+          "name": "Bob",
+          "email": null
+        },
+        {
+          "id": 3,
+          "name": "Carol"
+        }
+      ],
+      "expected_fields": {
+        "id": {
+          "type": "Integer",
+          "required": true,
+          "nullable": false
+        },
+        "name": {
+          "type": "String",
+          "required": true,
+          "nullable": false
+        },
+        "email": {
+          "type": "String",
+          "required": false,
+          "nullable": true
+        }
+      }
+    },
+    "mixed_types": {
+      "rows": [
+        {
+          "value": 1
+        },
+        {
+          "value": 2
+        },
+        {
+          "value": "three"
+        },
+        {
+          "value": 4
+        },
+        {
+          "value": 5
+        }
+      ],
+      "expected_fields": {
+        "value": {
+          "type": "Integer",
+          "mixed": true
+        }
+      },
+      "note": "60% Integer, 20% String — Integer should win"
+    },
+    "all_null_column": {
+      "rows": [
+        {
+          "id": 1,
+          "data": null
+        },
+        {
+          "id": 2,
+          "data": null
+        },
+        {
+          "id": 3,
+          "data": null
+        }
+      ],
+      "expected_fields": {
+        "id": {
+          "type": "Integer",
+          "required": true
+        },
+        "data": {
+          "type": "None",
+          "nullable": true
+        }
+      }
+    },
+    "audit_violations": {
+      "rows": [
+        {
+          "id": 1,
+          "name": "Alice",
+          "age": 30
+        },
+        {
+          "id": 2,
+          "name": "Bob",
+          "age": 25
+        },
+        {
+          "id": 3,
+          "name": "Carol",
+          "age": 35
+        }
+      ],
+      "audit_rows": [
+        {
+          "id": 4,
+          "name": "Dave",
+          "age": 40
+        },
+        {
+          "id": "five",
+          "name": "Eve",
+          "age": "thirty"
+        },
+        {
+          "id": 6,
+          "age": 28
+        },
+        {
+          "id": 7,
+          "name": "Grace",
+          "age": 33,
+          "extra": "unknown"
+        }
+      ],
+      "expected_violations": {
+        "min_count": 3,
+        "types": [
+          "TypeMismatch",
+          "MissingRequired",
+          "UnknownField"
+        ]
+      }
+    },
+    "wide_sparse": {
+      "rows": [
+        {
+          "a": 1,
+          "b": 2
+        },
+        {
+          "a": 3,
+          "c": 4
+        },
+        {
+          "b": 5,
+          "d": 6
+        },
+        {
+          "a": 7,
+          "b": 8,
+          "c": 9,
+          "d": 10
+        }
+      ],
+      "expected_field_count": 4,
+      "note": "sparse columns — fill rate varies per field"
+    }
+  }
+}

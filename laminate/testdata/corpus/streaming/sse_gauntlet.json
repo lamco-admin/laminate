@@ -1,0 +1,52 @@
+{
+  "_meta": {
+    "name": "SSE Parser Gauntlet",
+    "description": "Tests for the Server-Sent Events parser covering chunked delivery, multi-line data, comments, typed events, and real-world provider formats",
+    "version": "1.0.0"
+  },
+  "cases": [
+    {"id": "basic_001", "input": "data: hello\n\n", "expected_events": [{"data": "hello", "event_type": null}]},
+    {"id": "basic_002", "input": "data: {\"key\": \"value\"}\n\n", "expected_events": [{"data": "{\"key\": \"value\"}", "event_type": null}]},
+    {"id": "basic_003", "input": "data: \n\n", "expected_events": [{"data": "", "event_type": null}]},
+
+    {"id": "typed_001", "input": "event: message_start\ndata: {\"type\":\"message\"}\n\n", "expected_events": [{"data": "{\"type\":\"message\"}", "event_type": "message_start"}]},
+    {"id": "typed_002", "input": "event: ping\ndata: {}\n\n", "expected_events": [{"data": "{}", "event_type": "ping"}]},
+
+    {"id": "multi_001", "input": "data: first\n\ndata: second\n\n", "expected_events": [{"data": "first", "event_type": null}, {"data": "second", "event_type": null}]},
+    {"id": "multi_002", "input": "data: a\n\ndata: b\n\ndata: c\n\n", "expected_events": [{"data": "a", "event_type": null}, {"data": "b", "event_type": null}, {"data": "c", "event_type": null}]},
+
+    {"id": "multiline_001", "input": "data: line1\ndata: line2\ndata: line3\n\n", "expected_events": [{"data": "line1\nline2\nline3", "event_type": null}]},
+
+    {"id": "comment_001", "input": ": heartbeat\ndata: actual\n\n", "expected_events": [{"data": "actual", "event_type": null}]},
+    {"id": "comment_002", "input": ": keep-alive\n\ndata: real\n\n", "expected_events": [{"data": "real", "event_type": null}]},
+    {"id": "comment_003", "input": ": \n: \ndata: after_comments\n\n", "expected_events": [{"data": "after_comments", "event_type": null}]},
+
+    {"id": "crlf_001", "input": "data: hello\r\n\r\n", "expected_events": [{"data": "hello", "event_type": null}]},
+    {"id": "crlf_002", "input": "event: test\r\ndata: payload\r\n\r\n", "expected_events": [{"data": "payload", "event_type": "test"}]},
+
+    {"id": "done_001", "input": "data: [DONE]\n\n", "expected_events": [{"data": "[DONE]", "event_type": null}]},
+
+    {"id": "id_retry_001", "input": "id: 42\nretry: 5000\ndata: with_meta\n\n", "expected_events": [{"data": "with_meta", "event_type": null}], "note": "id and retry fields are ignored but should not break parsing"},
+
+    {"id": "empty_between_001", "input": "data: first\n\n\n\ndata: second\n\n", "expected_events": [{"data": "first", "event_type": null}, {"data": "second", "event_type": null}]},
+
+    {"id": "no_space_001", "input": "data:no_space\n\n", "expected_events": [{"data": "no_space", "event_type": null}], "note": "SSE spec: only one leading space stripped"},
+    {"id": "extra_space_001", "input": "data:  two_spaces\n\n", "expected_events": [{"data": " two_spaces", "event_type": null}], "note": "SSE spec: only one leading space stripped, second preserved"},
+
+    {"id": "chunked_001", "chunks": ["data: hel", "lo\n\n"], "expected_events": [{"data": "hello", "event_type": null}]},
+    {"id": "chunked_002", "chunks": ["data: fi", "rst\n\nda", "ta: second\n\n"], "expected_events": [{"data": "first", "event_type": null}, {"data": "second", "event_type": null}]},
+    {"id": "chunked_003", "chunks": ["event: ty", "pe1\ndata: pay", "load\n\n"], "expected_events": [{"data": "payload", "event_type": "type1"}]},
+
+    {"id": "anthropic_001", "input": "event: message_start\ndata: {\"type\":\"message_start\",\"message\":{\"id\":\"msg_01\",\"model\":\"claude-3\"}}\n\nevent: content_block_start\ndata: {\"type\":\"content_block_start\",\"index\":0}\n\nevent: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"delta\":{\"text\":\"Hello\"}}\n\nevent: content_block_stop\ndata: {\"type\":\"content_block_stop\",\"index\":0}\n\nevent: message_stop\ndata: {\"type\":\"message_stop\"}\n\n", "expected_count": 5},
+
+    {"id": "openai_001", "input": "data: {\"id\":\"chatcmpl-1\",\"choices\":[{\"delta\":{\"content\":\"Hi\"}}]}\n\ndata: {\"id\":\"chatcmpl-1\",\"choices\":[{\"delta\":{\"content\":\" there\"}}]}\n\ndata: [DONE]\n\n", "expected_count": 3},
+
+    {"id": "finish_001", "chunks": ["data: partial"], "expected_events": [{"data": "partial", "event_type": null}], "note": "finish() flushes remaining buffered event"},
+
+    {"id": "unknown_field_001", "input": "foo: bar\ndata: real\n\n", "expected_events": [{"data": "real", "event_type": null}], "note": "unknown fields ignored per SSE spec"},
+
+    {"id": "empty_event_001", "input": "event: empty\n\n", "expected_events": [], "note": "event type with no data should not emit"},
+
+    {"id": "large_001", "input_gen": {"type": "repeat", "template": "data: {\"index\":INDEX}\n\n", "count": 100}, "expected_count": 100}
+  ]
+}

@@ -1,0 +1,8 @@
+[
+  {"user_id": 1001, "score": 95.5, "active": true, "joined": "2024-01-15"},
+  {"user_id": "1002", "score": "87.3", "active": "true", "joined": "2024-02-20"},
+  {"user_id": 1003, "score": 92, "active": 1, "joined": "2024-03-01"},
+  {"user_id": "1004", "score": null, "active": false, "joined": "2024-04-10"},
+  {"user_id": [1005], "score": "N/A", "active": "yes", "joined": null},
+  {"user_id": 1006, "score": 88.0, "active": true, "extra_field": "surprise", "another": 42}
+]

@@ -1,0 +1,1173 @@
+{
+  "_meta": {
+    "name": "Type Detection Ground Truth",
+    "description": "Every GuessedType variant with known-correct top-1 and valid alternatives",
+    "version": "1.0.0",
+    "cases": 310
+  },
+  "cases": [
+    {
+      "id": "int_001",
+      "input": "0",
+      "top": "Integer",
+      "also": [
+        "Float",
+        "Boolean"
+      ]
+    },
+    {
+      "id": "int_002",
+      "input": "1",
+      "top": "Integer",
+      "also": [
+        "Float",
+        "Boolean"
+      ]
+    },
+    {
+      "id": "int_003",
+      "input": "42",
+      "top": "Integer",
+      "also": [
+        "Float"
+      ]
+    },
+    {
+      "id": "int_004",
+      "input": "-1",
+      "top": "Integer",
+      "also": [
+        "Float"
+      ]
+    },
+    {
+      "id": "int_005",
+      "input": "9999",
+      "top": "Integer",
+      "also": [
+        "Float"
+      ]
+    },
+    {
+      "id": "int_006",
+      "input": "9223372036854775807",
+      "top": "Integer",
+      "note": "i64::MAX"
+    },
+    {
+      "id": "int_007",
+      "input": "-9223372036854775808",
+      "top": "Integer",
+      "note": "i64::MIN"
+    },
+    {
+      "id": "int_008",
+      "input": "007",
+      "top": "Integer",
+      "note": "leading zeros"
+    },
+    {
+      "id": "int_009",
+      "input": "100",
+      "top": "Integer"
+    },
+    {
+      "id": "int_010",
+      "input": "12345",
+      "top": "Integer"
+    },
+    {
+      "id": "flt_001",
+      "input": "3.14",
+      "top": "Float"
+    },
+    {
+      "id": "flt_002",
+      "input": "0.0",
+      "top": "Float"
+    },
+    {
+      "id": "flt_003",
+      "input": "-273.15",
+      "top": "Float"
+    },
+    {
+      "id": "flt_004",
+      "input": "1e10",
+      "top": "Float"
+    },
+    {
+      "id": "flt_005",
+      "input": "1.23e-4",
+      "top": "Float"
+    },
+    {
+      "id": "flt_006",
+      "input": ".5",
+      "top": "Float"
+    },
+    {
+      "id": "flt_007",
+      "input": "1E6",
+      "top": "Float"
+    },
+    {
+      "id": "flt_008",
+      "input": "99.99",
+      "top": "Float"
+    },
+    {
+      "id": "flt_009",
+      "input": "0.001",
+      "top": "Float"
+    },
+    {
+      "id": "flt_010",
+      "input": "-0.5",
+      "top": "Float"
+    },
+    {
+      "id": "bool_001",
+      "input": "true",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_002",
+      "input": "false",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_003",
+      "input": "True",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_004",
+      "input": "FALSE",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_005",
+      "input": "yes",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_006",
+      "input": "no",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_007",
+      "input": "YES",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_008",
+      "input": "NO",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_009",
+      "input": "on",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_010",
+      "input": "off",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_011",
+      "input": "y",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_012",
+      "input": "n",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_013",
+      "input": "t",
+      "top": "Boolean"
+    },
+    {
+      "id": "bool_014",
+      "input": "f",
+      "top": "Boolean"
+    },
+    {
+      "id": "date_001",
+      "input": "2026-04-06",
+      "top": "Date",
+      "format": "ISO8601"
+    },
+    {
+      "id": "date_002",
+      "input": "2026-04-06T14:30:00Z",
+      "top": "Date",
+      "format": "ISO8601"
+    },
+    {
+      "id": "date_003",
+      "input": "2026-04-06T14:30:00+05:00",
+      "top": "Date"
+    },
+    {
+      "id": "date_004",
+      "input": "04/06/2026",
+      "top": "Date",
+      "note": "US format"
+    },
+    {
+      "id": "date_005",
+      "input": "06/04/2026",
+      "top": "Date",
+      "note": "could be US or European"
+    },
+    {
+      "id": "date_006",
+      "input": "01/02/2026",
+      "top": "Date",
+      "ambiguous": true
+    },
+    {
+      "id": "date_007",
+      "input": "13/01/2026",
+      "top": "Date",
+      "note": "unambiguously European (13>12)"
+    },
+    {
+      "id": "date_008",
+      "input": "06-Apr-2026",
+      "top": "Date",
+      "format": "abbreviated_month"
+    },
+    {
+      "id": "date_009",
+      "input": "April 6, 2026",
+      "top": "Date"
+    },
+    {
+      "id": "date_010",
+      "input": "6 Apr 2026",
+      "top": "Date"
+    },
+    {
+      "id": "date_011",
+      "input": "20260406",
+      "top": "Date",
+      "format": "compact"
+    },
+    {
+      "id": "date_012",
+      "input": "2026.04.06",
+      "top": "Date",
+      "format": "dot_separated"
+    },
+    {
+      "id": "date_013",
+      "input": "04-06-2026",
+      "top": "Date"
+    },
+    {
+      "id": "date_014",
+      "input": "2026/04/06",
+      "top": "Date"
+    },
+    {
+      "id": "date_015",
+      "input": "31-Mar-26",
+      "top": "Date",
+      "note": "2-digit year"
+    },
+    {
+      "id": "date_016",
+      "input": "1711900800",
+      "top": "Date",
+      "note": "Unix timestamp"
+    },
+    {
+      "id": "date_017",
+      "input": "14:30",
+      "top": "Date",
+      "note": "time without date"
+    },
+    {
+      "id": "date_018",
+      "input": "2:30 PM",
+      "top": "Date",
+      "note": "12-hour time"
+    },
+    {
+      "id": "date_019",
+      "input": "2026-W14",
+      "top": "Date",
+      "note": "ISO week date"
+    },
+    {
+      "id": "date_020",
+      "input": "29 Feb 2024",
+      "top": "Date",
+      "note": "leap year"
+    },
+    {
+      "id": "cur_001",
+      "input": "$12.99",
+      "top": "Currency"
+    },
+    {
+      "id": "cur_002",
+      "input": "€1.234,56",
+      "top": "Currency",
+      "note": "European euro"
+    },
+    {
+      "id": "cur_003",
+      "input": "£100",
+      "top": "Currency"
+    },
+    {
+      "id": "cur_004",
+      "input": "¥1,000",
+      "top": "Currency",
+      "note": "yen/yuan"
+    },
+    {
+      "id": "cur_005",
+      "input": "USD 12.99",
+      "top": "Currency",
+      "note": "code prefix"
+    },
+    {
+      "id": "cur_006",
+      "input": "12.99 EUR",
+      "top": "Currency",
+      "note": "code suffix"
+    },
+    {
+      "id": "cur_007",
+      "input": "CHF 1'234.56",
+      "top": "Currency",
+      "note": "Swiss franc"
+    },
+    {
+      "id": "cur_008",
+      "input": "₹1,00,000",
+      "top": "Currency",
+      "note": "Indian rupee lakhs"
+    },
+    {
+      "id": "cur_009",
+      "input": "(1,234.56)",
+      "top": "Currency",
+      "note": "accounting negative"
+    },
+    {
+      "id": "cur_010",
+      "input": "-$5.00",
+      "top": "Currency",
+      "note": "negative with symbol"
+    },
+    {
+      "id": "cur_011",
+      "input": "BTC 0.00123",
+      "top": "Currency",
+      "note": "crypto"
+    },
+    {
+      "id": "cur_012",
+      "input": "ETH 1.5",
+      "top": "Currency",
+      "note": "crypto"
+    },
+    {
+      "id": "cur_013",
+      "input": "R$ 100,00",
+      "top": "Currency",
+      "note": "Brazilian real"
+    },
+    {
+      "id": "cur_014",
+      "input": "kr 1.234",
+      "top": "Currency",
+      "note": "Scandinavian krone"
+    },
+    {
+      "id": "cur_015",
+      "input": "$0.99",
+      "top": "Currency"
+    },
+    {
+      "id": "unit_001",
+      "input": "5.2 kg",
+      "top": "UnitValue",
+      "category": "Weight"
+    },
+    {
+      "id": "unit_002",
+      "input": "120 lbs",
+      "top": "UnitValue",
+      "category": "Weight"
+    },
+    {
+      "id": "unit_003",
+      "input": "98.6°F",
+      "top": "UnitValue",
+      "category": "Temperature"
+    },
+    {
+      "id": "unit_004",
+      "input": "37°C",
+      "top": "UnitValue",
+      "category": "Temperature"
+    },
+    {
+      "id": "unit_005",
+      "input": "100 km",
+      "top": "UnitValue",
+      "category": "Length"
+    },
+    {
+      "id": "unit_006",
+      "input": "5.5 mi",
+      "top": "UnitValue",
+      "category": "Length"
+    },
+    {
+      "id": "unit_007",
+      "input": "3.7 L",
+      "top": "UnitValue",
+      "category": "Volume"
+    },
+    {
+      "id": "unit_008",
+      "input": "1 gal",
+      "top": "UnitValue",
+      "category": "Volume"
+    },
+    {
+      "id": "unit_009",
+      "input": "100 kHz",
+      "top": "UnitValue",
+      "note": "SI prefix"
+    },
+    {
+      "id": "unit_010",
+      "input": "2.4 GHz",
+      "top": "UnitValue",
+      "note": "SI prefix"
+    },
+    {
+      "id": "unit_011",
+      "input": "500 MB",
+      "top": "UnitValue",
+      "category": "Data"
+    },
+    {
+      "id": "unit_012",
+      "input": "10 TB",
+      "top": "UnitValue",
+      "category": "Data"
+    },
+    {
+      "id": "unit_013",
+      "input": "1013.25 hPa",
+      "top": "UnitValue",
+      "category": "Pressure"
+    },
+    {
+      "id": "unit_014",
+      "input": "120 mmHg",
+      "top": "UnitValue",
+      "category": "Pressure"
+    },
+    {
+      "id": "unit_015",
+      "input": "3600 s",
+      "top": "UnitValue",
+      "category": "Time"
+    },
+    {
+      "id": "unit_016",
+      "input": "9.81 m/s²",
+      "top": "UnitValue",
+      "category": "Speed"
+    },
+    {
+      "id": "unit_017",
+      "input": "100 KGM",
+      "top": "UnitValue",
+      "note": "UNECE code"
+    },
+    {
+      "id": "unit_018",
+      "input": "0 kg",
+      "top": "UnitValue",
+      "note": "zero value"
+    },
+    {
+      "id": "unit_019",
+      "input": "G.W. 15.5kg",
+      "top": "UnitValue",
+      "note": "qualified weight"
+    },
+    {
+      "id": "unit_020",
+      "input": "1x100-count",
+      "top": "UnitValue",
+      "note": "pack notation"
+    },
+    {
+      "id": "uuid_001",
+      "input": "550e8400-e29b-41d4-a716-446655440000",
+      "top": "Uuid"
+    },
+    {
+      "id": "uuid_002",
+      "input": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "top": "Uuid"
+    },
+    {
+      "id": "uuid_003",
+      "input": "00000000-0000-0000-0000-000000000000",
+      "top": "Uuid",
+      "note": "nil UUID"
+    },
+    {
+      "id": "uuid_004",
+      "input": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+      "top": "Uuid",
+      "note": "max UUID"
+    },
+    {
+      "id": "uuid_005",
+      "input": "not-a-uuid-at-all",
+      "top": "PlainString"
+    },
+    {
+      "id": "email_001",
+      "input": "alice@example.com",
+      "top": "Email"
+    },
+    {
+      "id": "email_002",
+      "input": "user+tag@example.com",
+      "top": "Email",
+      "note": "plus alias"
+    },
+    {
+      "id": "email_003",
+      "input": "first.last@company.co.uk",
+      "top": "Email"
+    },
+    {
+      "id": "email_004",
+      "input": "admin@localhost",
+      "top": "PlainString",
+      "note": "no TLD dot"
+    },
+    {
+      "id": "email_005",
+      "input": "test@192.168.1.1",
+      "top": "Email",
+      "note": "IP host"
+    },
+    {
+      "id": "email_006",
+      "input": "user@example.org",
+      "top": "Email"
+    },
+    {
+      "id": "email_007",
+      "input": "a@b.c",
+      "top": "Email",
+      "note": "minimal"
+    },
+    {
+      "id": "email_008",
+      "input": "very.long.email.address@subdomain.example.com",
+      "top": "Email"
+    },
+    {
+      "id": "email_009",
+      "input": "name@日本語.jp",
+      "top": "Email",
+      "note": "IDN domain"
+    },
+    {
+      "id": "email_010",
+      "input": "user name@example.com",
+      "top": "PlainString",
+      "note": "space disqualifies"
+    },
+    {
+      "id": "url_001",
+      "input": "https://example.com",
+      "top": "Url"
+    },
+    {
+      "id": "url_002",
+      "input": "http://localhost:3000/api/v1",
+      "top": "Url"
+    },
+    {
+      "id": "url_003",
+      "input": "https://example.com/path?q=hello&lang=en",
+      "top": "Url"
+    },
+    {
+      "id": "url_004",
+      "input": "ftp://files.example.com/data.csv",
+      "top": "Url"
+    },
+    {
+      "id": "url_005",
+      "input": "https://user:pass@host.com:8080",
+      "top": "Url"
+    },
+    {
+      "id": "url_006",
+      "input": "www.example.com",
+      "top": "PlainString",
+      "note": "no protocol"
+    },
+    {
+      "id": "url_007",
+      "input": "https://例え.jp/パス",
+      "top": "Url",
+      "note": "Unicode URL"
+    },
+    {
+      "id": "ip_001",
+      "input": "192.168.1.1",
+      "top": "IpAddress"
+    },
+    {
+      "id": "ip_002",
+      "input": "10.0.0.1",
+      "top": "IpAddress"
+    },
+    {
+      "id": "ip_003",
+      "input": "255.255.255.255",
+      "top": "IpAddress"
+    },
+    {
+      "id": "ip_004",
+      "input": "0.0.0.0",
+      "top": "IpAddress"
+    },
+    {
+      "id": "ip_005",
+      "input": "127.0.0.1",
+      "top": "IpAddress"
+    },
+    {
+      "id": "ip_006",
+      "input": "8.8.8.8",
+      "top": "IpAddress",
+      "note": "Google DNS"
+    },
+    {
+      "id": "ip_007",
+      "input": "::1",
+      "top": "IpAddress",
+      "note": "IPv6 loopback"
+    },
+    {
+      "id": "ip_008",
+      "input": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+      "top": "IpAddress",
+      "note": "full IPv6"
+    },
+    {
+      "id": "ip_009",
+      "input": "999.999.999.999",
+      "top": "PlainString",
+      "note": "invalid octets"
+    },
+    {
+      "id": "null_001",
+      "input": "null",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_002",
+      "input": "NULL",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_003",
+      "input": "None",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_004",
+      "input": "none",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_005",
+      "input": "N/A",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_006",
+      "input": "n/a",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_007",
+      "input": "NA",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_008",
+      "input": "na",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_009",
+      "input": "NaN",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_010",
+      "input": "nil",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_011",
+      "input": "undefined",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_012",
+      "input": "-",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "null_013",
+      "input": "",
+      "top": "NullSentinel",
+      "note": "empty string"
+    },
+    {
+      "id": "null_014",
+      "input": "unknown",
+      "top": "NullSentinel"
+    },
+    {
+      "id": "json_001",
+      "input": "{\"name\": \"Alice\"}",
+      "top": "Json"
+    },
+    {
+      "id": "json_002",
+      "input": "[1, 2, 3]",
+      "top": "Json"
+    },
+    {
+      "id": "json_003",
+      "input": "{}",
+      "top": "Json"
+    },
+    {
+      "id": "json_004",
+      "input": "[]",
+      "top": "Json"
+    },
+    {
+      "id": "json_005",
+      "input": "{\"nested\": {\"deep\": true}}",
+      "top": "Json"
+    },
+    {
+      "id": "json_006",
+      "input": "{invalid json}",
+      "top": "PlainString",
+      "note": "not valid JSON"
+    },
+    {
+      "id": "iban_001",
+      "input": "GB29 NWBK 6016 1331 9268 19",
+      "top": "Iban"
+    },
+    {
+      "id": "iban_002",
+      "input": "DE89370400440532013000",
+      "top": "Iban",
+      "note": "German no spaces"
+    },
+    {
+      "id": "iban_003",
+      "input": "FR76 3000 6000 0112 3456 7890 189",
+      "top": "Iban",
+      "note": "French"
+    },
+    {
+      "id": "iban_004",
+      "input": "ES91 2100 0418 4502 0005 1332",
+      "top": "Iban",
+      "note": "Spanish"
+    },
+    {
+      "id": "iban_005",
+      "input": "IT60 X054 2811 1010 0000 0123 456",
+      "top": "Iban",
+      "note": "Italian"
+    },
+    {
+      "id": "iban_006",
+      "input": "NL91 ABNA 0417 1643 00",
+      "top": "Iban",
+      "note": "Dutch"
+    },
+    {
+      "id": "iban_007",
+      "input": "CH93 0076 2011 6238 5295 7",
+      "top": "Iban",
+      "note": "Swiss"
+    },
+    {
+      "id": "iban_008",
+      "input": "AT61 1904 3002 3457 3201",
+      "top": "Iban",
+      "note": "Austrian"
+    },
+    {
+      "id": "iban_009",
+      "input": "BE68 5390 0754 7034",
+      "top": "Iban",
+      "note": "Belgian"
+    },
+    {
+      "id": "iban_010",
+      "input": "GB00 XXXX 0000 0000 0000 00",
+      "top": "PlainString",
+      "note": "invalid check digits"
+    },
+    {
+      "id": "cc_001",
+      "input": "4111111111111111",
+      "top": "CreditCard",
+      "detail": "Visa"
+    },
+    {
+      "id": "cc_002",
+      "input": "5500000000000004",
+      "top": "CreditCard",
+      "detail": "Mastercard"
+    },
+    {
+      "id": "cc_003",
+      "input": "340000000000009",
+      "top": "CreditCard",
+      "detail": "Amex"
+    },
+    {
+      "id": "cc_004",
+      "input": "6011000000000004",
+      "top": "CreditCard",
+      "detail": "Discover"
+    },
+    {
+      "id": "cc_005",
+      "input": "4111-1111-1111-1111",
+      "top": "CreditCard",
+      "note": "dashed format"
+    },
+    {
+      "id": "cc_006",
+      "input": "4111 1111 1111 1111",
+      "top": "CreditCard",
+      "note": "spaced format"
+    },
+    {
+      "id": "cc_007",
+      "input": "1234567890123456",
+      "top": "Integer",
+      "note": "fails Luhn, but 16-digit number parses as Integer — correct"
+    },
+    {
+      "id": "cc_008",
+      "input": "3530111333300000",
+      "top": "CreditCard",
+      "detail": "JCB"
+    },
+    {
+      "id": "isbn_001",
+      "input": "978-0-306-40615-7",
+      "top": "Isbn",
+      "note": "ISBN-13 dashed"
+    },
+    {
+      "id": "isbn_002",
+      "input": "9780306406157",
+      "top": "Isbn",
+      "note": "ISBN-13 plain"
+    },
+    {
+      "id": "isbn_003",
+      "input": "0-306-40615-2",
+      "top": "Isbn",
+      "note": "ISBN-10 dashed"
+    },
+    {
+      "id": "isbn_004",
+      "input": "155860832X",
+      "top": "Isbn",
+      "note": "ISBN-10 X check digit"
+    },
+    {
+      "id": "isbn_005",
+      "input": "978-3-16-148410-0",
+      "top": "Isbn"
+    },
+    {
+      "id": "ssn_001",
+      "input": "123-45-6789",
+      "top": "Ssn"
+    },
+    {
+      "id": "ssn_002",
+      "input": "078-05-1120",
+      "top": "Ssn",
+      "note": "Woolworth wallet card"
+    },
+    {
+      "id": "ssn_003",
+      "input": "000-12-3456",
+      "top": "PlainString",
+      "note": "invalid area 000"
+    },
+    {
+      "id": "ssn_004",
+      "input": "666-12-3456",
+      "top": "PlainString",
+      "note": "invalid area 666"
+    },
+    {
+      "id": "ssn_005",
+      "input": "900-12-3456",
+      "top": "PlainString",
+      "note": "invalid area 900+"
+    },
+    {
+      "id": "ein_001",
+      "input": "12-3456789",
+      "top": "Ein"
+    },
+    {
+      "id": "ein_002",
+      "input": "00-1234567",
+      "top": "PlainString",
+      "note": "prefix 00 is invalid for EIN — correctly PlainString"
+    },
+    {
+      "id": "vat_001",
+      "input": "DE123456789",
+      "top": "VatNumber",
+      "note": "German VAT"
+    },
+    {
+      "id": "vat_002",
+      "input": "FR12345678901",
+      "top": "VatNumber",
+      "note": "French VAT"
+    },
+    {
+      "id": "vat_003",
+      "input": "GB123456789",
+      "top": "VatNumber",
+      "note": "UK VAT"
+    },
+    {
+      "id": "vat_004",
+      "input": "IT12345678901",
+      "top": "VatNumber",
+      "note": "Italian VAT"
+    },
+    {
+      "id": "vat_005",
+      "input": "ES12345678A",
+      "top": "VatNumber",
+      "note": "Spanish VAT"
+    },
+    {
+      "id": "phone_001",
+      "input": "+1-555-123-4567",
+      "top": "Phone"
+    },
+    {
+      "id": "phone_002",
+      "input": "+44 20 7946 0958",
+      "top": "Phone",
+      "note": "UK format"
+    },
+    {
+      "id": "phone_003",
+      "input": "+33 1 23 45 67 89",
+      "top": "Phone",
+      "note": "French format"
+    },
+    {
+      "id": "phone_004",
+      "input": "(555) 123-4567",
+      "top": "Phone",
+      "note": "US parens format"
+    },
+    {
+      "id": "phone_005",
+      "input": "+1 (555) 123-4567",
+      "top": "Phone"
+    },
+    {
+      "id": "phone_006",
+      "input": "555-1234",
+      "top": "PlainString",
+      "note": "too short for phone"
+    },
+    {
+      "id": "phone_007",
+      "input": "+49 30 12345678",
+      "top": "Phone",
+      "note": "German"
+    },
+    {
+      "id": "phone_008",
+      "input": "+81 3 1234 5678",
+      "top": "Phone",
+      "note": "Japanese"
+    },
+    {
+      "id": "str_001",
+      "input": "hello world",
+      "top": "PlainString"
+    },
+    {
+      "id": "str_002",
+      "input": "The quick brown fox",
+      "top": "PlainString"
+    },
+    {
+      "id": "str_003",
+      "input": "foo bar baz",
+      "top": "PlainString"
+    },
+    {
+      "id": "str_004",
+      "input": "just a string",
+      "top": "PlainString"
+    },
+    {
+      "id": "str_005",
+      "input": "café résumé naïve",
+      "top": "PlainString",
+      "note": "Unicode accents"
+    },
+    {
+      "id": "str_006",
+      "input": "こんにちは",
+      "top": "PlainString",
+      "note": "Japanese"
+    },
+    {
+      "id": "str_007",
+      "input": "مرحبا",
+      "top": "PlainString",
+      "note": "Arabic"
+    },
+    {
+      "id": "str_008",
+      "input": "Привет мир",
+      "top": "PlainString",
+      "note": "Russian"
+    },
+    {
+      "id": "str_009",
+      "input": "🎉🎊🎈",
+      "top": "PlainString",
+      "note": "emoji"
+    },
+    {
+      "id": "str_010",
+      "input": "a",
+      "top": "PlainString",
+      "note": "single character"
+    },
+    {
+      "id": "str_011",
+      "input": "   ",
+      "top": "NullSentinel",
+      "note": "whitespace-only trims to empty"
+    },
+    {
+      "id": "ambig_001",
+      "input": "12-34-5678",
+      "top": "Date",
+      "note": "looks like date or SSN fragment"
+    },
+    {
+      "id": "ambig_002",
+      "input": "1.2.3.4",
+      "top": "IpAddress",
+      "note": "also looks like version"
+    },
+    {
+      "id": "ambig_003",
+      "input": "42",
+      "top": "Integer",
+      "note": "also Float and Boolean(0.3)"
+    },
+    {
+      "id": "ambig_004",
+      "input": "1",
+      "top": "Integer",
+      "also": [
+        "Float",
+        "Boolean"
+      ]
+    },
+    {
+      "id": "ambig_005",
+      "input": "0",
+      "top": "Integer",
+      "also": [
+        "Float",
+        "Boolean"
+      ]
+    },
+    {
+      "id": "ambig_006",
+      "input": "+1-555-123-4567",
+      "top": "Phone",
+      "note": "also looks numeric with dashes"
+    },
+    {
+      "id": "ambig_007",
+      "input": "3.14159",
+      "top": "Float",
+      "note": "not Date, not IP"
+    },
+    {
+      "id": "ambig_008",
+      "input": "12:34:56",
+      "top": "Date",
+      "note": "time — not IPv6"
+    },
+    {
+      "id": "ambig_009",
+      "input": "2026",
+      "top": "Integer",
+      "note": "year? no — just a number"
+    },
+    {
+      "id": "ambig_010",
+      "input": "$0",
+      "top": "Currency",
+      "note": "zero dollar"
+    }
+  ]
+}

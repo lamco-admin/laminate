@@ -1,0 +1,61 @@
+[
+  {
+    "resourceType": "Patient",
+    "id": "pat-001",
+    "active": true,
+    "name": [{"use": "official", "family": "Smith", "given": ["John", "Michael"]}],
+    "gender": "male",
+    "birthDate": "1985-03-15",
+    "telecom": [
+      {"system": "phone", "value": "+1-555-0101", "use": "home"},
+      {"system": "email", "value": "john.smith@example.com"}
+    ],
+    "address": [{"line": ["123 Main St"], "city": "Springfield", "state": "IL", "postalCode": "62701", "country": "US"}],
+    "identifier": [
+      {"system": "http://hl7.org/fhir/sid/us-ssn", "value": "999-88-7777"},
+      {"system": "http://hospital.example.org/mrn", "value": "MRN-12345"}
+    ],
+    "maritalStatus": {"coding": [{"system": "http://hl7.org/fhir/ValueSet/marital-status", "code": "M", "display": "Married"}]},
+    "contact": [{"name": {"family": "Smith", "given": ["Jane"]}, "telecom": [{"system": "phone", "value": "+1-555-0102"}], "relationship": [{"coding": [{"code": "N", "display": "Next-of-Kin"}]}]}]
+  },
+  {
+    "resourceType": "Patient",
+    "id": "pat-002",
+    "active": "true",
+    "name": [{"use": "official", "family": "Doe", "given": ["Jane"]}],
+    "gender": "female",
+    "birthDate": "1990-07-22",
+    "telecom": [{"system": "phone", "value": "555.0201"}],
+    "address": [{"line": ["456 Oak Ave", "Apt 2B"], "city": "Portland", "state": "OR", "postalCode": "97201"}],
+    "identifier": [{"system": "http://hospital.example.org/mrn", "value": "MRN-67890"}],
+    "deceasedBoolean": false,
+    "multipleBirthInteger": 0
+  },
+  {
+    "resourceType": "Patient",
+    "id": "pat-003",
+    "active": 1,
+    "name": [{"family": "García", "given": ["María", "Elena"]}],
+    "gender": "female",
+    "birthDate": "22/07/1955",
+    "telecom": [],
+    "address": [],
+    "identifier": [{"system": "http://hospital.example.org/mrn", "value": 44321}],
+    "extension": [
+      {"url": "http://hl7.org/fhir/StructureDefinition/patient-race", "valueCodeableConcept": {"coding": [{"code": "2106-3", "display": "White"}]}},
+      {"url": "http://custom.hospital.org/smoking-status", "valueString": "former"}
+    ],
+    "communication": [{"language": {"coding": [{"system": "urn:ietf:bcp:47", "code": "es"}]}, "preferred": true}]
+  },
+  {
+    "resourceType": "Patient",
+    "id": "pat-004",
+    "active": true,
+    "name": [{"use": "official", "text": "Robert \"Bobby\" Johnson Jr."}],
+    "gender": "male",
+    "birthDate": "1948",
+    "address": [{"text": "Rural Route 3, Box 42, Somewhere, KS 67000"}],
+    "identifier": [{"value": "OLD-SYSTEM-9999"}],
+    "generalPractitioner": [{"reference": "Practitioner/pract-001", "display": "Dr. Williams"}]
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "save_version": 3,
+  "player": {
+    "name": "DragonSlayer42",
+    "level": 67,
+    "experience": "2450000",
+    "health": 1250,
+    "max_health": 1250,
+    "mana": "800",
+    "max_mana": 800,
+    "gold": 154320,
+    "class": "warrior",
+    "stats": {
+      "strength": 45,
+      "dexterity": 22,
+      "intelligence": "15",
+      "wisdom": 18,
+      "charisma": "12"
+    }
+  },
+  "inventory": [
+    {"id": 1001, "name": "Sword of Truth", "type": "weapon", "damage": "45-60", "durability": "87/100", "enchantments": ["fire_damage", "lifesteal"], "equipped": true},
+    {"id": 1002, "name": "Shield of Ages", "type": "armor", "defense": 35, "durability": "100/100", "enchantments": [], "equipped": true},
+    {"id": "1003", "name": "Health Potion", "type": "consumable", "quantity": "25", "stackable": true, "equipped": false},
+    {"id": 1004, "name": "Mystery Gem", "type": "quest_item", "quest_id": "Q-042", "tradeable": false, "equipped": false, "custom_data": {"glow_color": "#FF00FF", "found_at": "Dragon's Lair"}}
+  ],
+  "quests": {
+    "active": [
+      {"id": "Q-042", "title": "The Dragon's Hoard", "progress": "3/5", "started": "2026-03-15"},
+      {"id": "Q-055", "title": "Lost Library", "progress": "1/10", "started": "2026-03-28"}
+    ],
+    "completed": ["Q-001", "Q-002", "Q-003", "Q-010", "Q-011", "Q-020", "Q-030", "Q-031", "Q-032", "Q-040", "Q-041"]
+  },
+  "settings": {
+    "difficulty": "hard",
+    "auto_save": "true",
+    "music_volume": "0.7",
+    "sfx_volume": "0.85",
+    "show_damage_numbers": "true",
+    "ui_scale": "1.25"
+  },
+  "play_time_seconds": 345600,
+  "last_save": "2026-03-31T15:00:00Z",
+  "mod_data": {
+    "enhanced_graphics": {"version": "2.1", "settings": {"shadow_quality": "ultra", "ray_tracing": true}},
+    "custom_quest_pack": {"version": "1.0.3", "quests_added": 15}
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "evt_1PB3Aq2eZvKYlo2C0YRfSd3T",
+  "object": "event",
+  "api_version": "2024-04-10",
+  "created": 1711900800,
+  "type": "payment_intent.succeeded",
+  "data": {
+    "object": {
+      "id": "pi_3PB3Aq2eZvKYlo2C0abc123",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_received": 2000,
+      "currency": "usd",
+      "status": "succeeded",
+      "customer": "cus_abc123",
+      "description": "Order #1234",
+      "metadata": {
+        "order_id": "1234",
+        "user_id": "5678",
+        "plan": "pro"
+      },
+      "payment_method": "pm_card_visa",
+      "created": 1711900700,
+      "livemode": false,
+      "receipt_email": "alice@example.com",
+      "charges": {
+        "object": "list",
+        "data": [{
+          "id": "ch_abc123",
+          "amount": 2000,
+          "amount_refunded": 0,
+          "paid": true,
+          "refunded": false,
+          "failure_code": null,
+          "failure_message": null
+        }],
+        "has_more": false,
+        "total_count": 1
+      }
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": "req_abc123",
+    "idempotency_key": "key_abc123"
+  }
+}

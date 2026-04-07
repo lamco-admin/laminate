@@ -1,0 +1,17 @@
+[
+  {"id": 1, "created": "2026-03-31T15:30:00Z", "format": "ISO8601"},
+  {"id": 2, "created": "03/31/2026", "format": "MM/DD/YYYY"},
+  {"id": 3, "created": "31/03/2026", "format": "DD/MM/YYYY"},
+  {"id": 4, "created": "31 March 2026", "format": "D MMMM YYYY"},
+  {"id": 5, "created": "Mar 31, 2026", "format": "MMM DD, YYYY"},
+  {"id": 6, "created": "2026-03-31", "format": "YYYY-MM-DD"},
+  {"id": 7, "created": "1711900800", "format": "unix_seconds"},
+  {"id": 8, "created": 1711900800, "format": "unix_seconds_numeric"},
+  {"id": 9, "created": "01/02/2026", "format": "AMBIGUOUS_MM_DD_or_DD_MM"},
+  {"id": 10, "created": null, "format": "null"},
+  {"id": 11, "created": "", "format": "empty_string"},
+  {"id": 12, "created": "ABT 1850", "format": "GEDCOM_approximate"},
+  {"id": 13, "created": "BET 1840 AND 1860", "format": "GEDCOM_range"},
+  {"id": 14, "created": "?", "format": "unknown_marker"},
+  {"id": 15, "created": "circa 1900", "format": "approximate_english"}
+]

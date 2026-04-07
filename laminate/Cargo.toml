@@ -1,0 +1,55 @@
+[package]
+name = "laminate"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+authors = ["Greg Lamberson <greg@lamco.io>"]
+description = "Progressive data shaping for Rust — type coercion, format detection, and fault-tolerant deserialization built on serde"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/lamco-admin/laminate"
+homepage = "https://lamco.ai"
+documentation = "https://docs.rs/laminate"
+readme = "../README.md"
+keywords = ["serde", "json", "coercion", "flexible", "deserialization"]
+categories = ["encoding", "parser-implementations"]
+exclude = ["/tests/iteration_*", "/testdata/corpus/*/volume_*", "/fuzz/", "/results/", "*.proptest-regressions"]
+
+[badges]
+maintenance = { status = "actively-developed" }
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[features]
+default = ["core"]
+core = []                  # FlexValue, path access, coercion, modes, diagnostics
+derive = ["core", "laminate-derive"]  # #[derive(Laminate)] macro
+streaming = ["core"]       # SSE parser, stream event handling
+providers = ["core"]       # Anthropic/OpenAI normalization adapters
+registry = ["core", "providers"]  # Handler dispatch for tool calls (requires providers)
+schema = ["core"]          # Schema inference and data auditing
+full = ["core", "derive", "streaming", "providers", "registry", "schema"]
+
+# Optional integrations with established crates
+chrono-integration = ["dep:chrono"]    # Date conversion → chrono::DateTime types
+uom-integration = ["dep:uom"]         # Unit values → type-safe dimensional analysis
+# rusty-money-integration = ["dep:rusty-money"]  # Currency → Decimal precision (pending crate compatibility check)
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+laminate-derive = { path = "../laminate-derive", version = "0.1.0", optional = true }
+chrono = { version = "0.4", optional = true }
+uom = { version = "0.36", default-features = false, features = ["f64", "si"], optional = true }
+
+[dev-dependencies]
+laminate-derive = { path = "../laminate-derive", version = "0.1.0" }
+tokio = { version = "1", features = ["macros", "rt"] }
+criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1"
+
+[[bench]]
+name = "core"
+harness = false

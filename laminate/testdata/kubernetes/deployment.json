@@ -1,0 +1,47 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "web-server",
+    "namespace": "production",
+    "labels": {"app": "web", "version": "v2.1.0", "team": "platform"},
+    "annotations": {"deployment.kubernetes.io/revision": "5", "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\"}"}
+  },
+  "spec": {
+    "replicas": "3",
+    "selector": {"matchLabels": {"app": "web"}},
+    "template": {
+      "metadata": {"labels": {"app": "web", "version": "v2.1.0"}},
+      "spec": {
+        "containers": [{
+          "name": "web",
+          "image": "registry.example.com/web:v2.1.0",
+          "ports": [{"containerPort": 8080, "protocol": "TCP"}],
+          "resources": {
+            "requests": {"cpu": "100m", "memory": "128Mi"},
+            "limits": {"cpu": "500m", "memory": "512Mi"}
+          },
+          "env": [
+            {"name": "DB_HOST", "value": "postgres.production.svc"},
+            {"name": "DB_PORT", "value": "5432"},
+            {"name": "LOG_LEVEL", "value": "info"},
+            {"name": "ENABLE_CACHE", "value": "true"},
+            {"name": "MAX_CONNECTIONS", "value": "100"}
+          ],
+          "livenessProbe": {"httpGet": {"path": "/healthz", "port": 8080}, "initialDelaySeconds": 15, "periodSeconds": 10},
+          "readinessProbe": {"httpGet": {"path": "/ready", "port": 8080}, "initialDelaySeconds": 5}
+        }],
+        "imagePullSecrets": [{"name": "registry-creds"}]
+      }
+    }
+  },
+  "status": {
+    "replicas": 3,
+    "readyReplicas": 3,
+    "availableReplicas": 3,
+    "conditions": [
+      {"type": "Available", "status": "True", "lastTransitionTime": "2026-03-31T10:00:00Z"},
+      {"type": "Progressing", "status": "True", "lastTransitionTime": "2026-03-31T10:00:30Z"}
+    ]
+  }
+}

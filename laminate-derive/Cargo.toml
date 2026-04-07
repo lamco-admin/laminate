@@ -1,0 +1,25 @@
+[package]
+name = "laminate-derive"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+authors = ["Greg Lamberson <greg@lamco.io>"]
+description = "Derive macros for the laminate progressive data shaping library"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/lamco-admin/laminate"
+homepage = "https://lamco.ai"
+documentation = "https://docs.rs/laminate-derive"
+keywords = ["laminate", "derive", "serde", "coercion", "deserialization"]
+categories = ["encoding"]
+exclude = ["/tests/"]
+
+[badges]
+maintenance = { status = "actively-developed" }
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2", features = ["full", "extra-traits"] }
+quote = "1"
+proc-macro2 = "1"

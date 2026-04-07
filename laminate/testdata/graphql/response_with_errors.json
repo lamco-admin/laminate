@@ -1,0 +1,26 @@
+{
+  "data": {
+    "user": {
+      "id": "usr_123",
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "posts": [
+        {"id": "post_1", "title": "Hello World", "likes": 42, "published": true},
+        {"id": "post_2", "title": "Second Post", "likes": "17", "published": "true"}
+      ]
+    },
+    "stats": null
+  },
+  "errors": [
+    {
+      "message": "Could not resolve field 'stats'",
+      "locations": [{"line": 5, "column": 3}],
+      "path": ["user", "stats"],
+      "extensions": {"code": "INTERNAL_SERVER_ERROR", "timestamp": "2026-03-31T15:00:00Z"}
+    }
+  ],
+  "extensions": {
+    "tracing": {"duration": 45, "parsing": 2, "validation": 1, "execution": 42},
+    "cacheControl": {"version": 1, "hints": [{"path": ["user"], "maxAge": 300}]}
+  }
+}

@@ -1,0 +1,8 @@
+[
+  {"id": "1", "name": "Widget A", "price": "12.99", "quantity": "100", "in_stock": "true", "weight_kg": "0.5", "category": "hardware"},
+  {"id": "2", "name": "Widget B", "price": "24.50", "quantity": "0", "in_stock": "false", "weight_kg": "1.2", "category": "hardware"},
+  {"id": "3", "name": "Gadget C", "price": "7.99", "quantity": "250", "in_stock": "true", "weight_kg": "0.1", "category": "electronics"},
+  {"id": "4", "name": "Gadget D", "price": "99.00", "quantity": "12", "in_stock": "true", "weight_kg": "2.0", "category": "electronics"},
+  {"id": "5", "name": "Doohickey E", "price": "3.49", "quantity": "1000", "in_stock": "true", "weight_kg": "", "category": "misc"},
+  {"id": "6", "name": "Thingamajig F", "price": "not_a_price", "quantity": "50", "in_stock": "yes", "weight_kg": "0.3", "category": null}
+]

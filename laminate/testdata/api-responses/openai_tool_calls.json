@@ -1,0 +1,37 @@
+{
+  "id": "chatcmpl-toolcall789",
+  "object": "chat.completion",
+  "created": 1711000000,
+  "model": "gpt-4o-2024-08-06",
+  "choices": [{
+    "index": 0,
+    "message": {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_abc123",
+          "type": "function",
+          "function": {
+            "name": "get_weather",
+            "arguments": "{\"city\":\"London\",\"units\":\"celsius\"}"
+          }
+        },
+        {
+          "id": "call_def456",
+          "type": "function",
+          "function": {
+            "name": "search_web",
+            "arguments": "{\"query\":\"rust laminate crate\",\"max_results\":5}"
+          }
+        }
+      ]
+    },
+    "finish_reason": "tool_calls"
+  }],
+  "usage": {
+    "prompt_tokens": 80,
+    "completion_tokens": 45,
+    "total_tokens": 125
+  }
+}
