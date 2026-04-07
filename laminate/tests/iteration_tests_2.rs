@@ -396,7 +396,7 @@ fn iter51_ollama_roundtrip() {
     let adapter = laminate::provider::ollama::OllamaAdapter;
     let emitted = adapter.emit_response(&resp);
     assert_eq!(emitted["model"], "llama3.2:latest");
-    assert!(emitted["done"]);
+    assert_eq!(emitted["done"], true);
 }
 
 // ═══════════════════════════════════════════════════════════════

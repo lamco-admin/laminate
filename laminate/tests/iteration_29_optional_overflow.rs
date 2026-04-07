@@ -35,5 +35,5 @@ fn iter29_optional_overflow_roundtrip() {
     // Round-trip via to_value
     let val = s.to_value();
     assert_eq!(val["id"], "abc");
-    assert!(val["extra_key"]);
+    assert_eq!(val["extra_key"], true);
 }
