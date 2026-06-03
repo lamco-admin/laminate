@@ -1,3 +1,4 @@
+#![allow(clippy::approx_constant)]
 //! Iteration 33: Format — Rust/Python-style underscore numeric separators
 //!
 //! Tests coercion of underscore-formatted numeric strings like "1_000" to

@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 //! Iteration 341: shape_lenient on {} (empty) — all default/optional fields.
 //! GAP: Option<T> without #[laminate(default)] fails with PathNotFound on empty object.
 
@@ -28,7 +29,7 @@ fn shape_lenient_empty_object() {
     let lr = result.unwrap();
     assert_eq!(lr.value.name, "", "String default is empty");
     assert_eq!(lr.value.count, 0, "i64 default is 0");
-    assert_eq!(lr.value.active, false, "bool default is false");
+    assert!(!lr.value.active, "bool default is false");
     assert_eq!(lr.value.tags, None, "Option default is None");
 }
 

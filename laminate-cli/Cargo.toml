@@ -1,6 +1,6 @@
 [package]
 name = "laminate-cli"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.85"
 authors = ["Greg Lamberson <greg@lamco.io>"]
@@ -20,6 +20,6 @@ name = "laminate"
 path = "src/main.rs"
 
 [dependencies]
-laminate = { path = "../laminate", version = "0.1.0", features = ["schema"] }
+laminate = { path = "../laminate", version = "0.1.1", features = ["schema"] }
 clap = { version = "4", features = ["derive"] }
 serde_json = "1"

@@ -28,7 +28,7 @@ fn default_coerce_missing_field() {
 
     assert_eq!(config.name, "app");
     assert_eq!(config.port, 0, "missing → default 0");
-    assert_eq!(config.debug, false, "missing → default false");
+    assert!(!config.debug, "missing → default false");
     assert_eq!(config.label, "", "missing → default empty string");
     assert!(
         diagnostics.is_empty(),
@@ -43,7 +43,7 @@ fn default_coerce_null_field() {
 
     println!("config = {:?}", config);
     assert_eq!(config.port, 0, "null → default 0");
-    assert_eq!(config.debug, false, "null → default false");
+    assert!(!config.debug, "null → default false");
     assert!(diagnostics.is_empty(), "no diagnostics for default on null");
 }
 
@@ -56,7 +56,7 @@ fn default_coerce_coercible_value() {
     println!("diagnostics = {:?}", diagnostics);
 
     assert_eq!(config.port, 8080, "string coerced to i64");
-    assert_eq!(config.debug, true, "string coerced to bool");
+    assert!(config.debug, "string coerced to bool");
     assert!(diagnostics.len() >= 2, "should have coercion diagnostics");
 }
 

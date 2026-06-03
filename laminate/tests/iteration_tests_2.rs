@@ -1,4 +1,4 @@
-#![allow(dead_code, unused_imports, unused_must_use)]
+#![allow(dead_code, unused_imports, unused_must_use, clippy::approx_constant)]
 //! Iteration tests 31-60 from laminate-iterate loop.
 
 use laminate::packs::{currency, time, units};

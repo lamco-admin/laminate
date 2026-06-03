@@ -1,3 +1,4 @@
+#![allow(clippy::type_complexity)]
 #![allow(dead_code, unused_imports, unused_must_use)]
 //! Integration tests against real-world JSON fixtures.
 //!

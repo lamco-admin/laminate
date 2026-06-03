@@ -421,7 +421,11 @@ fn validate_uk_nhs(s: &str) -> ValidationResult {
         return ValidationResult::invalid(digits, "NHS number invalid (check digit would be 10)");
     }
 
-    let expected_check = digits.chars().last().unwrap().to_digit(10).unwrap_or(99);
+    let expected_check = digits
+        .chars()
+        .last()
+        .and_then(|c| c.to_digit(10))
+        .unwrap_or(99);
     if check == expected_check {
         ValidationResult::valid(digits, None)
     } else {

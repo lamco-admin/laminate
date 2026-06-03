@@ -5,7 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - Unreleased
+## [0.1.1] - 2026-06-03
+
+### Changed
+
+- Copyright holder is now **Lamco Development LLC** (`LICENSE-MIT`, `LICENSE-APACHE`).
+
+### Fixed
+
+- `identifiers`: the NHS checksum no longer panics on malformed input — a missing
+  final digit yields the invalid-check sentinel instead of a panic.
+- Internal panic-safety hardening: documented or eliminated the production
+  `unwrap`/`expect` sites, plus small `units` and `streaming` refinements. No
+  public API change.
+
+## [0.1.0] - 2026-04-06
 
 ### Added
 

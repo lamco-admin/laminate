@@ -38,7 +38,7 @@ jobs:
           components: clippy
       - uses: Swatinem/rust-cache@v2
       - name: Clippy (all features)
-        run: cargo clippy --workspace --features laminate/full,laminate-sql/sqlite -- -D warnings
+        run: cargo clippy --workspace --exclude laminate-harness --all-targets --features laminate/full,laminate-sql/sqlite -- -D warnings
 
   fmt:
     name: Formatting
@@ -84,7 +84,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: EmbarkStudios/cargo-deny-action@v2
+      - uses: taiki-e/install-action@v2
         with:
-          command: check
-          arguments: --workspace
+          tool: cargo-deny
+      - run: cargo deny check
+
+  fuzz-smoke:
+    name: Fuzz smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+      - uses: Swatinem/rust-cache@v2
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-fuzz
+      - name: smoke each fuzz target (60s)
+        working-directory: laminate
+        run: |
+          for target in $(cargo fuzz list); do
+            echo "::group::fuzz $target"
+            cargo fuzz run "$target" --target x86_64-unknown-linux-gnu -- -max_total_time=60 -rss_limit_mb=2048
+            echo "::endgroup::"
+          done

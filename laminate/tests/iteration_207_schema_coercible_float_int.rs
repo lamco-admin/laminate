@@ -5,10 +5,9 @@
 //! Float(3.5) → Integer: audit says "not coercible" (TypeMismatch). Correct?
 //! This checks consistency between schema audit classification and runtime coercion.
 
-use laminate::schema::{ExternalConstraint, InferredSchema, JsonType};
+use laminate::schema::InferredSchema;
 use laminate::FlexValue;
 use serde_json::json;
-use std::collections::HashMap;
 
 #[test]
 fn float_3_0_coercible_to_integer_in_audit() {

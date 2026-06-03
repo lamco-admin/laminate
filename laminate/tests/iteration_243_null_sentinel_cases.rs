@@ -108,7 +108,7 @@ fn null_sentinel_bool_default() {
     let val = FlexValue::from(serde_json::json!("null")).with_coercion(CoercionLevel::BestEffort);
 
     let result: bool = val.extract_root().unwrap();
-    assert_eq!(result, false, "'null' → null → false for bool");
+    assert!(!result, "'null' → null → false for bool");
 }
 
 #[test]

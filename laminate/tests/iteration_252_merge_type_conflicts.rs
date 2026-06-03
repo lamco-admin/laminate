@@ -15,7 +15,7 @@ fn merge_scalar_replaced_by_object() {
 
     let merged = base.merge(&overlay);
     let debug: bool = merged.extract("config.debug").unwrap();
-    assert_eq!(debug, true, "object should replace scalar");
+    assert!(debug, "object should replace scalar");
 }
 
 #[test]

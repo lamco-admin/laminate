@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 //! Iteration 335: shape_lenient on {"name": null} — null required field.
 
 use laminate::Laminate;

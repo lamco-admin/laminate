@@ -24,7 +24,7 @@ fn main() {
         "hello world",
     ];
 
-    println!("{:<45} {:<20} {}", "Input", "Top Type", "Confidence");
+    println!("{:<45} {:<20} Confidence", "Input", "Top Type");
     println!("{}", "-".repeat(75));
 
     for sample in &samples {

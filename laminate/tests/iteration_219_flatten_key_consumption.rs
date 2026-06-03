@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 /// Iteration 219: #[laminate(flatten)] — which keys does it consume?
 ///
 /// Target #219: flatten deserializes from remaining map after regular fields

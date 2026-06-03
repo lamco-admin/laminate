@@ -1,3 +1,4 @@
+#![allow(clippy::approx_constant)]
 //! Iteration 177: each_iter() preserves data_source after fix in iteration 176.
 
 use laminate::value::SourceHint;

@@ -3,13 +3,13 @@
 //! Demonstrates: SourceHint::Csv, pack coercion for currency/units,
 //! guess_type() for unknown columns, batch date detection.
 
-use laminate::detect::{guess_type, GuessedType};
+use laminate::detect::guess_type;
 use laminate::value::SourceHint;
 use laminate::FlexValue;
 
 fn main() {
     // Simulated CSV data (all values are strings — typical of CSV)
-    let rows = vec![
+    let rows = [
         r#"{"price": "$12.99", "weight": "2.5 kg", "date": "03/15/2026", "active": "yes"}"#,
         r#"{"price": "$24.50", "weight": "1.0 kg", "date": "03/16/2026", "active": "no"}"#,
         r#"{"price": "$7.99", "weight": "0.5 kg", "date": "03/17/2026", "active": "true"}"#,
@@ -50,9 +50,8 @@ fn main() {
 
     // Batch date format detection
     println!("\n=== Batch date disambiguation ===\n");
-    let dates = vec!["03/15/2026", "03/16/2026", "13/04/2026"];
-    let info =
-        laminate::packs::time::detect_column_format(&dates.iter().map(|s| *s).collect::<Vec<_>>());
+    let dates = ["03/15/2026", "03/16/2026", "13/04/2026"];
+    let info = laminate::packs::time::detect_column_format(&dates);
     println!("Dominant format: {:?}", info.dominant_format);
     println!("Date percentage: {:.0}%", info.date_percentage * 100.0);
     println!(

@@ -1,3 +1,4 @@
+#![allow(clippy::approx_constant)]
 //! Iteration 288 — Coerce-WhitespaceInNumber
 //! Whitespace around numbers is trimmed before parsing (PASS)
 

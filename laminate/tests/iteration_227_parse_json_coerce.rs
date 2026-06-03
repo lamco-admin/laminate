@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 /// Iteration 227: #[laminate(parse_json_string, coerce)] — parse then coerce
 ///
 /// Target #227: When parse_json_string and coerce are combined, the macro

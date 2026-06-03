@@ -116,7 +116,7 @@ fn default_field_serialized_in_output() {
     let json = serde_json::json!({"name": "Charlie", "age": 35});
 
     let (original, _) = RoundTrip::from_flex_value(&json).unwrap();
-    assert_eq!(original.active, false, "default should be false");
+    assert!(!original.active, "default should be false");
 
     let serialized = original.to_value();
     let obj = serialized.as_object().unwrap();

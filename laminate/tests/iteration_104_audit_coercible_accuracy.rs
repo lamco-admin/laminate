@@ -1,4 +1,5 @@
 #![cfg(feature = "schema")]
+#![allow(clippy::approx_constant)]
 /// Iteration 104: Schema audit — fractional Float→Integer is a violation, not coercible
 ///
 /// is_coercible blindly returned true for Float→Integer. Now

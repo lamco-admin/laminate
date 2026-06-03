@@ -1,3 +1,4 @@
+#![allow(clippy::unnecessary_unwrap)]
 #![allow(dead_code, unused_imports, unused_must_use)]
 //! Iteration tests from laminate-iterate loop.
 //! 30 iterations covering all 10 scenario categories.
@@ -105,7 +106,7 @@ fn iter04_schema_max_drift() {
     let schema = InferredSchema::from_values(&rows);
     assert_eq!(schema.fields.len(), 4);
     // Every field has 75% absent rate
-    for (_, defn) in &schema.fields {
+    for defn in schema.fields.values() {
         assert_eq!(defn.present_count, 1);
         assert_eq!(defn.absent_count, 3);
     }

@@ -1,3 +1,4 @@
+#![allow(clippy::empty_line_after_doc_comments)]
 use laminate::schema::{InferredSchema, JsonType, ViolationKind};
 use serde_json::Value;
 

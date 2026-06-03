@@ -1,3 +1,4 @@
+#![allow(clippy::approx_constant)]
 // Iteration 164: with_mode::<Absorbing>() + extract — SafeWidening coercion level
 // Target #135 — Absorbing mode uses SafeWidening, which allows int→float
 // but rejects string→number. Verify extract() actually enforces this.

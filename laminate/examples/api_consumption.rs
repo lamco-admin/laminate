@@ -3,7 +3,7 @@
 //! Demonstrates: type coercion, path navigation, derive macro with overflow,
 //! and diagnostics for auditing what was coerced.
 
-use laminate::{FlexValue, Laminate};
+use laminate::Laminate;
 use std::collections::HashMap;
 
 #[derive(Debug, Laminate)]

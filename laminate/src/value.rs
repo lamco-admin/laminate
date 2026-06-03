@@ -243,8 +243,8 @@ impl FlexValue {
                             {
                                 if let Ok(parsed) = serde_json::from_str::<Value>(s) {
                                     parsed_holder = Some(parsed);
-                                    // SAFETY: just assigned Some above
-                                    current = parsed_holder.as_ref().unwrap();
+                                    current =
+                                        parsed_holder.as_ref().expect("just assigned Some above");
                                     // Now retry this segment on the parsed value
                                     current = current.get(key.as_str()).ok_or_else(|| {
                                         FlexError::PathNotFound {
@@ -275,8 +275,8 @@ impl FlexValue {
                             if trimmed.starts_with('[') && trimmed.ends_with(']') {
                                 if let Ok(parsed) = serde_json::from_str::<Value>(s) {
                                     parsed_holder = Some(parsed);
-                                    // SAFETY: just assigned Some above
-                                    current = parsed_holder.as_ref().unwrap();
+                                    current =
+                                        parsed_holder.as_ref().expect("just assigned Some above");
                                     let arr = current.as_array().ok_or_else(|| {
                                         FlexError::TypeMismatch {
                                             path: path_up_to(&segments, i, path),
@@ -863,8 +863,9 @@ fn set_at_path(root: &mut Value, segments: &[crate::path::Segment], value: Value
                     return;
                 }
             }
-            // SAFETY: matched Object above (or just assigned Object from Null)
-            let obj = root.as_object_mut().unwrap();
+            let obj = root
+                .as_object_mut()
+                .expect("matched Object above (or just assigned Object from Null)");
             if segments.len() == 1 {
                 obj.insert(key.clone(), value);
             } else {
@@ -888,8 +889,9 @@ fn set_at_path(root: &mut Value, segments: &[crate::path::Segment], value: Value
                     return;
                 }
             }
-            // SAFETY: matched Array above (or just assigned Array from Null)
-            let arr = root.as_array_mut().unwrap();
+            let arr = root
+                .as_array_mut()
+                .expect("matched Array above (or just assigned Array from Null)");
             while arr.len() <= *idx {
                 arr.push(Value::Null);
             }

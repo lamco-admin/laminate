@@ -1,3 +1,4 @@
+#![allow(clippy::empty_line_after_doc_comments, clippy::too_many_arguments)]
 #![recursion_limit = "512"]
 use laminate::schema::{InferredSchema, JsonType};
 use serde_json::json;

@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 /// Iteration 223: #[laminate(parse_json_string)] on stringified JSON
 ///
 /// Target #223: When a JSON value is a string containing valid JSON, the

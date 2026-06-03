@@ -1,6 +1,6 @@
 [package]
 name = "laminate-sql"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.85"
 authors = ["Greg Lamberson <greg@lamco.io>"]
@@ -24,7 +24,7 @@ mysql = ["sqlx/mysql"]
 all-databases = ["postgres", "sqlite", "mysql"]
 
 [dependencies]
-laminate = { path = "../laminate", version = "0.1.0", features = ["schema"] }
+laminate = { path = "../laminate", version = "0.1.1", features = ["schema"] }
 async-trait = "0.1"
 serde_json = "1"
 thiserror = "2"

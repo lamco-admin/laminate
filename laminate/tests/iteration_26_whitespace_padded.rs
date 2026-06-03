@@ -1,3 +1,4 @@
+#![allow(clippy::approx_constant)]
 //! Iteration 26: GAP — whitespace-padded numeric strings failed to coerce
 //! "  42  ", "\t7\t", "  3.14  " all produced opaque serde errors.
 //! Fix: Added .trim() at top of String→Numeric, String→Float, and String→Bool arms.

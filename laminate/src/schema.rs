@@ -334,8 +334,9 @@ impl InferredSchema {
             if let Value::Object(obj) = row {
                 // Check each expected field
                 for (field_name, defn) in &self.fields {
-                    // SAFETY: entry ensured above for all fields
-                    let stats = field_stats.get_mut(field_name).unwrap();
+                    let stats = field_stats
+                        .get_mut(field_name)
+                        .expect("entry ensured above for all fields");
                     let effective_type = self.effective_type(defn);
                     let is_required = self.is_field_required(defn);
 

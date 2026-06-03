@@ -155,14 +155,12 @@ impl MessageSnapshot {
                 content,
                 block_type,
                 ..
-            } => {
-                if block_type == "tool_use" || block_type == "function" {
-                    self.tool_calls.push((
-                        id.clone(),
-                        name.clone().unwrap_or_default(),
-                        content.clone(),
-                    ));
-                }
+            } if block_type == "tool_use" || block_type == "function" => {
+                self.tool_calls.push((
+                    id.clone(),
+                    name.clone().unwrap_or_default(),
+                    content.clone(),
+                ));
             }
             StreamEvent::Stop(reason) => {
                 self.stop_reason = Some(reason.clone());

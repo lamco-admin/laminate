@@ -124,7 +124,7 @@ fn all_attributes_with_coercion() {
     println!("diagnostics: {:?}", diags);
 
     assert_eq!(result.score, 88.0, "string '88' should coerce to f64");
-    assert_eq!(result.active, true, "'yes' should coerce to true");
+    assert!(result.active, "'yes' should coerce to true");
 }
 
 #[test]

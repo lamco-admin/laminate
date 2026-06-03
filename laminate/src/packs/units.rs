@@ -457,7 +457,7 @@ pub fn parse_unit_value(s: &str) -> Option<UnitValue> {
 
     // Try each known unit pattern (longest first to avoid "m" matching before "mm")
     let mut patterns: Vec<_> = UNIT_PATTERNS.iter().collect();
-    patterns.sort_by(|a, b| b.0.len().cmp(&a.0.len()));
+    patterns.sort_by_key(|p| std::cmp::Reverse(p.0.len()));
 
     for (suffix, normalized, category) in &patterns {
         if s.ends_with(suffix) {

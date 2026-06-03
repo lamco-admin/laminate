@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 /// Iteration 224: #[laminate(parse_json_string)] on non-JSON string
 ///
 /// Target #224: When parse_json_string gets a string that isn't valid JSON,

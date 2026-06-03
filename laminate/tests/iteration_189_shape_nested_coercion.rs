@@ -1,3 +1,4 @@
+#![allow(clippy::approx_constant)]
 #![allow(dead_code)]
 //! Iteration 189: shape on nested path with Absorbing mode.
 //!

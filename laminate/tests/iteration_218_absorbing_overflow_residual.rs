@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use laminate::Laminate;
 /// Iteration 218: shape_absorbing overflow residual is always empty
 ///

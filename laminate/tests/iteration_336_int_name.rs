@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 //! Iteration 336: shape_lenient on {"name": 42, "port": 8080} — coerce int→string?
 
 use laminate::Laminate;

@@ -23,7 +23,7 @@ fn json_values_approx_eq(a: &serde_json::Value, b: &serde_json::Value) -> bool {
             ao.len() == bo.len()
                 && ao
                     .iter()
-                    .all(|(k, v)| bo.get(k).map_or(false, |bv| json_values_approx_eq(v, bv)))
+                    .all(|(k, v)| bo.get(k).is_some_and(|bv| json_values_approx_eq(v, bv)))
         }
         _ => a == b,
     }

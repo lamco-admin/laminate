@@ -123,8 +123,8 @@ fn currency_extract_as_string_preserves_original() {
 #[test]
 fn currency_precision_cents() {
     // Verify that currency amounts preserve cent precision
-    let amounts = vec!["$0.01", "$0.99", "$999.99", "$1,000,000.01"];
-    let expected = vec![0.01, 0.99, 999.99, 1_000_000.01];
+    let amounts = ["$0.01", "$0.99", "$999.99", "$1,000,000.01"];
+    let expected = [0.01, 0.99, 999.99, 1_000_000.01];
 
     for (s, exp) in amounts.iter().zip(expected.iter()) {
         let val = FlexValue::from(serde_json::json!(s))

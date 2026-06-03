@@ -63,7 +63,7 @@ fn merge_stress_shared_keys_take_b_value() {
     // Spot-check first, middle, last shared keys
     for i in [0usize, 249, 499] {
         let key = format!("shared_{i:04}");
-        let expected = (i as i64 * 10 + 1) as i64; // b's value
+        let expected = i as i64 * 10 + 1; // b's value
         let got: i64 = merged
             .extract(&key)
             .unwrap_or_else(|e| panic!("key {key} missing: {e}"));

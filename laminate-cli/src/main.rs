@@ -171,7 +171,11 @@ fn cmd_infer(source: &str, required_threshold: f64, format: &str) {
                 "total_records": schema.total_records,
                 "fields": fields,
             });
-            println!("{}", serde_json::to_string_pretty(&output).unwrap());
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&output)
+                    .expect("serializing a JSON value never fails")
+            );
         }
         _ => {
             println!("Schema inferred from {} records:\n", schema.total_records);

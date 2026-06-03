@@ -1,3 +1,4 @@
+#![allow(clippy::doc_lazy_continuation)]
 #![allow(dead_code)]
 //! Iteration 217: #[laminate(overflow)] as Option<HashMap>.
 //!

@@ -114,7 +114,7 @@ fn to_snake_case(s: &str) -> String {
             if i > 0 {
                 result.push('_');
             }
-            result.push(ch.to_lowercase().next().unwrap());
+            result.push(ch.to_lowercase().next().unwrap_or(ch));
         } else {
             result.push(ch);
         }
@@ -164,7 +164,10 @@ pub fn expand_tool_definition(input: DeriveInput) -> Result<TokenStream> {
     let mut required_names = Vec::new();
 
     for field in fields {
-        let field_ident = field.ident.as_ref().unwrap();
+        let field_ident = field
+            .ident
+            .as_ref()
+            .expect("derive requires named struct fields");
         let field_attrs = ToolAttrs::parse(&field.attrs);
 
         // Parameter name: explicit rename or field name
