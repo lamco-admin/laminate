@@ -1,13 +1,12 @@
 [package]
 name = "laminate-sql"
-version = "0.1.1"
+version = "0.4.0"
 edition = "2021"
 rust-version = "1.85"
-authors = ["Greg Lamberson <greg@lamco.io>"]
 description = "Database connectors for laminate — PostgreSQL, SQLite, MySQL data sources"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/lamco-admin/laminate"
-homepage = "https://lamco.ai"
+homepage = "https://lamco.ai/open-source/laminate/"
 documentation = "https://docs.rs/laminate-sql"
 keywords = ["laminate", "database", "sql", "data-source", "etl"]
 categories = ["database", "encoding"]
@@ -24,7 +23,7 @@ mysql = ["sqlx/mysql"]
 all-databases = ["postgres", "sqlite", "mysql"]
 
 [dependencies]
-laminate = { path = "../laminate", version = "0.1.1", features = ["schema"] }
+laminate = { path = "../laminate", version = "0.4.0", features = ["schema"] }
 async-trait = "0.1"
 serde_json = "1"
 thiserror = "2"

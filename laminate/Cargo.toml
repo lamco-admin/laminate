@@ -1,13 +1,12 @@
 [package]
 name = "laminate"
-version = "0.1.1"
+version = "0.4.0"
 edition = "2021"
 rust-version = "1.85"
-authors = ["Greg Lamberson <greg@lamco.io>"]
 description = "Progressive data shaping for Rust — type coercion, format detection, and fault-tolerant deserialization built on serde"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/lamco-admin/laminate"
-homepage = "https://lamco.ai"
+homepage = "https://lamco.ai/open-source/laminate/"
 documentation = "https://docs.rs/laminate"
 readme = "../README.md"
 keywords = ["serde", "json", "coercion", "flexible", "deserialization"]
@@ -40,12 +39,12 @@ uom-integration = ["dep:uom"]         # Unit values → type-safe dimensional an
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 thiserror = "2"
-laminate-derive = { path = "../laminate-derive", version = "0.1.1", optional = true }
+laminate-derive = { path = "../laminate-derive", version = "0.4.0", optional = true }
 chrono = { version = "0.4", optional = true }
 uom = { version = "0.36", default-features = false, features = ["f64", "si"], optional = true }
 
 [dev-dependencies]
-laminate-derive = { path = "../laminate-derive", version = "0.1.1" }
+laminate-derive = { path = "../laminate-derive", version = "0.4.0" }
 tokio = { version = "1", features = ["macros", "rt"] }
 criterion = { version = "0.5", features = ["html_reports"] }
 proptest = "1"
@@ -53,3 +52,7 @@ proptest = "1"
 [[bench]]
 name = "core"
 harness = false
+
+[[example]]
+name = "llm_tool_call"
+required-features = ["derive", "providers"]

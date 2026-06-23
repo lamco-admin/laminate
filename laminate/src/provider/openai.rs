@@ -208,7 +208,12 @@ fn parse_openai_usage(body: &FlexValue) -> Usage {
     if let Ok(output) = body.extract::<u64>("usage.completion_tokens") {
         usage.output_tokens = output;
     }
-    // OpenAI doesn't have cache tokens in the standard API (yet)
+    // OpenAI reports prompt-cache hits under usage.prompt_tokens_details.cached_tokens
+    // (issue #6). There is no separate cache-creation count as in Anthropic, so
+    // cache_creation_tokens stays None.
+    if let Ok(cached) = body.extract::<u64>("usage.prompt_tokens_details.cached_tokens") {
+        usage.cache_read_tokens = Some(cached);
+    }
 
     usage
 }
@@ -367,5 +372,32 @@ mod tests {
 
         let resp = parse_openai_response(&raw).unwrap();
         assert_eq!(resp.stop_reason, StopReason::MaxTokens);
+    }
+
+    #[test]
+    fn parse_cached_prompt_tokens() {
+        // Issue #6: OpenAI's cached prompt tokens map into Usage.cache_read_tokens.
+        let raw = FlexValue::from_json(
+            r#"{
+                "id": "chatcmpl-cache",
+                "model": "gpt-4o",
+                "choices": [{
+                    "index": 0,
+                    "message": {"role": "assistant", "content": "Hi"},
+                    "finish_reason": "stop"
+                }],
+                "usage": {
+                    "prompt_tokens": 1000,
+                    "completion_tokens": 20,
+                    "prompt_tokens_details": {"cached_tokens": 768}
+                }
+            }"#,
+        )
+        .unwrap();
+
+        let resp = parse_openai_response(&raw).unwrap();
+        assert_eq!(resp.usage.input_tokens, 1000);
+        assert_eq!(resp.usage.cache_read_tokens, Some(768));
+        assert_eq!(resp.usage.cache_creation_tokens, None);
     }
 }

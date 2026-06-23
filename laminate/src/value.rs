@@ -127,6 +127,24 @@ impl FlexValue {
         Ok(Self::new(value))
     }
 
+    /// Parse JSON embedded in an LLM text response.
+    ///
+    /// LLM outputs frequently wrap JSON in Markdown code fences or surround it
+    /// with prose (`Sure, here's the JSON: { ... }`). This is an **opt-in**
+    /// convenience that locates the JSON payload before parsing. Resolution
+    /// order:
+    ///
+    /// 1. the contents of the first fenced code block, if any;
+    /// 2. otherwise the first balanced JSON object or array embedded in the text
+    ///    (string-aware, so braces inside string values are ignored);
+    /// 3. otherwise the whole trimmed input.
+    ///
+    /// [`from_json`](Self::from_json) is unaffected and remains strict — prefer
+    /// it when you control the input and want exact JSON.
+    pub fn from_llm_response(text: &str) -> Result<Self> {
+        Self::from_json(extract_json_payload(text))
+    }
+
     /// Set the coercion level for this value and all values navigated from it.
     pub fn with_coercion(mut self, level: CoercionLevel) -> Self {
         self.coercion = level;
@@ -1015,6 +1033,70 @@ fn value_type_name(v: &Value) -> &'static str {
         Value::Array(_) => "array",
         Value::Object(_) => "object",
     }
+}
+
+/// Locate the JSON payload inside an LLM text response, returning a slice of the
+/// input. Falls back to the trimmed input when nothing more specific is found.
+fn extract_json_payload(text: &str) -> &str {
+    let text = text.strip_prefix('\u{FEFF}').unwrap_or(text);
+    if let Some(inner) = extract_fenced_block(text) {
+        return inner;
+    }
+    if let Some(span) = first_json_span(text) {
+        return span;
+    }
+    text.trim()
+}
+
+/// If the text contains a Markdown fenced code block (delimited by triple
+/// backticks), return the trimmed slice between the opening and closing fence,
+/// dropping an optional info-string (e.g. a language tag) on the opening line.
+fn extract_fenced_block(text: &str) -> Option<&str> {
+    let fence = "```";
+    let open = text.find(fence)?;
+    let after = &text[open + fence.len()..];
+    let close_rel = after.find(fence)?;
+    let mut inner = &after[..close_rel];
+    if let Some(nl) = inner.find('\n') {
+        let first_line = inner[..nl].trim();
+        if !first_line.contains('{') && !first_line.contains('[') {
+            inner = &inner[nl + 1..];
+        }
+    }
+    Some(inner.trim())
+}
+
+/// Find the first balanced JSON object or array embedded in `text`, ignoring
+/// braces/brackets that appear inside JSON string literals. Returns the slice.
+fn first_json_span(text: &str) -> Option<&str> {
+    let bytes = text.as_bytes();
+    let start = bytes.iter().position(|&b| b == b'{' || b == b'[')?;
+    let open = bytes[start];
+    let close = if open == b'{' { b'}' } else { b']' };
+    let mut depth = 0i32;
+    let mut in_str = false;
+    let mut escaped = false;
+    for (i, &b) in bytes.iter().enumerate().skip(start) {
+        if in_str {
+            if escaped {
+                escaped = false;
+            } else if b == b'\\' {
+                escaped = true;
+            } else if b == b'"' {
+                in_str = false;
+            }
+        } else if b == b'"' {
+            in_str = true;
+        } else if b == open {
+            depth += 1;
+        } else if b == close {
+            depth -= 1;
+            if depth == 0 {
+                return Some(&text[start..=i]);
+            }
+        }
+    }
+    None
 }
 
 #[cfg(test)]

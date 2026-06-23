@@ -6,6 +6,8 @@
 [![Docs.rs](https://docs.rs/laminate/badge.svg)](https://docs.rs/laminate)
 [![License](https://img.shields.io/crates/l/laminate.svg)](LICENSE)
 
+**[Website](https://lamco.ai/open-source/laminate/) · [Documentation](https://docs.rs/laminate) · [crates.io](https://crates.io/crates/laminate) · [Source](https://github.com/lamco-admin/laminate)**
+
 ## Why This Exists
 
 Rust has excellent AI/ML inference libraries (candle, burn, ort) but **no good way to handle the messy JSON that LLM APIs actually return.** Anthropic stringifies tool call arguments. OpenAI streams fragments across dozens of SSE events. Ollama uses a different response shape entirely. Schema changes arrive without warning. And serde — Rust's serialization workhorse — fails on the first unexpected field.
@@ -284,12 +286,12 @@ Six built-in domain packs, always compiled (no feature flags needed):
 
 ```toml
 [dependencies]
-laminate = "0.1"                          # Core: FlexValue, coercion, modes
-laminate = { version = "0.1", features = ["derive"] }     # + #[derive(Laminate)]
-laminate = { version = "0.1", features = ["full"] }       # Everything
+laminate = "0.4"                          # Core: FlexValue, coercion, modes
+laminate = { version = "0.4", features = ["derive"] }     # + #[derive(Laminate)]
+laminate = { version = "0.4", features = ["full"] }       # Everything
 
 # Optional: database sources
-laminate-sql = { version = "0.1", features = ["sqlite"] }
+laminate-sql = { version = "0.4", features = ["sqlite"] }
 ```
 
 | Feature | What It Adds |
@@ -334,8 +336,17 @@ overridden object → number at 'config' [Warning: nested data lost]
 
 ## License
 
-[License details]
+Licensed under either of [Apache License, Version 2.0](LICENSE-APACHE) or
+[MIT license](LICENSE-MIT) at your option.
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this crate by you, as defined in the Apache-2.0 license, shall
+be dual licensed as above, without any additional terms or conditions.
+
+© Lamco Development LLC.
 
 ## Contributing
 
-[Contributing guidelines]
+Issues and pull requests are welcome at
+[github.com/lamco-admin/laminate](https://github.com/lamco-admin/laminate).
+Please run `cargo test`, `cargo clippy`, and `cargo fmt` before submitting.

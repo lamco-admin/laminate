@@ -1,13 +1,12 @@
 [package]
 name = "laminate-derive"
-version = "0.1.1"
+version = "0.4.0"
 edition = "2021"
 rust-version = "1.85"
-authors = ["Greg Lamberson <greg@lamco.io>"]
 description = "Derive macros for the laminate progressive data shaping library"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/lamco-admin/laminate"
-homepage = "https://lamco.ai"
+homepage = "https://lamco.ai/open-source/laminate/"
 documentation = "https://docs.rs/laminate-derive"
 keywords = ["laminate", "derive", "serde", "coercion", "deserialization"]
 categories = ["encoding"]

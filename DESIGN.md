@@ -1195,6 +1195,10 @@ Every feature should have tests parsing these fixtures and asserting correct ext
 
 ## Adoption & Marketing Strategy **[PLANNED]**
 
+> **▶ Outreach and case-study work is now governed by `OUTREACH-ROADMAP.md`**
+> (laminate-dev root, authoritative, 2026-06-21). The positioning notes below
+> remain background reference.
+
 ### Organic Adoption Path
 
 1. **crates.io presence** — name `laminate` is available, strong SEO

@@ -5,6 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-06-23
+
+### Added
+
+- `#[derive(Laminate)]` now supports string-valued **enums**: unit variants match
+  by name (or `#[laminate(rename = "...")]`), and an optional
+  `#[laminate(unknown)]` newtype variant (e.g. `Unknown(String)`) captures an
+  unrecognized value with a diagnostic instead of erroring. ([#2])
+- `FlexValue::from_llm_response` — an opt-in entry point that locates a JSON
+  payload inside LLM text output (Markdown code fences, or JSON embedded in
+  prose, string-aware) before parsing. `from_json` remains strict. ([#3])
+- Derived types also expose `from_llm_response(text)` for one-call shaping
+  directly from LLM text (payload extraction + shaping). ([#12])
+- `Usage.cache_read_tokens` is now populated from OpenAI's
+  `usage.prompt_tokens_details.cached_tokens`. The OpenAI API has no
+  cache-creation count, so `cache_creation_tokens` stays `None`. ([#6])
+- `examples/llm_tool_call.rs`, a runnable end-to-end example that parses an
+  OpenAI-compatible response and an Anthropic response with the same shaping
+  code. Requires the `derive` and `providers` features. ([#11])
+
+### Changed
+
+- A plain `#[laminate(default)]` field now records a `Defaulted` diagnostic when
+  it fills a missing or null field. Previously only the `coerce` path did. ([#4])
+
+### Fixed
+
+- `shape_absorbing()` now populates the `LaminateResult<T, Absorbing>` overflow
+  **residual** from the struct's `#[laminate(overflow)]` field. It was previously
+  always empty (unknown fields were still captured in the struct field, so no
+  data was lost). ([#1])
+- The Ollama adapter no longer reuses one tool-call id when a single tool is
+  called more than once. Ids are unique per call. A backend-supplied id is used
+  when present, otherwise one is synthesized from the call's position. ([#9])
+
+[#1]: https://github.com/lamco-admin/laminate/issues/1
+[#2]: https://github.com/lamco-admin/laminate/issues/2
+[#3]: https://github.com/lamco-admin/laminate/issues/3
+[#4]: https://github.com/lamco-admin/laminate/issues/4
+[#6]: https://github.com/lamco-admin/laminate/issues/6
+[#9]: https://github.com/lamco-admin/laminate/issues/9
+[#11]: https://github.com/lamco-admin/laminate/issues/11
+[#12]: https://github.com/lamco-admin/laminate/issues/12
+
 ## [0.1.1] - 2026-06-03
 
 ### Changed

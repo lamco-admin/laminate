@@ -934,7 +934,7 @@ dependencies = [
 
 [[package]]
 name = "laminate"
-version = "0.1.1"
+version = "0.4.0"
 dependencies = [
  "chrono",
  "criterion",
@@ -949,7 +949,7 @@ dependencies = [
 
 [[package]]
 name = "laminate-cli"
-version = "0.1.1"
+version = "0.4.0"
 dependencies = [
  "clap",
  "laminate",
@@ -958,7 +958,7 @@ dependencies = [
 
 [[package]]
 name = "laminate-derive"
-version = "0.1.1"
+version = "0.4.0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -967,7 +967,7 @@ dependencies = [
 
 [[package]]
 name = "laminate-sql"
-version = "0.1.1"
+version = "0.4.0"
 dependencies = [
  "async-trait",
  "laminate",

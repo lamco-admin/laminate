@@ -2,3 +2,4 @@
 *.proptest-regressions
 results/
 iteration-runner.log
+.research-session-ids.json

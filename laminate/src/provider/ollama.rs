@@ -101,13 +101,18 @@ pub fn parse_ollama_response(body: &FlexValue) -> Result<NormalizedResponse> {
     }
 
     // Tool calls (Ollama 0.5+ — arguments are objects, not stringified JSON)
-    for tc in body.each("message.tool_calls") {
+    for (index, tc) in body.each("message.tool_calls").into_iter().enumerate() {
         let name: String = tc.extract("function.name")?;
         let input = tc
             .at("function.arguments")
             .unwrap_or_else(|_| FlexValue::new(serde_json::json!({})));
-        // Ollama doesn't provide tool call IDs — generate one from name
-        let tool_id = format!("ollama_{}", name);
+        // Ollama's native API does not supply tool-call IDs. Prefer one if a backend
+        // provides it; otherwise synthesize a unique id from the call's position, so
+        // repeated calls to the same tool do not collide (issue #9).
+        let tool_id = tc
+            .maybe::<String>("id")?
+            .filter(|s| !s.is_empty())
+            .unwrap_or_else(|| format!("ollama_{name}_{index}"));
         content.push(ContentBlock::ToolUse {
             id: tool_id,
             name,
@@ -188,6 +193,36 @@ mod tests {
 
         let resp = parse_ollama_response(&raw).unwrap();
         assert_eq!(resp.stop_reason, StopReason::MaxTokens);
+    }
+
+    #[test]
+    fn repeated_tool_calls_get_unique_ids() {
+        // Issue #9: one tool called twice must not produce colliding ids.
+        let raw = FlexValue::from_json(
+            r#"{
+                "model": "llama3.2:latest",
+                "message": {
+                    "role": "assistant",
+                    "content": "",
+                    "tool_calls": [
+                        {"function": {"name": "get_weather", "arguments": {"city": "London"}}},
+                        {"function": {"name": "get_weather", "arguments": {"city": "Paris"}}}
+                    ]
+                },
+                "done": true,
+                "done_reason": "stop"
+            }"#,
+        )
+        .unwrap();
+
+        let resp = parse_ollama_response(&raw).unwrap();
+        let ids: Vec<&str> = resp
+            .content
+            .iter()
+            .filter_map(|b| b.as_tool_use().map(|(id, _, _)| id))
+            .collect();
+        assert_eq!(ids.len(), 2);
+        assert_ne!(ids[0], ids[1], "repeated tool calls must have unique ids");
     }
 
     #[test]

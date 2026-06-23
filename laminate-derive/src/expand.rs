@@ -98,6 +98,43 @@ fn parse_field_attrs(field: &syn::Field) -> Result<FieldAttrs> {
     Ok(attrs)
 }
 
+/// Variant-level attributes parsed from `#[laminate(...)]` on an enum variant.
+struct VariantAttrs {
+    /// Match this string instead of the variant's name.
+    rename: Option<String>,
+    /// This variant captures an unrecognized value (newtype `V(String)`).
+    unknown: bool,
+}
+
+fn parse_variant_attrs(variant: &syn::Variant) -> Result<VariantAttrs> {
+    let mut va = VariantAttrs {
+        rename: None,
+        unknown: false,
+    };
+    for attr in &variant.attrs {
+        if !attr.path().is_ident("laminate") {
+            continue;
+        }
+        attr.parse_nested_meta(|meta| {
+            if meta.path.is_ident("rename") {
+                let value = meta.value()?;
+                let lit: Lit = value.parse()?;
+                if let Lit::Str(s) = lit {
+                    va.rename = Some(s.value());
+                }
+                Ok(())
+            } else if meta.path.is_ident("unknown") {
+                va.unknown = true;
+                Ok(())
+            } else {
+                Err(meta
+                    .error("unknown laminate variant attribute (expected `rename` or `unknown`)"))
+            }
+        })?;
+    }
+    Ok(va)
+}
+
 pub fn expand_laminate(input: DeriveInput) -> Result<TokenStream> {
     let name = &input.ident;
     let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
@@ -112,10 +149,11 @@ pub fn expand_laminate(input: DeriveInput) -> Result<TokenStream> {
                 ));
             }
         },
-        _ => {
+        Data::Enum(data) => return expand_enum(&input, data),
+        Data::Union(_) => {
             return Err(Error::new_spanned(
                 name,
-                "Laminate can only be derived for structs",
+                "Laminate cannot be derived for unions",
             ));
         }
     };
@@ -507,11 +545,23 @@ pub fn expand_laminate(input: DeriveInput) -> Result<TokenStream> {
                     }
                 }
             } else if attrs.has_default {
-                // Use Default::default() if missing
+                // Use Default::default() if missing or null, recording a Defaulted diagnostic.
                 quote! {
                     match map.remove(#json_key) {
                         Some(::serde_json::Value::Null) | None => {
-                            <#ty as Default>::default()
+                            let __defaulted = <#ty as Default>::default();
+                            _diagnostics.push(::laminate::Diagnostic {
+                                path: #json_key.to_string(),
+                                kind: ::laminate::DiagnosticKind::Defaulted {
+                                    field: #json_key.to_string(),
+                                    value: ::serde_json::to_value(&__defaulted)
+                                        .map(|v| v.to_string())
+                                        .unwrap_or_else(|_| "null".to_string()),
+                                },
+                                risk: ::laminate::RiskLevel::Info,
+                                suggestion: None,
+                            });
+                            __defaulted
                         }
                         Some(val) => {
                             #preprocess
@@ -617,6 +667,20 @@ pub fn expand_laminate(input: DeriveInput) -> Result<TokenStream> {
         v
     };
 
+    // Overflow residual for shape_absorbing(): pull the captured unknown fields
+    // out of the shaped struct's `#[laminate(overflow)]` field so the
+    // `LaminateResult<T, Absorbing>` residual reflects them (mode.rs documents the
+    // Absorbing residual as `Overflow`). Empty when the struct has no overflow field.
+    let absorbing_overflow = if let Some((ref overflow_ident, is_option)) = overflow_field {
+        if is_option {
+            quote! { let overflow = shaped.#overflow_ident.clone().unwrap_or_default(); }
+        } else {
+            quote! { let overflow = shaped.#overflow_ident.clone(); }
+        }
+    } else {
+        quote! { let overflow = ::std::collections::HashMap::new(); }
+    };
+
     let expanded = quote! {
         impl #impl_generics #name #ty_generics #where_clause {
             /// Deserialize from a `serde_json::Value` using laminate's flexible shaping.
@@ -673,6 +737,16 @@ pub fn expand_laminate(input: DeriveInput) -> Result<TokenStream> {
                 Self::from_flex_value(&value)
             }
 
+            /// Shape from an LLM text response, extracting the JSON payload
+            /// (Markdown code fences, or JSON embedded in prose) before shaping.
+            /// See `FlexValue::from_llm_response`.
+            pub fn from_llm_response(
+                text: &str,
+            ) -> ::laminate::Result<(Self, Vec<::laminate::Diagnostic>)> {
+                let __fv = ::laminate::FlexValue::from_llm_response(text)?;
+                Self::from_flex_value(__fv.raw())
+            }
+
             /// Shape with a specific mode, returning `LaminateResult`.
             ///
             /// The mode controls coercion level, unknown field handling,
@@ -692,8 +766,8 @@ pub fn expand_laminate(input: DeriveInput) -> Result<TokenStream> {
                 value: &::serde_json::Value,
             ) -> ::laminate::Result<::laminate::LaminateResult<Self, ::laminate::Absorbing>> {
                 let (shaped, diagnostics) = Self::from_flex_value(value)?;
-                // Extract overflow from the shaped value if it has an overflow field
-                let overflow = ::std::collections::HashMap::new();
+                // Reflect the struct's captured overflow into the Absorbing residual.
+                #absorbing_overflow
                 Ok(::laminate::LaminateResult::absorbing(shaped, overflow, diagnostics))
             }
 
@@ -844,4 +918,173 @@ pub fn expand_laminate(input: DeriveInput) -> Result<TokenStream> {
     };
 
     Ok(combined)
+}
+
+/// Generate the `Laminate` impl for a string-valued enum.
+///
+/// First-cut scope: unit variants matched by name (or `#[laminate(rename)]`),
+/// plus one optional `#[laminate(unknown)]` newtype variant (e.g.
+/// `Unknown(String)`) that captures an unrecognized value with a diagnostic.
+/// Tagged and data-carrying variants are out of scope for this version.
+fn expand_enum(input: &DeriveInput, data: &syn::DataEnum) -> Result<TokenStream> {
+    let name = &input.ident;
+    let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
+
+    let mut match_arms: Vec<TokenStream> = Vec::new();
+    let mut unknown_arm: Option<TokenStream> = None;
+
+    for variant in &data.variants {
+        let v_ident = &variant.ident;
+        let v_attrs = parse_variant_attrs(variant)?;
+
+        if v_attrs.unknown {
+            match &variant.fields {
+                Fields::Unnamed(f) if f.unnamed.len() == 1 => {}
+                _ => {
+                    return Err(Error::new_spanned(
+                        variant,
+                        "#[laminate(unknown)] must be a newtype variant, e.g. `Unknown(String)`",
+                    ));
+                }
+            }
+            if unknown_arm.is_some() {
+                return Err(Error::new_spanned(
+                    variant,
+                    "only one #[laminate(unknown)] variant is allowed",
+                ));
+            }
+            unknown_arm = Some(quote! {
+                other => {
+                    _diagnostics.push(::laminate::Diagnostic {
+                        path: "(root)".to_string(),
+                        kind: ::laminate::DiagnosticKind::Coerced {
+                            from: "string".to_string(),
+                            to: format!(
+                                "{}::{} (unrecognized variant)",
+                                stringify!(#name),
+                                stringify!(#v_ident)
+                            ),
+                        },
+                        risk: ::laminate::RiskLevel::Warning,
+                        suggestion: Some(
+                            "value did not match a known variant; captured via the unknown fallback"
+                                .to_string(),
+                        ),
+                    });
+                    #name::#v_ident(other.to_string())
+                }
+            });
+        } else {
+            match &variant.fields {
+                Fields::Unit => {}
+                _ => {
+                    return Err(Error::new_spanned(
+                        variant,
+                        "Laminate enum variants must be unit variants (except one optional \
+                         #[laminate(unknown)] newtype variant)",
+                    ));
+                }
+            }
+            let match_name = v_attrs.rename.unwrap_or_else(|| v_ident.to_string());
+            let lit = syn::LitStr::new(&match_name, v_ident.span());
+            match_arms.push(quote! { #lit => #name::#v_ident, });
+        }
+    }
+
+    let has_unknown = unknown_arm.is_some();
+    let fallback = unknown_arm.unwrap_or_else(|| {
+        quote! {
+            other => {
+                return ::std::result::Result::Err(::laminate::FlexError::TypeMismatch {
+                    path: "(root)".to_string(),
+                    expected: format!("one of the known {} variants", stringify!(#name)),
+                    actual: format!("unrecognized value {:?}", other),
+                });
+            }
+        }
+    });
+
+    let diag_decl = if has_unknown {
+        quote! { let mut _diagnostics: ::std::vec::Vec<::laminate::Diagnostic> = ::std::vec::Vec::new(); }
+    } else {
+        quote! { let _diagnostics: ::std::vec::Vec<::laminate::Diagnostic> = ::std::vec::Vec::new(); }
+    };
+
+    Ok(quote! {
+        impl #impl_generics #name #ty_generics #where_clause {
+            /// Shape this enum from a `serde_json::Value` (expects a JSON string),
+            /// returning the variant and any diagnostics.
+            pub fn from_flex_value(
+                value: &::serde_json::Value,
+            ) -> ::laminate::Result<(Self, ::std::vec::Vec<::laminate::Diagnostic>)> {
+                #diag_decl
+                let s = value.as_str().ok_or_else(|| ::laminate::FlexError::TypeMismatch {
+                    path: "(root)".to_string(),
+                    expected: "string".to_string(),
+                    actual: format!("{:?}", value),
+                })?;
+                let shaped = match s {
+                    #(#match_arms)*
+                    #fallback
+                };
+                ::std::result::Result::Ok((shaped, _diagnostics))
+            }
+
+            /// Shape this enum from a JSON string (a JSON-encoded string value).
+            pub fn from_json(
+                json: &str,
+            ) -> ::laminate::Result<(Self, ::std::vec::Vec<::laminate::Diagnostic>)> {
+                let value: ::serde_json::Value = ::serde_json::from_str(json).map_err(|e| {
+                    ::laminate::FlexError::DeserializeError {
+                        path: "(root)".to_string(),
+                        source: e,
+                    }
+                })?;
+                Self::from_flex_value(&value)
+            }
+
+            /// Shape from an LLM text response, extracting the JSON payload
+            /// (Markdown code fences, or JSON embedded in prose) before shaping.
+            pub fn from_llm_response(
+                text: &str,
+            ) -> ::laminate::Result<(Self, ::std::vec::Vec<::laminate::Diagnostic>)> {
+                let __fv = ::laminate::FlexValue::from_llm_response(text)?;
+                Self::from_flex_value(__fv.raw())
+            }
+
+            /// Shape with Lenient mode.
+            pub fn shape_lenient(
+                value: &::serde_json::Value,
+            ) -> ::laminate::Result<::laminate::LaminateResult<Self, ::laminate::Lenient>> {
+                let (shaped, diagnostics) = Self::from_flex_value(value)?;
+                ::std::result::Result::Ok(::laminate::LaminateResult::lenient(shaped, diagnostics))
+            }
+
+            /// Shape with Absorbing mode. Enums carry no overflow, so the
+            /// residual is always empty.
+            pub fn shape_absorbing(
+                value: &::serde_json::Value,
+            ) -> ::laminate::Result<::laminate::LaminateResult<Self, ::laminate::Absorbing>> {
+                let (shaped, diagnostics) = Self::from_flex_value(value)?;
+                ::std::result::Result::Ok(::laminate::LaminateResult::absorbing(
+                    shaped,
+                    ::std::collections::HashMap::new(),
+                    diagnostics,
+                ))
+            }
+
+            /// Shape with Strict mode — rejects an unrecognized value even when
+            /// an `#[laminate(unknown)]` fallback variant exists.
+            pub fn shape_strict(value: &::serde_json::Value) -> ::laminate::Result<Self> {
+                let (shaped, diagnostics) = Self::from_flex_value(value)?;
+                if !diagnostics.is_empty() {
+                    return ::std::result::Result::Err(::laminate::FlexError::ShapingDiagnostics {
+                        count: diagnostics.len(),
+                        diagnostics,
+                    });
+                }
+                ::std::result::Result::Ok(shaped)
+            }
+        }
+    })
 }
