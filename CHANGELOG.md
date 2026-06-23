@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-06-23
+
+### Documentation
+
+- Comprehensive README and `FEATURES.md` rewrite, verified against the source.
+  `FEATURES.md` corrects numerous inaccurate signatures, counts, and behaviors
+  (for example: `shape_strict` returns the value, not a `LaminateResult`;
+  `ViolationKind` has five variants) and documents previously-undocumented public
+  surface: enum derive with `#[laminate(unknown)]`, `from_llm_response`, the
+  `Coercible` coercion API, the medical clinical-calculation and reference-range
+  suite, schema inference config and the coercible audit tier, provider `emit`,
+  `MessageSnapshot`, and the standalone SSE parser.
+- Fixed pack module doc-comment counts (currency 29 codes / 19 symbols; medical
+  44 conversions across 36 analytes) and removed an unimplemented UTM/MGRS/Plus
+  Codes claim from the geo pack docs.
+
+### Changed
+
+- crates.io keyword `flexible` replaced with `llm` for discoverability. No API
+  change.
+
 ## [0.4.0] - 2026-06-23
 
 ### Added

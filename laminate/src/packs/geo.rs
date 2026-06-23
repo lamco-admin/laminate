@@ -1,8 +1,8 @@
 //! Geospatial coordinate detection and parsing pack.
 //!
 //! Detects and parses common coordinate formats:
-//! decimal degrees, DMS (degrees-minutes-seconds), degrees decimal minutes,
-//! UTM, MGRS, ISO 6709, and Plus Codes (Open Location Code).
+//! decimal degrees, DMS (degrees-minutes-seconds), degrees decimal minutes (DDM),
+//! and ISO 6709, with datum detection (WGS84, JGD2011, CGCS2000, PZ-90, KTRF).
 //!
 //! ```
 //! use laminate::packs::geo::{parse_coordinate, CoordinateFormat};

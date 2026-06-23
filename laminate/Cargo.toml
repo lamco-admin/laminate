@@ -1,15 +1,15 @@
 [package]
 name = "laminate"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2021"
 rust-version = "1.85"
-description = "Progressive data shaping for Rust — type coercion, format detection, and fault-tolerant deserialization built on serde"
+description = "Progressive data shaping for Rust: type coercion, format detection, and fault-tolerant deserialization built on serde"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/lamco-admin/laminate"
 homepage = "https://lamco.ai/open-source/laminate/"
 documentation = "https://docs.rs/laminate"
 readme = "../README.md"
-keywords = ["serde", "json", "coercion", "flexible", "deserialization"]
+keywords = ["serde", "json", "coercion", "llm", "deserialization"]
 categories = ["encoding", "parser-implementations"]
 exclude = ["/tests/iteration_*", "/testdata/corpus/*/volume_*", "/fuzz/", "/results/", "*.proptest-regressions"]
 
